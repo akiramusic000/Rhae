@@ -1,0 +1,6 @@
+object_base: orig/RHAE01
+object: sys/main.dol
+hash: 0da5e7e51135219f580ad011d1b635bc83569bb9
+symbols: config/RHAE01/symbols.txt
+splits: config/RHAE01/splits.txt
+mw_comment_version: 11
