@@ -52,3 +52,63 @@ runtime/Gecko_ExceptionPPC.c:
 runtime/GCN_mem_alloc.c:
 	.text       start:0x800B2860 end:0x800B2918
 	.rodata     start:0x8030FE70 end:0x8030FEE0
+
+revolution/AI/ai.c:
+	.text       start:0x80102F84 end:0x801034B8
+	.data       start:0x80341140 end:0x80341188
+	.sdata      start:0x8043AFC8 end:0x8043AFD0
+	.sbss       start:0x8043C0A8 end:0x8043C0E4
+
+revolution/ARC/arc.c:
+	.text       start:0x801034B8 end:0x80103E38
+	.data       start:0x80341188 end:0x803411F8
+	.sdata      start:0x8043AFD0 end:0x8043AFD8
+
+revolution/AX/AX.c:
+	.text       start:0x80103E38 end:0x80103E8C
+	.data       start:0x803411F8 end:0x80341240
+	.sdata      start:0x8043AFD8 end:0x8043AFDC
+	.sbss       start:0x8043C0E8 end:0x8043C0EC
+
+revolution/AX/AXAlloc.c:
+	.text       start:0x80103E8C end:0x80104344
+	.bss        start:0x803BFA80 end:0x803BFB80
+	.sbss       start:0x8043C0F0 end:0x8043C0F4
+
+revolution/AX/AXAux.c:
+	.text       start:0x80104344 end:0x80104B5C
+	.bss        start:0x803BFB80 end:0x803C2D00
+	.sbss       start:0x8043C0F8 end:0x8043C140
+
+revolution/AX/AXCL.c:
+	.text       start:0x80104B5C end:0x801055E8
+	.bss        start:0x803C2D00 end:0x803C2E00
+	.sbss       start:0x8043C140 end:0x8043C160
+
+revolution/AX/AXOut.c:
+	.text       start:0x801055E8 end:0x80105DD4
+	.bss        start:0x803C2E00 end:0x803C3C00
+	.sbss       start:0x8043C160 end:0x8043C1A0
+
+revolution/AX/AXSPB.c:
+	.text       start:0x80105DD4 end:0x801061F4
+	.bss        start:0x803C3C00 end:0x803C3C80
+	.sbss       start:0x8043C1A0 end:0x8043C1F0
+
+revolution/AX/AXVPB.c:
+	.text       start:0x801061F4 end:0x80106F90
+	.data       start:0x80341240 end:0x803412D0
+	.bss        start:0x803C3C80 end:0x803D5380
+	.sbss       start:0x8043C1F0 end:0x8043C210
+	.sdata2     start:0x8043E338 end:0x8043E358
+
+revolution/AX/AXComp.c:
+	.data       start:0x803412E0 end:0x803422A0
+
+revolution/AX/DSPCode.c:
+	.data       start:0x803422A0 end:0x803442A0
+	.sdata      start:0x8043AFE0 end:0x8043AFE8
+
+revolution/AX/AXProf.c:
+	.text       start:0x80106F90 end:0x80106FD0
+	.sbss       start:0x8043C210 end:0x8043C220
