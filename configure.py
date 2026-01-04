@@ -211,6 +211,8 @@ cflags_base = [
     "-str reuse",
     "-enc SJIS",
     "-i include",
+    "-i include/MSL",
+    "-i include/MSL/internal",
     f"-i build/{config.version}/include",
     f"-DBUILD_VERSION={version_num}",
     f"-DVERSION_{config.version}",

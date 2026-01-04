@@ -1,32 +1,32 @@
-#include <init.h>
-#include <types.h>
-#include <macros.h>
+#include <runtime/Gecko_ExceptionPPC.h>
+#include <runtime/global_destructor_chain.h>
+
+#include <revolution/OS.h>
 
 static int fragmentID = -2;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 void __init_cpp_exceptions(void);
 void __fini_cpp_exceptions(void);
-void __destroy_global_chain(void);
-
 #ifdef __cplusplus
 }
 #endif
 
-inline static char* GetR2() {
-    register char* ret;
-    asm {
-        mr ret, r2;
-    }
-    return ret;
+static void* GetTOC(void) {
+    register void* toc;
+
+    ASM (
+        mr toc, r2
+    )
+
+    return toc;
 }
 
 void __init_cpp_exceptions(void) {
     if (fragmentID == -2) {
-        fragmentID = __register_fragment(&_eti_init_info, GetR2());
+        fragmentID = __register_fragment(_eti_init_info, GetTOC());
     }
 }
 
@@ -39,12 +39,12 @@ void __fini_cpp_exceptions(void) {
 
 #pragma section ".ctors$10"
 DECL_SECTION(".ctors$10")
-funcptr_t __init_cpp_exceptions_reference = __init_cpp_exceptions;
+extern funcptr_t const __init_cpp_exceptions_reference = __init_cpp_exceptions;
 
 #pragma section ".dtors$10"
 DECL_SECTION(".dtors$10")
-funcptr_t __destroy_global_chain_reference = __destroy_global_chain;
+extern funcptr_t const __destroy_global_chain_reference = __destroy_global_chain;
 
 #pragma section ".dtors$15"
 DECL_SECTION(".dtors$15")
-funcptr_t __fini_cpp_exceptions_reference = __fini_cpp_exceptions;
+extern funcptr_t const __fini_cpp_exceptions_reference = __fini_cpp_exceptions;
