@@ -37,12 +37,12 @@ void __fini_cpp_exceptions(void) {
 
 #pragma section ".ctors$10"
 DECL_SECTION(".ctors$10")
-funcptr_t const __init_cpp_exceptions_reference = __init_cpp_exceptions;
+extern funcptr_t const __init_cpp_exceptions_reference = __init_cpp_exceptions;
 
 #pragma section ".dtors$10"
 DECL_SECTION(".dtors$10")
-funcptr_t const __destroy_global_chain_reference = __destroy_global_chain;
+extern funcptr_t const __destroy_global_chain_reference = __destroy_global_chain;
 
 #pragma section ".dtors$15"
 DECL_SECTION(".dtors$15")
-funcptr_t const __fini_cpp_exceptions_reference = __fini_cpp_exceptions;
+extern funcptr_t const __fini_cpp_exceptions_reference = __fini_cpp_exceptions;
