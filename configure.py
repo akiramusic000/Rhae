@@ -297,7 +297,7 @@ config.libs = [
             Object(Matching, "runtime/__mem.c"),
             Object(Matching, "runtime/__va_arg.c"),
             Object(NonMatching, "runtime/global_destructor_chain.c"),
-            Object(NonMatching, "runtime/NMWException.c"),
+            Object(NonMatching, "runtime/NMWException.cpp", extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "runtime/ptmf.c"),
             Object(Matching, "runtime/runtime.c"),
             Object(NonMatching, "runtime/__init_cpp_exceptions.cpp"),

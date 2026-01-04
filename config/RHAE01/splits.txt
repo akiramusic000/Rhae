@@ -25,6 +25,11 @@ runtime/global_destructor_chain.c:
 	.text       start:0x800B1CB8 end:0x800B1D18
 	.sbss       start:0x8043BCE0 end:0x8043BCE8
 
+runtime/NMWException.cpp:
+	extab       start:0x800065D8 end:0x80006620
+	extabindex  start:0x80006DE4 end:0x80006E20
+	.text       start:0x800B1D18 end:0x800B20C8
+
 runtime/ptmf.c:
 	.text       start:0x800B20C8 end:0x800B2120
 	.rodata     start:0x8030FE48 end:0x8030FE54
