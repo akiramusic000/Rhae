@@ -16,6 +16,7 @@ Sections:
 
 runtime/__init_cpp_exceptions.cpp:
 	.text       start:0x800B278C end:0x800B27FC
-	.ctors      start:0x802E9CC0 end:0x802E9CC4
-	.dtors      start:0x802E9E40 end:0x802E9E48
-	.sdata      start:0x8043AC70 end:0x8043AC74
+	.ctors      start:0x802E9CC0 end:0x802E9CC4 rename:.ctors$10
+	.dtors      start:0x802E9E40 end:0x802E9E44 rename:.dtors$10
+	.dtors      start:0x802E9E44 end:0x802E9E48 rename:.dtors$15
+	.sdata      start:0x8043AC70 end:0x8043AC78

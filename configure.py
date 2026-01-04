@@ -209,7 +209,7 @@ cflags_base = [
     "-RTTI off",
     "-fp_contract on",
     "-str reuse",
-    "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
+    "-enc SJIS",
     "-i include",
     f"-i build/{config.version}/include",
     f"-DBUILD_VERSION={version_num}",
@@ -248,7 +248,7 @@ cflags_rel = [
     "-sdata2 0",
 ]
 
-config.linker_version = "GC/1.3.2"
+config.linker_version = "GC/3.0a5.2"
 
 
 # Helper function for Dolphin libraries
@@ -292,7 +292,7 @@ config.libs = [
         "cflags": cflags_runtime,
         "progress_category": "sdk",  # str | List[str]
         "objects": [
-            Object(Matching, "runtime/__init_cpp_exceptions.cpp"),
+            Object(NonMatching, "runtime/__init_cpp_exceptions.cpp"),
         ],
     },
 ]
