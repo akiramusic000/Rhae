@@ -5,8 +5,8 @@ Sections:
 	.text       type:code align:4
 	.ctors      type:rodata align:32
 	.dtors      type:rodata align:32
-	.rodata     type:rodata align:32
-	.rodata2    type:rodata align:64
+	.BINARY     type:rodata align:32
+	.rodata     type:rodata align:64
 	.data       type:data align:32
 	.bss        type:bss align:128
 	.sdata      type:data align:8
@@ -14,9 +14,36 @@ Sections:
 	.sdata2     type:rodata align:32
 	.sbss2      type:bss align:32
 
+runtime/__mem.c:
+	.init       start:0x80004000 end:0x80004134
+	.text       start:0x800B1BD4 end:0x800B1BF0
+
+runtime/__va_arg.c:
+	.text       start:0x800B1BF0 end:0x800B1CB8
+
+runtime/global_destructor_chain.c:
+	.text       start:0x800B1CB8 end:0x800B1D18
+	.sbss       start:0x8043BCE0 end:0x8043BCE8
+
+runtime/ptmf.c:
+	.text       start:0x800B20C8 end:0x800B2120
+	.rodata     start:0x8030FE48 end:0x8030FE54
+
+runtime/runtime.c:
+	.text       start:0x800B2120 end:0x800B278C
+	.rodata     start:0x8030FE58 end:0x8030FE70
+
 runtime/__init_cpp_exceptions.cpp:
 	.text       start:0x800B278C end:0x800B27FC
 	.ctors      start:0x802E9CC0 end:0x802E9CC4 rename:.ctors$10
 	.dtors      start:0x802E9E40 end:0x802E9E44 rename:.dtors$10
 	.dtors      start:0x802E9E44 end:0x802E9E48 rename:.dtors$15
 	.sdata      start:0x8043AC70 end:0x8043AC78
+
+runtime/Gecko_ExceptionPPC.c:
+	.text       start:0x800B27FC end:0x800B2860
+	.bss        start:0x803A03D0 end:0x803A03DC
+
+runtime/GCN_mem_alloc.c:
+	.text       start:0x800B2860 end:0x800B2918
+	.rodata     start:0x8030FE70 end:0x8030FEE0

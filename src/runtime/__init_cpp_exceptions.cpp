@@ -14,37 +14,35 @@ void __fini_cpp_exceptions(void);
 }
 #endif
 
-static void* GetTOC(void) {
-    register void* toc;
+static void *GetTOC(void) {
+  register void *toc;
 
-    ASM (
-        mr toc, r2
-    )
+  ASM(mr toc, r2)
 
-    return toc;
+  return toc;
 }
 
 void __init_cpp_exceptions(void) {
-    if (fragmentID == -2) {
-        fragmentID = __register_fragment(_eti_init_info, GetTOC());
-    }
+  if (fragmentID == -2) {
+    fragmentID = __register_fragment(_eti_init_info, GetTOC());
+  }
 }
 
 void __fini_cpp_exceptions(void) {
-    if (fragmentID != -2) {
-        __unregister_fragment(fragmentID);
-        fragmentID = -2;
-    }
+  if (fragmentID != -2) {
+    __unregister_fragment(fragmentID);
+    fragmentID = -2;
+  }
 }
 
 #pragma section ".ctors$10"
 DECL_SECTION(".ctors$10")
-extern funcptr_t const __init_cpp_exceptions_reference = __init_cpp_exceptions;
+funcptr_t const __init_cpp_exceptions_reference = __init_cpp_exceptions;
 
 #pragma section ".dtors$10"
 DECL_SECTION(".dtors$10")
-extern funcptr_t const __destroy_global_chain_reference = __destroy_global_chain;
+funcptr_t const __destroy_global_chain_reference = __destroy_global_chain;
 
 #pragma section ".dtors$15"
 DECL_SECTION(".dtors$15")
-extern funcptr_t const __fini_cpp_exceptions_reference = __fini_cpp_exceptions;
+funcptr_t const __fini_cpp_exceptions_reference = __fini_cpp_exceptions;

@@ -294,7 +294,15 @@ config.libs = [
         "cflags": cflags_runtime,
         "progress_category": "sdk",  # str | List[str]
         "objects": [
+            Object(Matching, "runtime/__mem.c"),
+            Object(Matching, "runtime/__va_arg.c"),
+            Object(NonMatching, "runtime/global_destructor_chain.c"),
+            Object(NonMatching, "runtime/NMWException.c"),
+            Object(Matching, "runtime/ptmf.c"),
+            Object(Matching, "runtime/runtime.c"),
             Object(NonMatching, "runtime/__init_cpp_exceptions.cpp"),
+            Object(Matching, "runtime/Gecko_ExceptionPPC.c"),
+            Object(Matching, "runtime/GCN_mem_alloc.c"),
         ],
     },
 ]

@@ -30,4 +30,4 @@ void __destroy_global_chain(void) {
 
 #pragma section ".dtors$10"
 DECL_SECTION(".dtors$10")
-DECL_WEAK funcptr_t __destroy_global_chain_reference = __destroy_global_chain;
+DECL_WEAK funcptr_t const __destroy_global_chain_reference = __destroy_global_chain;
