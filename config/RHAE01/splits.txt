@@ -112,3 +112,31 @@ revolution/AX/DSPCode.c:
 revolution/AX/AXProf.c:
 	.text       start:0x80106F90 end:0x80106FD0
 	.sbss       start:0x8043C210 end:0x8043C220
+
+revolution/AXFX/AXFXReverbHi.c:
+	.text       start:0x80106FD0 end:0x801070CC
+	.sdata2     start:0x8043E358 end:0x8043E360
+
+revolution/AXFX/AXFXReverbHiDpl2.c:
+	.text       start:0x801070CC end:0x80107208
+	.sdata2     start:0x8043E360 end:0x8043E368
+
+revolution/AXFX/AXFXDelay.c:
+	.text       start:0x80109134 end:0x801097C8
+	.sdata2     start:0x8043E3E8 end:0x8043E3F8
+
+revolution/AXFX/AXFXChorus.c:
+	.text       start:0x801097C8 end:0x8010992C
+	.sdata2     start:0x8043E3F8 end:0x8043E410
+
+revolution/AXFX/AXFXLfoTable.c:
+	.text       start:0x8010A3A8 end:0x8010A3B4
+	.data       start:0x80344600 end:0x80344800
+
+revolution/AXFX/AXFXSrcCoef.c:
+	.text       start:0x8010A3B4 end:0x8010A3C8
+	.data       start:0x80344800 end:0x80345000
+
+revolution/AXFX/AXFXHooks.c:
+	.text       start:0x8010A3C8 end:0x8010A400
+	.sdata      start:0x8043AFE8 end:0x8043AFF0
