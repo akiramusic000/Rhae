@@ -1,7 +1,7 @@
-Wii Party
+Wii Play
 =============
 
-A work-in-progress decompilation of Wii Party.
+A work-in-progress decompilation of Wii Play.
 
 This repository does **not** contain any game assets or assembly whatsoever. An existing copy of the game is required.
 
