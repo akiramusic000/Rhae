@@ -213,9 +213,11 @@ cflags_base = [
     "-i include",
     "-i include/MSL",
     "-i include/MSL/internal",
+    "-ir include/revolution/BTE",
     f"-i build/{config.version}/include",
     f"-DBUILD_VERSION={version_num}",
     f"-DVERSION_{config.version}",
+    "-DREVOLUTION",
 ]
 
 # Debug flags
