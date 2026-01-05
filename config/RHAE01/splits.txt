@@ -43,7 +43,7 @@ runtime/__init_cpp_exceptions.cpp:
 	.ctors      start:0x802E9CC0 end:0x802E9CC4 rename:.ctors$10
 	.dtors      start:0x802E9E40 end:0x802E9E44 rename:.dtors$10
 	.dtors      start:0x802E9E44 end:0x802E9E48 rename:.dtors$15
-	.sdata      start:0x8043AC70 end:0x8043AC78
+	.sdata      start:0x8043AC70 end:0x8043AC74
 
 runtime/Gecko_ExceptionPPC.c:
 	.text       start:0x800B27FC end:0x800B2860
@@ -107,7 +107,7 @@ revolution/AX/AXComp.c:
 
 revolution/AX/DSPCode.c:
 	.data       start:0x803422A0 end:0x803442A0
-	.sdata      start:0x8043AFE0 end:0x8043AFE8
+	.sdata      start:0x8043AFE0 end:0x8043AFE6
 
 revolution/AX/AXProf.c:
 	.text       start:0x80106F90 end:0x80106FD0
@@ -160,6 +160,12 @@ revolution/DSP/dsp_task.c:
 	.text       start:0x80138774 end:0x80139008
 	.data       start:0x8034B5E0 end:0x8034B720
 	.sbss       start:0x8043C268 end:0x8043C280
+
+revolution/DVD/dvdfs.c:
+	.text       start:0x80139008 end:0x80139A50
+	.data       start:0x8034B720 end:0x8034B888
+	.sdata      start:0x8043B0A8 end:0x8043B0B8
+	.sbss       start:0x8043C280 end:0x8043C2A0
 
 revolution/CNT/cnt.c:
 	.text       start:0x80141690 end:0x80141838
