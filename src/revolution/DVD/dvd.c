@@ -183,7 +183,7 @@ static OSAlarm ResetAlarm;
 
 static u8 GameTocBuffer[DISK_TOC_SIZE] ALIGN(32);
 static u8 PartInfoBuffer[DISK_PART_SIZE] ALIGN(32);
-static u8 TmdBuffer[ROUND_UP(sizeof(ESPTmd), 32)] ALIGN(64);
+u8 TmdBuffer[ROUND_UP(sizeof(ESPTmd), 32)] ALIGN(64);
 
 static DVDCommandBlock DummyCommandBlock;
 DVDCommandBlock __DVDStopMotorCommandBlock;
@@ -1970,6 +1970,109 @@ void __DVDPrepareResetAsync(DVDCommandCallback callback) {
     }
 
     OSRestoreInterrupts(enabled);
+}
+
+BOOL DVDCheckDiskAsync(DVDCommandBlock* block, DVDCommandCallback callback) {
+    BOOL enabled;
+    s32 retVal, state;
+
+    enabled = OSDisableInterrupts();
+
+    if (FatalErrorFlag) {
+        state = -1;
+    }
+    else if (PausingFlag) {
+        state = 8;
+    }
+    else {
+        if (WaitingForCoverOpen) {
+            state = 7;
+        }
+        if (WaitingForCoverClose) {
+            state = 5;
+        }
+        else if (executing == NULL) {
+            switch (ResumeFromHere) {
+                case 3:
+                {
+                    state = 4;
+                    break;
+                }
+                case 4:
+                {
+                    state = 5;
+                    break;
+                }
+                case 1:
+                {
+                    state = 6;
+                    break;
+                }
+                case 2:
+                {
+                    state = 11;
+                    break;
+                }
+                case 7:
+                {
+                    state = 7;
+                    break;
+                }
+                default:
+                {
+                    state = 0;
+                    break;
+                }
+            }
+        }
+        else if (executing == &DummyCommandBlock) {
+            state = 0;
+        }
+        else {
+            state = executing->state;
+        }
+    }
+
+    retVal = TRUE;
+    switch (state) {
+      case 1:
+      case 9:
+      case 10:
+      case 2:
+        block->state = 0;
+        if (callback) {
+          (*callback)(TRUE, block);
+        }
+        OSRestoreInterrupts(enabled);
+        break;
+
+      case -1:
+      case 11:
+      case 7:
+      case 3:
+      case 4:
+      case 5:
+      case 6:
+      case 12:
+        block->state = 0;
+        if (callback) {
+          (*callback)(FALSE, block);
+        }
+        OSRestoreInterrupts(enabled);
+        break;
+
+      case 0:
+      case 8:
+        OSRestoreInterrupts(enabled);
+
+        block->command = 36;
+        block->callback = callback;
+
+        retVal = issueCommand(2, block);
+        break;
+    }
+
+    return retVal;
 }
 
 static void Callback(s32 result, DVDCommandBlock* block) {

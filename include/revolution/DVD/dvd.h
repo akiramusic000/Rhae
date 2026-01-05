@@ -105,6 +105,7 @@ s32 DVDCancel(DVDCommandBlock* block);
 BOOL DVDCancelAllAsync(DVDCommandCallback callback);
 const DVDDiskID* DVDGetCurrentDiskID(void);
 u32 __DVDGetCoverStatus(void);
+BOOL DVDCheckDiskAsync(DVDCommandBlock* block, DVDCommandCallback callback);
 void __DVDPrepareResetAsync(DVDCommandCallback callback);
 void __DVDPrepareReset(void);
 BOOL __DVDTestAlarm(const OSAlarm* alarm);
