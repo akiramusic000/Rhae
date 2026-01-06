@@ -7,7 +7,7 @@ This repository does **not** contain any game assets or assembly whatsoever. An 
 
 Supported versions:
 
-- `RHAE01`: Rev 0 (USA)
+- `RHAE01`: Rev 1 (USA)
 
 Dependencies
 ============
