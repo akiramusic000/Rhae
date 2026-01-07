@@ -376,7 +376,7 @@ config.libs = [
             Object(Matching, "revolution/OS/OSAudioSystem.c"),
             Object(Matching, "revolution/OS/OSCache.c"),
             Object(Matching, "revolution/OS/OSContext.c"),
-            Object(Matching, "revolution/OS/OSError.c"),
+            Object(NonMatching, "revolution/OS/OSError.c"),
             Object(Matching, "revolution/OS/OSExec.c"),
             Object(Matching, "revolution/OS/OSFatal.c"),
             Object(Matching, "revolution/OS/OSFont.c"),
