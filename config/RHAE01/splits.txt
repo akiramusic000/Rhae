@@ -87,12 +87,6 @@ revolution/OS/OSContext.c:
 	.text       start:0x800EE3A8 end:0x800EEC30
 	.data       start:0x80331C08 end:0x80331DE4
 
-revolution/OS/OSError.c:
-	.text       start:0x800EEC30 end:0x800EF2D4
-	.data       start:0x80331DE8 end:0x80332108
-	.bss        start:0x803A8BD0 end:0x803A8C14
-	.sdata      start:0x8043AE30 end:0x8043AE38
-
 revolution/OS/__start.c:
 	.init       start:0x800060E8 end:0x800063C8
 	.sbss       start:0x8043BF68 end:0x8043BF70
