@@ -65,6 +65,34 @@ revolution/OS/OSAlarm.c:
 	.data       start:0x80331940 end:0x80331950
 	.sbss       start:0x8043BED8 end:0x8043BEE0
 
+revolution/OS/OSAlloc.c:
+	.text       start:0x800ED528 end:0x800ED830
+	.sdata      start:0x8043AE20 end:0x8043AE24
+	.sbss       start:0x8043BEE0 end:0x8043BEF0
+
+revolution/OS/OSArena.c:
+	.text       start:0x800ED830 end:0x800ED8C4
+	.sdata      start:0x8043AE28 end:0x8043AE30
+	.sbss       start:0x8043BEF0 end:0x8043BEF8
+
+revolution/OS/OSAudioSystem.c:
+	.text       start:0x800ED8C4 end:0x800EDD78
+	.data       start:0x80331950 end:0x803319D0
+
+revolution/OS/OSCache.c:
+	.text       start:0x800EDD78 end:0x800EE3A8
+	.data       start:0x803319D0 end:0x80331C08
+
+revolution/OS/OSContext.c:
+	.text       start:0x800EE3A8 end:0x800EEC30
+	.data       start:0x80331C08 end:0x80331DE4
+
+revolution/OS/OSError.c:
+	.text       start:0x800EEC30 end:0x800EF2D4
+	.data       start:0x80331DE8 end:0x80332108
+	.bss        start:0x803A8BD0 end:0x803A8C14
+	.sdata      start:0x8043AE30 end:0x8043AE38
+
 revolution/OS/__start.c:
 	.init       start:0x800060E8 end:0x800063C8
 	.sbss       start:0x8043BF68 end:0x8043BF70
