@@ -1,6 +1,15 @@
 Wii Play
 =============
 
+[![Build Status]][actions] [![Code Progress]][progress] [![Data Progress]][progress]
+
+[Build Status]: https://github.com/akiramusic000/Rhae/actions/workflows/build.yml/badge.svg
+[actions]: https://github.com/akiramusic000/Rhae/actions/workflows/build.yml
+[Code Progress]: https://decomp.dev/akiramusic000/Rhae.svg?mode=shield&measure=code&label=Code
+[Data Progress]: https://decomp.dev/akiramusic000/Rhae.svg?mode=shield&measure=data&label=Data
+[progress]: https://decomp.dev/akiramusic000/Rhae
+[<img src="https://decomp.dev/akiramusic000/Rhae.svg?w=512&h=256" width="512" height="256" alt="A visual">][Progress]
+
 A work-in-progress decompilation of Wii Play.
 
 This repository does **not** contain any game assets or assembly whatsoever. An existing copy of the game is required.
