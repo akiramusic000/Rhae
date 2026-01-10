@@ -109,7 +109,7 @@ revolution/OS/OSFatal.c:
 revolution/OS/OSFont.c:
 	.text       start:0x800F01C8 end:0x800F1548
 	.data       start:0x80332108 end:0x80332C18
-	.sdata      start:0x8043AE48 end:0x8043AE4C
+	.sdata      start:0x8043AE48 end:0x8043AE4A
 	.sbss       start:0x8043BF00 end:0x8043BF10
 	.sdata2     start:0x8043E328 end:0x8043E330
 
@@ -117,6 +117,37 @@ revolution/OS/OSInterrupt.c:
 	.text       start:0x800F1548 end:0x800F1CCC
 	.data       start:0x80332C18 end:0x80332C48
 	.sbss       start:0x8043BF10 end:0x8043BF24
+
+revolution/OS/OSLink.c:
+	.text       start:0x800F1CCC end:0x800F1CE4
+
+revolution/OS/OSMessage.c:
+	.text       start:0x800F1CE4 end:0x800F1FB8
+
+revolution/OS/OSMemory.c:
+	.text       start:0x800F1FB8 end:0x800F27CC
+	.data       start:0x80332C48 end:0x80332C58
+
+revolution/OS/OSMutex.c:
+	.text       start:0x800F27CC end:0x800F2AD0
+
+revolution/OS/OSReset.c:
+	.text       start:0x800F2AD0 end:0x800F2FCC
+	.data       start:0x80332C58 end:0x80332CD0
+	.sbss       start:0x8043BF28 end:0x8043BF30
+
+revolution/OS/OSRtc.c:
+	.text       start:0x800F2FCC end:0x800F3A58
+	.bss        start:0x803B4C20 end:0x803B4C78
+
+revolution/OS/OSSync.c:
+	.text       start:0x800F3A58 end:0x800F3AD8
+
+revolution/OS/OSThread.c:
+	.text       start:0x800F3AD8 end:0x800F528C
+	.bss        start:0x803B4C78 end:0x803B5670
+	.sdata      start:0x8043AE50 end:0x8043AE54
+	.sbss       start:0x8043BF30 end:0x8043BF3C
 
 revolution/OS/__start.c:
 	.init       start:0x800060E8 end:0x800063C8
