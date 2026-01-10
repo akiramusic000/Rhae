@@ -149,6 +149,14 @@ revolution/OS/OSThread.c:
 	.sdata      start:0x8043AE50 end:0x8043AE54
 	.sbss       start:0x8043BF30 end:0x8043BF3C
 
+revolution/OS/OSTime.c:
+	.text       start:0x800F528C end:0x800F56A0
+	.data       start:0x80332CD0 end:0x80332D30
+
+revolution/OS/OSUtf.c:
+	.text       start:0x800F56A0 end:0x800F58D8
+	.data       start:0x80332D30 end:0x8033EB70
+
 revolution/OS/__start.c:
 	.init       start:0x800060E8 end:0x800063C8
 	.sbss       start:0x8043BF68 end:0x8043BF70
