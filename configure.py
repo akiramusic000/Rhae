@@ -253,13 +253,6 @@ cflags_rvl = [
     "-ipa file",
 ]
 
-# REL flags
-cflags_rel = [
-    *cflags_base,
-    "-sdata 0",
-    "-sdata2 0",
-]
-
 config.linker_version = "GC/3.0a5.2"
 
 
@@ -272,18 +265,6 @@ def DolphinLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "progress_category": "sdk",
         "objects": objects,
     }
-
-
-# Helper function for REL script objects
-def Rel(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
-    return {
-        "lib": lib_name,
-        "mw_version": "GC/1.3.2",
-        "cflags": cflags_rel,
-        "progress_category": "game",
-        "objects": objects,
-    }
-
 
 Matching = True                   # Object matches and should be linked
 NonMatching = False               # Object does not match and should not be linked

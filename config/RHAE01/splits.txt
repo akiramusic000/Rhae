@@ -343,3 +343,6 @@ revolution/DVD/dvd_broadway.c:
 revolution/CNT/cnt.c:
 	.text       start:0x80141690 end:0x80141838
 	.data       start:0x8034CD60 end:0x8034D010
+
+main.cpp:
+	.text       start:0x80183B1C end:0x80183B50
