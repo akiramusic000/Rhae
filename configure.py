@@ -235,6 +235,18 @@ elif args.warn == "off":
 elif args.warn == "error":
     cflags_base.append("-W error")
 
+cflags_pedantic = [
+    "-w unused",
+    "-w missingreturn",
+    "-w hidevirtual",
+    "-w filecaps",
+    "-w sysfilecaps",
+    "-w tokenpasting",
+    "-w impl_float2int",
+    '-pragma "warn_no_explicit_virtual on"',
+    "-w err",
+]
+
 # Metrowerks library flags
 cflags_runtime = [
     *cflags_base,
@@ -251,6 +263,21 @@ cflags_rvl = [
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
+]
+
+# RP flags
+cflags_rp = [
+    *cflags_base,
+    *cflags_pedantic,
+    "-DPACK_PARTY",
+    "-enc SJIS",
+    "-inline deferred",
+    "-fp_contract on",
+    "-use_lmw_stmw on",
+    "-str reuse,pool,readonly",
+    "-i include/nw4r",
+    "-ir include/egg", # TODO(kiwi) remove after refactor
+    "-i include/Pack",
 ]
 
 config.linker_version = "GC/3.0a5.2"
@@ -294,6 +321,15 @@ config.libs = [
             Object(NonMatching, "runtime/__init_cpp_exceptions.cpp"),
             Object(Matching, "runtime/Gecko_ExceptionPPC.c"),
             Object(Matching, "runtime/GCN_mem_alloc.c"),
+        ],
+    },
+    {
+        "lib": "RP",
+        "mw_version": config.linker_version,
+        "cflags": cflags_rp,
+        "progress_category": "game",  # str | List[str]
+        "objects": [
+            Object(Matching, "Pack/main.cpp"),
         ],
     },
     {
