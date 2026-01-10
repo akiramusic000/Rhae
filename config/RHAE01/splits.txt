@@ -55,9 +55,9 @@ runtime/GCN_mem_alloc.c:
 
 revolution/OS/OS.c:
 	.text       start:0x800EBA10 end:0x800ECD44
-	.data       start:0x80331550 end:0x80331940
+	.data       start:0x80331550 end:0x8033193B
 	.bss        start:0x803A8B60 end:0x803A8BD0
-	.sdata      start:0x8043ADF8 end:0x8043AE20
+	.sdata      start:0x8043ADF8 end:0x8043AE1C
 	.sbss       start:0x8043BE90 end:0x8043BED8
 
 revolution/OS/OSAlarm.c:
@@ -89,9 +89,9 @@ revolution/OS/OSContext.c:
 
 revolution/OS/OSError.c:
 	.text       start:0x800EEC30 end:0x800EF2D4
-	.data       start:0x80331DE8 end:0x80332108
-	.bss        start:0x803A8BD0 end:0x803A8C40
-	.sdata      start:0x8043AE30 end:0x8043AE38
+	.data       start:0x80331DE8 end:0x80332104
+	.bss        start:0x803A8BD0 end:0x803A8C14
+	.sdata      start:0x8043AE30 end:0x8043AE36
 
 revolution/OS/OSExec.c:
 	.text       start:0x800EF2D4 end:0x800EF5A4
@@ -99,6 +99,24 @@ revolution/OS/OSExec.c:
 	.sdata      start:0x8043AE38 end:0x8043AE40
 	.sbss       start:0x8043BEF8 end:0x8043BEFC
 	.sdata2     start:0x8043E2E0 end:0x8043E2E4
+
+revolution/OS/OSFatal.c:
+	.text       start:0x800EF5A4 end:0x800F01C8
+	.bss        start:0x803B4940 end:0x803B4C14
+	.sdata      start:0x8043AE40 end:0x8043AE44
+	.sdata2     start:0x8043E2E8 end:0x8043E328
+
+revolution/OS/OSFont.c:
+	.text       start:0x800F01C8 end:0x800F1548
+	.data       start:0x80332108 end:0x80332C18
+	.sdata      start:0x8043AE48 end:0x8043AE4C
+	.sbss       start:0x8043BF00 end:0x8043BF10
+	.sdata2     start:0x8043E328 end:0x8043E330
+
+revolution/OS/OSInterrupt.c:
+	.text       start:0x800F1548 end:0x800F1CCC
+	.data       start:0x80332C18 end:0x80332C48
+	.sbss       start:0x8043BF10 end:0x8043BF24
 
 revolution/OS/__start.c:
 	.init       start:0x800060E8 end:0x800063C8
