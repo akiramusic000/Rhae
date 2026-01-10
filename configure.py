@@ -306,7 +306,7 @@ config.libs = [
         "objects": [
             Object(Matching, "runtime/__mem.c"),
             Object(Matching, "runtime/__va_arg.c"),
-            Object(NonMatching, "runtime/global_destructor_chain.c"),
+            Object(Matching, "runtime/global_destructor_chain.c"),
             Object(NonMatching, "runtime/NMWException.cpp", extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "runtime/ptmf.c"),
             Object(Matching, "runtime/runtime.c"),
@@ -397,7 +397,7 @@ config.libs = [
             Object(Matching, "revolution/OS/OSPlayRecord.c"),
             Object(Matching, "revolution/OS/OSStateFlags.c"),
             Object(Matching, "revolution/OS/OSNet.c"),
-            Object(NonMatching, "revolution/OS/__ppc_eabi_init.c"),
+            Object(Matching, "revolution/OS/__ppc_eabi_init.c"),
             Object(Matching, "revolution/SC/scsystem.c"),
             Object(Matching, "revolution/SC/scapi.c"),
             Object(Matching, "revolution/SC/scapi_prdinfo.c"),

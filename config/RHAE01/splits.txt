@@ -157,9 +157,40 @@ revolution/OS/OSUtf.c:
 	.text       start:0x800F56A0 end:0x800F58D8
 	.data       start:0x80332D30 end:0x8033EB70
 
+revolution/OS/OSIpc.c:
+	.text       start:0x800F58D8 end:0x800F5900
+	.sdata      start:0x8043AE58 end:0x8043AE5C
+	.sbss       start:0x8043BF40 end:0x8043BF44
+
+revolution/OS/OSStateTM.c:
+	.text       start:0x800F5900 end:0x800F5F90
+	.data       start:0x8033EB70 end:0x8033EC38
+	.bss        start:0x803B5680 end:0x803B5740
+	.sbss       start:0x8043BF48 end:0x8043BF68
+
 revolution/OS/__start.c:
 	.init       start:0x800060E8 end:0x800063C8
 	.sbss       start:0x8043BF68 end:0x8043BF70
+
+revolution/OS/OSPlayRecord.c:
+	.text       start:0x800F5F90 end:0x800F6688
+	.data       start:0x8033EC38 end:0x8033EC80
+	.bss        start:0x803B5740 end:0x803B5938
+	.sdata      start:0x8043AE60 end:0x8043AE64
+	.sbss       start:0x8043BF70 end:0x8043BF90
+
+revolution/OS/OSStateFlags.c:
+	.text       start:0x800F6688 end:0x800F6894
+	.data       start:0x8033EC80 end:0x8033ECA8
+	.bss        start:0x803B5940 end:0x803B5960
+
+revolution/OS/OSNet.c:
+	.text       start:0x800F6894 end:0x800F6938
+	.data       start:0x8033ECA8 end:0x8033EE10
+
+revolution/OS/__ppc_eabi_init.c:
+	.init       start:0x800063C8 end:0x80006420
+	.text       start:0x800F6938 end:0x800F69EC
 
 revolution/AI/ai.c:
 	.text       start:0x80102F84 end:0x801034B8
