@@ -344,5 +344,62 @@ revolution/CNT/cnt.c:
 	.text       start:0x80141690 end:0x80141838
 	.data       start:0x8034CD60 end:0x8034D010
 
+revolution/ESP/esp.c:
+	.text       start:0x80141838 end:0x80141964
+	.sdata      start:0x8043B0F0 end:0x8043B0F4
+
+revolution/NET/nettime.c:
+	.text       start:0x80141964 end:0x80141A48
+	.sbss       start:0x8043C378 end:0x8043C380
+
+revolution/NET/NETVersion.c:
+	.text       start:0x80141A48 end:0x80141A50
+	.data       start:0x8034D010 end:0x8034D050
+	.sdata      start:0x8043B0F8 end:0x8043B0FC
+
+revolution/NWC24/NWC24StdApi.c:
+	.text       start:0x80141A50 end:0x8014276C
+	.data       start:0x8034D050 end:0x8034D0D8
+
+revolution/NWC24/NWC24FileApi.c:
+	.text       start:0x8014276C end:0x80143A18
+	.data       start:0x8034D0D8 end:0x8034D108
+	.sdata      start:0x8043B100 end:0x8043B110
+	.sbss       start:0x8043C380 end:0x8043C38C
+
+revolution/NWC24/NWC24Config.c:
+	.text       start:0x80143A18 end:0x80144010
+	.data       start:0x8034D108 end:0x8034D170
+	.sdata      start:0x8043B110 end:0x8043B120
+	.sbss       start:0x8043C390 end:0x8043C398
+
+revolution/NWC24/NWC24Utils.c:
+	.text       start:0x80144010 end:0x80144238
+
+revolution/NWC24/NWC24Manage.c:
+	.text       start:0x80144238 end:0x801445AC
+	.data       start:0x8034D170 end:0x8034D280
+	.sdata      start:0x8043B120 end:0x8043B124
+	.sbss       start:0x8043C398 end:0x8043C3B0
+
+revolution/NWC24/NWC24MsgObj.c:
+	.text       start:0x801445AC end:0x80144B24
+
+revolution/NWC24/NWC24MBoxCtrl.c:
+	.text       start:0x80144B24 end:0x80146398
+	.data       start:0x8034D280 end:0x8034D328
+	.sdata      start:0x8043B128 end:0x8043B138
+	.sbss       start:0x8043C3B0 end:0x8043C3B8
+
+revolution/NWC24/NWC24Mime.c:
+	.text       start:0x80146398 end:0x80146AFC
+	.data       start:0x8034D328 end:0x8034D370
+	.sdata      start:0x8043B138 end:0x8043B13C
+
+revolution/NWC24/NWC24Parser.c:
+	.text       start:0x80146AFC end:0x80146C1C
+	.data       start:0x8034D370 end:0x8034D620
+	.sdata      start:0x8043B140 end:0x8043B180
+
 Pack/main.cpp:
 	.text       start:0x80183B1C end:0x80183B50

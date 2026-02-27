@@ -276,7 +276,7 @@ cflags_rp = [
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
     "-i include/nw4r",
-    "-ir include/egg", # TODO(kiwi) remove after refactor
+    "-ir include/egg",  # TODO(kiwi) remove after refactor
     "-i include/Pack",
 ]
 
@@ -293,9 +293,12 @@ def DolphinLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "objects": objects,
     }
 
-Matching = True                   # Object matches and should be linked
-NonMatching = False               # Object does not match and should not be linked
-Equivalent = config.non_matching  # Object should be linked when configured with --non-matching
+
+Matching = True  # Object matches and should be linked
+NonMatching = False  # Object does not match and should not be linked
+Equivalent = (
+    config.non_matching
+)  # Object should be linked when configured with --non-matching
 
 
 # Object is only matching for specific versions
@@ -315,7 +318,11 @@ config.libs = [
             Object(Matching, "runtime/__mem.c"),
             Object(Matching, "runtime/__va_arg.c"),
             Object(Matching, "runtime/global_destructor_chain.c"),
-            Object(NonMatching, "runtime/NMWException.cpp", extra_cflags=["-Cpp_exceptions on"]),
+            Object(
+                NonMatching,
+                "runtime/NMWException.cpp",
+                extra_cflags=["-Cpp_exceptions on"],
+            ),
             Object(Matching, "runtime/ptmf.c"),
             Object(Matching, "runtime/runtime.c"),
             Object(NonMatching, "runtime/__init_cpp_exceptions.cpp"),
@@ -329,14 +336,14 @@ config.libs = [
         "cflags": cflags_rp,
         "progress_category": "game",  # str | List[str]
         "objects": [
-            Object(Matching, "Pack/main.cpp"),
+            Object(NonMatching, "Pack/main.cpp"),
         ],
     },
     {
         "lib": "RVL_SDK",
         "mw_version": config.linker_version,
         "cflags": cflags_rvl,
-        "progress_category": "sdk", # str | List[str]
+        "progress_category": "sdk",  # str | List[str]
         "objects": [
             Object(NonMatching, "revolution/NdevExi2AD/DebuggerDriver.c"),
             Object(Matching, "revolution/NdevExi2AD/exi2.c"),
@@ -348,8 +355,9 @@ config.libs = [
             Object(NonMatching, "revolution/WPAD/WPADMem.c"),
             Object(Matching, "revolution/WPAD/debug_msg.c"),
             Object(Matching, "revolution/EUART/euart.c"),
-            Object(Matching, "revolution/EXI/EXIBios.c",
-                   extra_cflags=["-schedule off"]),
+            Object(
+                Matching, "revolution/EXI/EXIBios.c", extra_cflags=["-schedule off"]
+            ),
             Object(Matching, "revolution/EXI/EXIUart.c"),
             Object(Matching, "revolution/EXI/EXICommon.c"),
             Object(Matching, "revolution/FS/fs.c"),
@@ -466,20 +474,20 @@ config.libs = [
             Object(Matching, "revolution/WENC/wenc.c"),
             Object(NonMatching, "revolution/CNT/cnt.c"),
             Object(Matching, "revolution/ESP/esp.c"),
-            Object(NonMatching, "revolution/NET/nettime.c"),
+            Object(Matching, "revolution/NET/nettime.c"),
             Object(NonMatching, "revolution/NET/NETVersion.c"),
-            Object(NonMatching, "revolution/NWC24/NWC24StdApi.c"),
+            Object(Matching, "revolution/NWC24/NWC24StdApi.c"),
             Object(Matching, "revolution/NWC24/NWC24FileApi.c"),
             Object(Matching, "revolution/NWC24/NWC24Config.c"),
             Object(Matching, "revolution/NWC24/NWC24Utils.c"),
             Object(Matching, "revolution/NWC24/NWC24Manage.c"),
             Object(Matching, "revolution/NWC24/NWC24MsgObj.c"),
             Object(NonMatching, "revolution/NWC24/NWC24MBoxCtrl.c"),
-            Object(NonMatching, "revolution/NWC24/NWC24Mime.c"),
+            Object(Matching, "revolution/NWC24/NWC24Mime.c"),
             Object(Matching, "revolution/NWC24/NWC24Parser.c"),
-            Object(NonMatching, "revolution/NWC24/NWC24MsgCommit.c"),
+            Object(Matching, "revolution/NWC24/NWC24MsgCommit.c"),
             Object(Matching, "revolution/NWC24/NWC24Schedule.c"),
-            Object(NonMatching, "revolution/NWC24/NWC24DateParser.c"),
+            Object(Matching, "revolution/NWC24/NWC24DateParser.c"),
             Object(Matching, "revolution/NWC24/NWC24FriendList.c"),
             Object(Matching, "revolution/NWC24/NWC24SecretFList.c"),
             Object(Matching, "revolution/NWC24/NWC24Time.c"),
