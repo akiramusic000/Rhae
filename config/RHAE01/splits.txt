@@ -401,5 +401,52 @@ revolution/NWC24/NWC24Parser.c:
 	.data       start:0x8034D370 end:0x8034D620
 	.sdata      start:0x8043B140 end:0x8043B180
 
+revolution/NWC24/NWC24MsgCommit.c:
+	.text       start:0x80146C1C end:0x80148CB0
+	.data       start:0x8034D620 end:0x8034D7DC
+	.sdata      start:0x8043B180 end:0x8043B1CC
+
+revolution/NWC24/NWC24Schedule.c:
+	.text       start:0x80148CB0 end:0x801494E4
+	.data       start:0x8034D8B0 end:0x8034D8F8
+	.bss        start:0x8040F0E0 end:0x8040F260
+	.sbss       start:0x8043C3C0 end:0x8043C3CC
+
+revolution/NWC24/NWC24DateParser.c:
+	.text       start:0x801494E4 end:0x80149BAC
+	.rodata     start:0x80311730 end:0x80311758
+
+revolution/NWC24/NWC24FriendList.c:
+	.text       start:0x80149BAC end:0x80149CC8
+	.data       start:0x8034D8F8 end:0x8034D918
+	.sdata      start:0x8043B218 end:0x8043B21C
+
+revolution/NWC24/NWC24SecretFList.c:
+	.text       start:0x80149CC8 end:0x80149DE4
+	.data       start:0x8034D918 end:0x8034D938
+	.sdata      start:0x8043B220 end:0x8043B224
+
+revolution/NWC24/NWC24Time.c:
+	.text       start:0x80149DE4 end:0x8014A274
+	.data       start:0x8034D938 end:0x8034D978
+	.bss        start:0x8040F260 end:0x8040F340
+	.sbss       start:0x8043C3D0 end:0x8043C3E8
+
+revolution/NWC24/NWC24Ipc.c:
+	.text       start:0x8014A274 end:0x8014A3E8
+	.sbss       start:0x8043C3E8 end:0x8043C3EC
+
+revolution/NWC24/NWC24Download.c:
+	.text       start:0x8014A3E8 end:0x8014A914
+	.data       start:0x8034D978 end:0x8034D998
+	.sdata      start:0x8043B228 end:0x8043B22C
+
+revolution/NWC24/NWC24System.c:
+	.text       start:0x8014A914 end:0x8014AA8C
+	.data       start:0x8034D998 end:0x8034D9E0
+	.bss        start:0x8040F340 end:0x8040F3A0
+	.sdata      start:0x8043B230 end:0x8043B234
+	.sbss       start:0x8043C3F0 end:0x8043C400
+
 Pack/main.cpp:
 	.text       start:0x80183B1C end:0x80183B50
