@@ -53,6 +53,24 @@ runtime/GCN_mem_alloc.c:
 	.text       start:0x800B2860 end:0x800B2918
 	.rodata     start:0x8030FE70 end:0x8030FEE0
 
+revolution/MEM/mem_heapCommon.c:
+	.text       start:0x800E5B6C end:0x800E6118
+	.bss        start:0x803A8AF0 end:0x803A8B18
+	.sbss       start:0x8043BE78 end:0x8043BE7C
+
+revolution/MEM/mem_expHeap.c:
+	.text       start:0x800E631C end:0x800E6C20
+
+revolution/MEM/mem_frameHeap.c:
+	.text       start:0x800E6C20 end:0x800E71E8
+
+revolution/MEM/mem_allocator.c:
+	.text       start:0x800E71E8 end:0x800E726C
+	.sdata2     start:0x8043E278 end:0x8043E288
+
+revolution/MEM/mem_list.c:
+	.text       start:0x800E726C end:0x800E7380
+
 revolution/OS/OS.c:
 	.text       start:0x800EBA10 end:0x800ECD44
 	.data       start:0x80331550 end:0x8033193B
