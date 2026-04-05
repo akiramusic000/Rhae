@@ -336,7 +336,7 @@ config.libs = [
         "cflags": cflags_rp,
         "progress_category": "game",  # str | List[str]
         "objects": [
-            Object(NonMatching, "Pack/main.cpp"),
+            Object(Matching, "Pack/main.cpp"),
         ],
     },
     {
