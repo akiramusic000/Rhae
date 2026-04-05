@@ -358,6 +358,27 @@ revolution/DVD/dvd_broadway.c:
 	.sdata      start:0x8043B0D0 end:0x8043B0E0
 	.sbss       start:0x8043C338 end:0x8043C360
 
+revolution/SI/SIBios.c:
+	.text       start:0x80140178 end:0x801411A4
+	.data       start:0x8034CC28 end:0x8034CC98
+	.bss        start:0x8040EE40 end:0x8040EE40
+	.sbss       start:0x8043C360 end:0x8043C370
+
+revolution/SI/SISamplingRate.c:
+	.text       start:0x801411A4 end:0x80141284
+	.data       start:0x8034CC98 end:0x8034CD30
+	.sbss       start:0x8043C370 end:0x8043C378
+
+revolution/TPL/TPL.c:
+	.text       start:0x80141284 end:0x801413B8
+	.data       start:0x8034CD30 end:0x8034CD60
+	.sdata      start:0x8043B0E8 end:0x8043B0EE
+
+revolution/WENC/wenc.c:
+	.text       start:0x801413B8 end:0x80141690
+	.rodata     start:0x803116F0 end:0x80311730
+	.sdata2     start:0x8043E4A0 end:0x8043E4A8
+
 revolution/CNT/cnt.c:
 	.text       start:0x80141690 end:0x80141838
 	.data       start:0x8034CD60 end:0x8034D010
