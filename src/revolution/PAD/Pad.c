@@ -2,6 +2,7 @@
 #include <revolution/PAD.h>
 
 u32 __PADSpec = 0;
+u32 PADEnabledBits = 0;
 
 BOOL __PADDisableRecalibration(BOOL disable) {
     BOOL enabled = OSDisableInterrupts();

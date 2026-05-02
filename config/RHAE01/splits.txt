@@ -53,6 +53,104 @@ runtime/GCN_mem_alloc.c:
 	.text       start:0x800B2860 end:0x800B2918
 	.rodata     start:0x8030FE70 end:0x8030FEE0
 
+revolution/NdevExi2AD/DebuggerDriver.c:
+	.text       start:0x800C6D20 end:0x800C7054
+	.sdata      start:0x8043AC90 end:0x8043AC98
+	.sbss       start:0x8043BD18 end:0x8043BD30
+
+revolution/NdevExi2AD/exi2.c:
+	.text       start:0x800C7054 end:0x800C77E0
+
+revolution/PAD/Pad.c:
+	.text       start:0x800CA93C end:0x800CA998
+	.sbss       start:0x8043BD50 end:0x8043BD54
+
+revolution/WPAD/WPAD.c:
+	.text       start:0x800CA998 end:0x800D1FE4
+	.rodata     start:0x80311070 end:0x803110B0
+	.data       start:0x8032EED0 end:0x8032F1B8
+	.bss        start:0x803A4080 end:0x803A77A8
+	.sdata      start:0x8043AD10 end:0x8043AD20
+	.sbss       start:0x8043BD58 end:0x8043BD88
+	.sdata2     start:0x8043E108 end:0x8043E110
+
+revolution/WPAD/debug_msg.c:
+	.text       start:0x800D7D24 end:0x800D7D74
+
+revolution/EUART/euart.c:
+	.text       start:0x800D7D74 end:0x800D80E4
+	.sbss       start:0x8043BDA8 end:0x8043BDB8
+
+revolution/EXI/EXIBios.c:
+	.text       start:0x800D80E4 end:0x800D9978
+	.data       start:0x80330940 end:0x80330988
+	.bss        start:0x803A7810 end:0x803A78D0
+	.sdata      start:0x8043AD20 end:0x8043AD24
+	.sbss       start:0x8043BDB8 end:0x8043BDBC
+
+revolution/EXI/EXIUart.c:
+	.text       start:0x800D9978 end:0x800D9CAC
+	.sbss       start:0x8043BDC0 end:0x8043BDD0
+
+revolution/EXI/EXICommon.c:
+	.text       start:0x800D9CAC end:0x800D9E38
+	.sdata2     start:0x8043E138 end:0x8043E13C
+
+revolution/FS/fs.c:
+	.text       start:0x800D9E38 end:0x800DB448
+	.data       start:0x80330988 end:0x803309AC
+	.sdata      start:0x8043AD28 end:0x8043AD38
+	.sbss       start:0x8043BDD0 end:0x8043BDE4
+
+revolution/GX/GXAttr.c:
+	.text       start:0x800DD350 end:0x800DE574
+	.data       start:0x80330C30 end:0x80330EA4
+	.sdata      start:0x8043AD40 end:0x8043AD4C
+
+revolution/GX/GXGeometry.c:
+	.text       start:0x800DEE24 end:0x800DF3DC
+
+revolution/GX/GXLight.c:
+	.text       start:0x800DFEA8 end:0x800E05F8
+	.data       start:0x80330F98 end:0x80330FB4
+	.sdata2     start:0x8043E178 end:0x8043E1AC
+
+revolution/GX/GXBump.c:
+	.text       start:0x800E1700 end:0x800E1B4C
+	.sdata2     start:0x8043E1E8 end:0x8043E1EC
+
+revolution/GX/GXPixel.c:
+	.text       start:0x800E21CC end:0x800E2930
+	.data       start:0x80331258 end:0x80331278
+	.sdata2     start:0x8043E1F0 end:0x8043E240
+
+revolution/GX/GXDisplayList.c:
+	.text       start:0x800E2D00 end:0x800E2ED0
+	.bss        start:0x803A8220 end:0x803A8920
+
+revolution/GX/GXTransform.c:
+	.text       start:0x800E2ED0 end:0x800E34C4
+	.sdata2     start:0x8043E260 end:0x8043E274
+
+revolution/IPC/ipcMain.c:
+	.text       start:0x800E3D00 end:0x800E3D84
+	.sbss       start:0x8043BE48 end:0x8043BE60
+
+revolution/IPC/ipcclt.c:
+	.text       start:0x800E3D84 end:0x800E5484
+	.bss        start:0x803A8920 end:0x803A8970
+	.sdata      start:0x8043AD98 end:0x8043ADA0
+	.sbss       start:0x8043BE60 end:0x8043BE6C
+
+revolution/IPC/memory.c:
+	.text       start:0x800E5484 end:0x800E59A8
+	.bss        start:0x803A8970 end:0x803A89F0
+
+revolution/IPC/ipcProfile.c:
+	.text       start:0x800E59A8 end:0x800E5B6C
+	.bss        start:0x803A89F0 end:0x803A8AF0
+	.sbss       start:0x8043BE70 end:0x8043BE78
+
 revolution/MEM/mem_heapCommon.c:
 	.text       start:0x800E5B6C end:0x800E6118
 	.bss        start:0x803A8AF0 end:0x803A8B18
@@ -70,6 +168,40 @@ revolution/MEM/mem_allocator.c:
 
 revolution/MEM/mem_list.c:
 	.text       start:0x800E726C end:0x800E7380
+
+revolution/MTX/mtxvec.c:
+	.text       start:0x800E7F98 end:0x800E7FEC
+
+revolution/MTX/mtx44.c:
+	.text       start:0x800E7FEC end:0x800E820C
+	.sdata2     start:0x8043E2A8 end:0x8043E2C0
+
+revolution/MTX/vec.c:
+	.text       start:0x800E820C end:0x800E8430
+	.sdata2     start:0x8043E2C0 end:0x8043E2CC
+
+revolution/NAND/nand.c:
+	.text       start:0x800E8798 end:0x800E9888
+	.sdata      start:0x8043ADA8 end:0x8043ADB0
+
+revolution/NAND/NANDOpenClose.c:
+	.text       start:0x800E9888 end:0x800EA57C
+	.data       start:0x80331368 end:0x80331380
+	.sdata      start:0x8043ADB0 end:0x8043ADB8
+	.sbss       start:0x8043BE80 end:0x8043BE84
+
+revolution/NAND/NANDCore.c:
+	.text       start:0x800EA57C end:0x800EB84C
+	.rodata     start:0x803110C0 end:0x80311200
+	.data       start:0x80331380 end:0x803314A0
+	.bss        start:0x803A8B20 end:0x803A8B60
+	.sdata      start:0x8043ADB8 end:0x8043ADE8
+	.sbss       start:0x8043BE88 end:0x8043BE8C
+
+revolution/NAND/NANDCheck.c:
+	.text       start:0x800EB84C end:0x800EBA10
+	.data       start:0x803314A0 end:0x80331550
+	.sdata      start:0x8043ADE8 end:0x8043ADF8
 
 revolution/OS/OS.c:
 	.text       start:0x800EBA10 end:0x800ECD44
@@ -210,6 +342,43 @@ revolution/OS/__ppc_eabi_init.c:
 	.init       start:0x800063C8 end:0x80006420
 	.text       start:0x800F6938 end:0x800F69EC
 
+revolution/SC/scsystem.c:
+	.text       start:0x800F69EC end:0x800F8350
+	.rodata     start:0x80311200 end:0x80311254
+	.data       start:0x8033EE10 end:0x8033EFE0
+	.bss        start:0x803B5960 end:0x803BDB00
+	.sdata      start:0x8043AE68 end:0x8043AF68
+	.sbss       start:0x8043BF90 end:0x8043BFA8
+
+revolution/SC/scapi.c:
+	.text       start:0x800F8350 end:0x800F87BC
+
+revolution/SC/scapi_prdinfo.c:
+	.text       start:0x800F87BC end:0x800F89AC
+	.data       start:0x8033EFE0 end:0x8033F021
+	.sdata      start:0x8043AF68 end:0x8043AF70
+
+revolution/USB/usb.c:
+	.text       start:0x800F89AC end:0x800F9A4C
+	.data       start:0x8033F028 end:0x8033F648
+	.sdata      start:0x8043AF70 end:0x8043AF7C
+	.sbss       start:0x8043BFA8 end:0x8043BFB8
+
+revolution/WUD/WUD.c:
+	.text       start:0x800FE46C end:0x801029E8
+	.data       start:0x80340058 end:0x80340EC0
+	.bss        start:0x803BDCA0 end:0x803BFA80
+	.sdata      start:0x8043AFC0 end:0x8043AFC6
+	.sbss       start:0x8043C088 end:0x8043C0A8
+	.sdata2     start:0x8043E330 end:0x8043E338
+
+revolution/WUD/WUDHidHost.c:
+	.text       start:0x801029E8 end:0x80102F34
+	.data       start:0x80340EC0 end:0x80341140
+
+revolution/WUD/debug_msg.c:
+	.text       start:0x80102F34 end:0x80102F84
+
 revolution/AI/ai.c:
 	.text       start:0x80102F84 end:0x801034B8
 	.data       start:0x80341140 end:0x80341188
@@ -312,6 +481,9 @@ revolution/DSP/dsp.c:
 	.data       start:0x8034B560 end:0x8034B5E0
 	.sdata      start:0x8043B0A0 end:0x8043B0A4
 	.sbss       start:0x8043C260 end:0x8043C264
+
+revolution/DSP/dsp_debug.c:
+	.text       start:0x80138724 end:0x80138774
 
 revolution/DSP/dsp_task.c:
 	.text       start:0x80138774 end:0x80139008
