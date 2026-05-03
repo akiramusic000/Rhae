@@ -124,6 +124,11 @@ revolution/GX/GXPixel.c:
 	.data       start:0x80331258 end:0x80331278
 	.sdata2     start:0x8043E1F0 end:0x8043E240
 
+revolution/GX/GXDraw.c:
+	.text       start:0x800E2930 end:0x800E2D00
+	.bss        start:0x803A7F98 end:0x803A8220
+	.sdata2     start:0x8043E240 end:0x8043E260
+
 revolution/GX/GXDisplayList.c:
 	.text       start:0x800E2D00 end:0x800E2ED0
 	.bss        start:0x803A8220 end:0x803A8920
@@ -179,6 +184,11 @@ revolution/MTX/mtx44.c:
 revolution/MTX/vec.c:
 	.text       start:0x800E820C end:0x800E8430
 	.sdata2     start:0x8043E2C0 end:0x8043E2CC
+
+revolution/MTX/quat.c:
+	.text       start:0x800E8430 end:0x800E8798
+	.rodata     start:0x803110B0 end:0x803110C0
+	.sdata2     start:0x8043E2D0 end:0x8043E2E0
 
 revolution/NAND/nand.c:
 	.text       start:0x800E8798 end:0x800E9888
