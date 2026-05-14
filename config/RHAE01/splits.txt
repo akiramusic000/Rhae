@@ -14,6 +14,62 @@ Sections:
 	.sdata2     type:rodata align:32
 	.sbss2      type:bss align:32
 
+nw4r/ut/ut_list.cpp:
+	.text       start:0x80007800 end:0x80007A9C
+
+nw4r/ut/ut_LinkList.cpp:
+	.text       start:0x80007A9C end:0x80007C08
+
+nw4r/ut/ut_binaryFileFormat.cpp:
+	.text       start:0x80007C08 end:0x80007C7C
+
+nw4r/ut/ut_CharStrmReader.cpp:
+	.text       start:0x80007C7C end:0x80007D8C
+
+nw4r/ut/ut_TagProcessorBase.cpp:
+	.text       start:0x80007D8C end:0x8000845C
+	.data       start:0x803294E0 end:0x80329508
+	.sdata2     start:0x8043CB00 end:0x8043CB08
+
+nw4r/ut/ut_IOStream.cpp:
+	.text       start:0x8000845C end:0x8000849C
+	.ctors      start:0x802E9CC4 end:0x802E9CC8
+	.sbss       start:0x8043B960 end:0x8043B968
+
+nw4r/ut/ut_FileStream.cpp:
+	.text       start:0x8000849C end:0x80008608
+	.ctors      start:0x802E9CC8 end:0x802E9CCC
+	.sbss       start:0x8043B968 end:0x8043B96C
+
+nw4r/ut/ut_NandFileStream.cpp:
+	.text       start:0x80008E74 end:0x80009B4C
+	.ctors      start:0x802E9CD4 end:0x802E9CD8
+	.data       start:0x803295D8 end:0x80329638
+	.sbss       start:0x8043B980 end:0x8043B988
+
+nw4r/ut/ut_LockedCache.cpp:
+	.text       start:0x80009B4C end:0x80009CF8
+	.ctors      start:0x802E9CD8 end:0x802E9CDC
+	.bss        start:0x8035F998 end:0x8035F9B8
+
+nw4r/ut/ut_Font.cpp:
+	.text       start:0x80009CF8 end:0x80009DA0
+	.data       start:0x80329638 end:0x80329668
+
+nw4r/ut/ut_CharWriter.cpp:
+	.text       start:0x8000ADE8 end:0x8000C76C
+	.bss        start:0x8035F9B8 end:0x8035F9D8
+	.sbss       start:0x8043B988 end:0x8043B990
+	.sdata2     start:0x8043CB08 end:0x8043CB28
+
+nw4r/ut/ut_TextWriterBase.cpp:
+	.text       start:0x8000C76C end:0x80010890
+	.ctors      start:0x802E9CDC end:0x802E9CE0
+	.bss        start:0x8035F9D8 end:0x8035F9F0
+	.sdata      start:0x8043AAC8 end:0x8043AAD0
+	.sbss       start:0x8043B994 end:0x8043B9A8
+	.sdata2     start:0x8043CB28 end:0x8043CB40
+
 runtime/__mem.c:
 	.init       start:0x80004000 end:0x80004134
 	.text       start:0x800B1BD4 end:0x800B1BF0
