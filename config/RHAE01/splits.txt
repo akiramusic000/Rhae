@@ -44,7 +44,7 @@ nw4r/ut/ut_FileStream.cpp:
 nw4r/ut/ut_NandFileStream.cpp:
 	.text       start:0x80008E74 end:0x80009B4C
 	.ctors      start:0x802E9CD4 end:0x802E9CD8
-	.data       start:0x803295D8 end:0x80329638
+	.data       start:0x803295D8 end:0x80329634
 	.sbss       start:0x8043B980 end:0x8043B988
 
 nw4r/ut/ut_LockedCache.cpp:
@@ -67,8 +67,8 @@ nw4r/ut/ut_TextWriterBase.cpp:
 	.ctors      start:0x802E9CDC end:0x802E9CE0
 	.bss        start:0x8035F9D8 end:0x8035F9F0
 	.sdata      start:0x8043AAC8 end:0x8043AAD0
-	.sbss       start:0x8043B994 end:0x8043B9A8
-	.sdata2     start:0x8043CB28 end:0x8043CB40
+	.sbss       start:0x8043B990 end:0x8043B9A8
+	.sdata2     start:0x8043CB28 end:0x8043CB3C
 
 runtime/__mem.c:
 	.init       start:0x80004000 end:0x80004134
