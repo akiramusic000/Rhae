@@ -280,6 +280,17 @@ cflags_rp = [
     "-i include/Pack",
 ]
 
+# NW4R utility library flags
+cflags_libnw4r_ut = [
+    *cflags_base,
+    *cflags_pedantic,
+    "-enc SJIS",
+    "-fp_contract off",
+    "-ipa file",
+    "-i include/nw4r",
+]
+
+
 config.linker_version = "GC/3.0a5.2"
 
 
@@ -496,6 +507,31 @@ config.libs = [
             Object(Matching, "revolution/NWC24/NWC24System.c"),
         ],
     },
+    {
+        "lib": "libnw4r_ut",
+        "mw_version": config.linker_version,
+        "cflags": cflags_libnw4r_ut,
+        "progress_category": "nw4r",  # str | List[str]
+        "objects": [
+            Object(Matching, "nw4r/ut/ut_list.cpp"),
+            Object(Matching, "nw4r/ut/ut_LinkList.cpp"),
+            Object(Matching, "nw4r/ut/ut_binaryFileFormat.cpp"),
+            Object(Matching, "nw4r/ut/ut_CharStrmReader.cpp"),
+            Object(Matching, "nw4r/ut/ut_TagProcessorBase.cpp"),
+            Object(Matching, "nw4r/ut/ut_IOStream.cpp"),
+            Object(Matching, "nw4r/ut/ut_FileStream.cpp"),
+            Object(Matching, "nw4r/ut/ut_DvdFileStream.cpp"),
+            Object(Matching, "nw4r/ut/ut_DvdLockedFileStream.cpp"),
+            Object(Matching, "nw4r/ut/ut_NandFileStream.cpp"),
+            Object(Matching, "nw4r/ut/ut_LockedCache.cpp"),
+            Object(Matching, "nw4r/ut/ut_Font.cpp"),
+            Object(Matching, "nw4r/ut/ut_RomFont.cpp"),
+            Object(Matching, "nw4r/ut/ut_ResFontBase.cpp"),
+            Object(Matching, "nw4r/ut/ut_ResFont.cpp"),
+            Object(Matching, "nw4r/ut/ut_CharWriter.cpp"),
+            Object(Matching, "nw4r/ut/ut_TextWriterBase.cpp"),
+        ],
+    },
 ]
 
 
@@ -520,6 +556,7 @@ def link_order_callback(module_id: int, objects: List[str]) -> List[str]:
 # Optional extra categories for progress tracking
 # Adjust as desired for your project
 config.progress_categories = [
+    ProgressCategory("nw4r", "NW4R"),
     ProgressCategory("game", "Game Code"),
     ProgressCategory("sdk", "SDK Code"),
 ]
