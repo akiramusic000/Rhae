@@ -290,6 +290,16 @@ cflags_libnw4r_ut = [
     "-i include/nw4r",
 ]
 
+# NW4R math library flags
+cflags_libnw4r_math = [
+    *cflags_base,
+    *cflags_pedantic,
+    "-enc SJIS",
+    "-fp_contract off",
+    "-ipa file",
+    "-i include/nw4r",
+]
+
 
 config.linker_version = "GC/3.0a5.2"
 
@@ -530,6 +540,18 @@ config.libs = [
             Object(Matching, "nw4r/ut/ut_ResFont.cpp"),
             Object(Matching, "nw4r/ut/ut_CharWriter.cpp"),
             Object(Matching, "nw4r/ut/ut_TextWriterBase.cpp"),
+        ],
+    },
+    {
+        "lib": "libnw4r_math",
+        "mw_version": config.linker_version,
+        "cflags": cflags_libnw4r_math,
+        "progress_category": "nw4r",  # str | List[str]
+        "objects": [
+            Object(Matching, "nw4r/math/math_arithmetic.cpp"),
+            Object(Matching, "nw4r/math/math_triangular.cpp"),
+            Object(Matching, "nw4r/math/math_types.cpp"),
+            Object(Matching, "nw4r/math/math_geometry.cpp"),
         ],
     },
 ]
