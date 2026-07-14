@@ -19,14 +19,15 @@ class Symbol:
     address: int
     size: int
     pre: str
+    scope: str
     post: str
 
     def __format__(self, format_spec: str) -> str:
-        return f"{self.name} = {self.section}:0x{self.address:X}{self.pre}size:0x{self.size:X}{self.post}"
+        return f"{self.name} = {self.section}:0x{self.address:X}{self.pre}size:0x{self.size:X} scope:{self.scope}{self.post}"
 
 
 sym_regex = re.compile(
-    r"(?P<name>.+) = (?P<section>\.?[a-zA-Z0-9]+):0x(?P<address>[0-9A-Fa-f]{8})(?P<pre>.*)size:0x(?P<size>[0-9A-Za-z]*)(?P<post>.*)"
+    r"(?P<name>.+) = (?P<section>\.?[a-zA-Z0-9]+):0x(?P<address>[0-9A-Fa-f]{8})(?P<pre>.*)size:0x(?P<size>[0-9A-Za-z]*)( scope:(?P<scope>[a-z]*))?(?P<post>.*)"
 )
 
 
@@ -40,6 +41,12 @@ def parse_symbols(symbols_txt: str) -> Symbols:
         if sym_match != None:
             groups = sym_match.groupdict()
             address = int(groups["address"], 16)
+
+            if groups["scope"] != None:
+                scope = groups["scope"]
+            else:
+                scope = "global"
+
             symbol_list.append(
                 Symbol(
                     groups["name"],
@@ -47,6 +54,7 @@ def parse_symbols(symbols_txt: str) -> Symbols:
                     address,
                     int(groups["size"], 16),
                     groups["pre"],
+                    scope,
                     groups["post"],
                 )
             )
@@ -115,5 +123,6 @@ for i in range(longest_match):
     sym = current_syms.symbols[base_idx + i]
     ref_sym = ref_syms.symbols[ref_idx + i]
     sym.name = ref_sym.name
+    sym.scope = ref_sym.scope
 
     print(f"{sym}")
