@@ -783,7 +783,7 @@ BeginCalc__Q34nw4r2ef15ParticleManagerFb = .text:0x8001AF6C; // type:function si
 EndCalc__Q34nw4r2ef15ParticleManagerFv = .text:0x8001AFD8; // type:function size:0x40
 BeginDraw__Q34nw4r2ef15ParticleManagerFv = .text:0x8001B018; // type:function size:0xF4
 EndDraw__Q34nw4r2ef15ParticleManagerFv = .text:0x8001B10C; // type:function size:0x4
-Draw_ModifyColor__Q34nw4r2ef15ParticleManagerFPQ34nw4r2ef8ParticleP8_GXColorP8_GXColor = .text:0x8001B110; // type:functionsize:0x420
+Draw_ModifyColor__Q34nw4r2ef15ParticleManagerFPQ34nw4r2ef8ParticleP8_GXColorP8_GXColor = .text:0x8001B110; // type:function size:0x420
 __sinit_\ef_particlemanager_cpp = .text:0x8001B530; // type:function size:0x4
 GetInstance__Q34nw4r2ef8ResourceFv = .text:0x8001B534; // type:function size:0xC
 Initialize__Q34nw4r2ef8ResourceFv = .text:0x8001B540; // type:function size:0x48
@@ -918,7 +918,7 @@ DrawStripeTube_ConnectNone__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStri
 DrawStripeTube_ConnectRing__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei = .text:0x80029820; // type:function size:0x340
 DrawStripeTube_ConnectEmitter__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei = .text:0x80029B60; // type:function size:0x3B8
 DrawStripeTube__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei = .text:0x80029F18; // type:function size:0x1FC
-Draw__Q34nw4r2ef18DrawStripeStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager = .text:0x8002A114; // type:functionsize:0x5EC
+Draw__Q34nw4r2ef18DrawStripeStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager = .text:0x8002A114; // type:function size:0x5EC
 GetInitialPrevAxis__Q34nw4r2ef18DrawStripeStrategyFRCQ34nw4r2ef18EmitterDrawSettingRCQ44nw4r2ef18DrawStripeStrategy18AheadContextStripe = .text:0x8002A700; // type:function size:0x188
 GetCalcAheadFunc__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r2ef15ParticleManager = .text:0x8002A888; // type:function size:0xB4
 CalcAhead_Particle_Stripe__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle = .text:0x8002A93C; // type:function size:0x14C
