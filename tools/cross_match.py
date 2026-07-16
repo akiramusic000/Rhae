@@ -2,68 +2,7 @@
 
 import argparse
 from pathlib import Path
-import re
-from dataclasses import dataclass
-
-
-@dataclass
-class Symbols:
-    symbols: list[Symbol]
-    addresses: dict[int, int]
-
-
-@dataclass
-class Symbol:
-    name: str
-    section: str
-    address: int
-    size: int
-    pre: str
-    scope: str
-    post: str
-
-    def __format__(self, format_spec: str) -> str:
-        return f"{self.name} = {self.section}:0x{self.address:X}{self.pre}size:0x{self.size:X} scope:{self.scope}{self.post}"
-
-
-sym_regex = re.compile(
-    r"(?P<name>.+) = (?P<section>\.?[a-zA-Z0-9]+):0x(?P<address>[0-9A-Fa-f]{8})(?P<pre>.*)size:0x(?P<size>[0-9A-Za-z]*)( scope:(?P<scope>[a-z]*))?(?P<post>.*)"
-)
-
-
-def parse_symbols(symbols_txt: str) -> Symbols:
-    symbol_list = []
-    addresses = {}
-    i = 0
-
-    for line in symbols_txt.splitlines():
-        sym_match = sym_regex.match(line)
-        if sym_match != None:
-            groups = sym_match.groupdict()
-            address = int(groups["address"], 16)
-
-            if groups["scope"] != None:
-                scope = groups["scope"]
-            else:
-                scope = "global"
-
-            symbol_list.append(
-                Symbol(
-                    groups["name"],
-                    groups["section"],
-                    address,
-                    int(groups["size"], 16),
-                    groups["pre"],
-                    scope,
-                    groups["post"],
-                )
-            )
-            if not address in addresses:
-                addresses[address] = i
-            i += 1
-
-    return Symbols(symbol_list, addresses)
-
+from symbols import parse_symbols
 
 parser = argparse.ArgumentParser(
     description="Cross matches symbols from one decomp project to another."

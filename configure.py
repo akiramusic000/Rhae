@@ -290,6 +290,16 @@ cflags_libnw4r_ut = [
     "-i include/nw4r",
 ]
 
+# NW4R effect library flags
+cflags_libnw4r_ef = [
+    *cflags_base,
+    *cflags_pedantic,
+    "-enc SJIS",
+    "-fp_contract off",
+    "-ipa file",
+    "-i include/nw4r",
+]
+
 # NW4R math library flags
 cflags_libnw4r_math = [
     *cflags_base,
@@ -540,6 +550,45 @@ config.libs = [
             Object(Matching, "nw4r/ut/ut_ResFont.cpp"),
             Object(Matching, "nw4r/ut/ut_CharWriter.cpp"),
             Object(Matching, "nw4r/ut/ut_TextWriterBase.cpp"),
+        ],
+    },
+    {
+        "lib": "libnw4r_ef",
+        "mw_version": config.linker_version,
+        "cflags": cflags_libnw4r_ef,
+        "progress_category": "nw4r",  # str | List[str]
+        "objects": [
+            Object(Matching, "nw4r/ef/ef_draworder.cpp"),
+            Object(Matching, "nw4r/ef/ef_effect.cpp"),
+            Object(Matching, "nw4r/ef/ef_effectsystem.cpp"),
+            Object(Matching, "nw4r/ef/ef_emitter.cpp"),
+            Object(NonMatching, "nw4r/ef/ef_animcurve.cpp"),
+            Object(Matching, "nw4r/ef/ef_particle.cpp"),
+            Object(NonMatching, "nw4r/ef/ef_particlemanager.cpp"),
+            Object(Matching, "nw4r/ef/ef_resource.cpp"),
+            Object(Matching, "nw4r/ef/ef_util.cpp"),
+            Object(Matching, "nw4r/ef/ef_handle.cpp"),
+            Object(Matching, "nw4r/ef/ef_emitterform.cpp"),
+            Object(Matching, "nw4r/ef/ef_creationqueue.cpp"),
+            Object(Matching, "nw4r/ef/emform/ef_emform.cpp"),
+            Object(Matching, "nw4r/ef/emform/ef_point.cpp"),
+            Object(Matching, "nw4r/ef/emform/ef_line.cpp"),
+            Object(NonMatching, "nw4r/ef/emform/ef_disc.cpp"),
+            Object(Matching, "nw4r/ef/emform/ef_sphere.cpp"),
+            Object(NonMatching, "nw4r/ef/emform/ef_cylinder.cpp"),
+            Object(Matching, "nw4r/ef/emform/ef_torus.cpp"),
+            Object(Matching, "nw4r/ef/emform/ef_cube.cpp"),
+            Object(Matching, "nw4r/ef/drawstrategy/ef_drawstrategybuilder.cpp"),
+            Object(Matching, "nw4r/ef/drawstrategy/ef_drawstrategyimpl.cpp"),
+            Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawbillboardstrategy.cpp"),
+            Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawdirectionalstrategy.cpp"),
+            Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawfreestrategy.cpp"),
+            Object(Matching, "nw4r/ef/drawstrategy/ef_drawlinestrategy.cpp"),
+            Object(Matching, "nw4r/ef/drawstrategy/ef_drawpointstrategy.cpp"),
+            Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawstripestrategy.cpp"),
+            Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawsmoothstripestrategy.cpp"),
+            Object(Matching, "nw4r/ef/ef_res_emitter_ac.cpp"),
+            Object(Matching, "nw4r/ef/ef_res_animcurve_ac.cpp"),
         ],
     },
     {
