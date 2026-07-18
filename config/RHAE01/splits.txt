@@ -264,6 +264,305 @@ nw4r/math/math_geometry.cpp:
 	.text       start:0x800301E0 end:0x80030D74
 	.sdata2     start:0x8043CFE0 end:0x8043CFF0
 
+nw4r/snd/snd_AnimSound.cpp:
+	.text       start:0x80030D74 end:0x80030DC8
+
+nw4r/snd/snd_AxManager.cpp:
+	.text       start:0x80030DC8 end:0x800325D0
+	.bss        start:0x803650C0 end:0x803652C0
+	.sbss       start:0x8043B9E8 end:0x8043B9F0
+	.sdata2     start:0x8043CFF0 end:0x8043D008
+
+nw4r/snd/snd_AxVoice.cpp:
+	.text       start:0x800325D0 end:0x80034F40
+	.sdata2     start:0x8043D008 end:0x8043D028
+
+nw4r/snd/snd_AxVoiceManager.cpp:
+	.text       start:0x80034F40 end:0x80035978
+	.bss        start:0x803652C0 end:0x803652F8
+	.sbss       start:0x8043B9F0 end:0x8043B9F8
+
+nw4r/snd/snd_AxfxImpl.cpp:
+	.text       start:0x80035978 end:0x80035AE8
+	.sbss       start:0x8043B9F8 end:0x8043BA00
+
+nw4r/snd/snd_Bank.cpp:
+	.text       start:0x80035AE8 end:0x80035D10
+	.sdata2     start:0x8043D028 end:0x8043D048
+
+nw4r/snd/snd_BankFile.cpp:
+	.text       start:0x80035D10 end:0x80036118
+	.sdata2     start:0x8043D048 end:0x8043D04C
+
+nw4r/snd/snd_BasicPlayer.cpp:
+	.text       start:0x80036118 end:0x80036268
+	.data       start:0x8032B658 end:0x8032B67C
+	.sdata2     start:0x8043D050 end:0x8043D058
+
+nw4r/snd/snd_BasicSound.cpp:
+	.text       start:0x80036268 end:0x80037400
+	.ctors      start:0x802E9CF4 end:0x802E9CF8
+	.data       start:0x8032B680 end:0x8032B6F0
+	.sbss       start:0x8043BA00 end:0x8043BA04
+	.sdata2     start:0x8043D058 end:0x8043D068
+
+nw4r/snd/snd_Channel.cpp:
+	.text       start:0x80037400 end:0x8003851C
+	.bss        start:0x803652F8 end:0x80365328
+	.sbss       start:0x8043BA08 end:0x8043BA10
+	.sdata2     start:0x8043D068 end:0x8043D090
+
+nw4r/snd/snd_DisposeCallbackManager.cpp:
+	.text       start:0x8003851C end:0x8003887C
+	.bss        start:0x80365328 end:0x80365340
+	.sbss       start:0x8043BA10 end:0x8043BA18
+
+nw4r/snd/snd_DvdSoundArchive.cpp:
+	.text       start:0x8003887C end:0x80038EB4
+	.data       start:0x8032B6F0 end:0x8032B778
+	.sbss       start:0x8043BA18 end:0x8043BA20
+	.sbss2      start:0x80441960 end:0x80441964
+
+nw4r/snd/snd_EnvGenerator.cpp:
+	.text       start:0x80038EB4 end:0x800391F8
+	.rodata     start:0x8030A440 end:0x8030A740
+	.sdata2     start:0x8043D090 end:0x8043D0C0
+
+nw4r/snd/snd_ExternalSoundPlayer.cpp:
+	.text       start:0x800391F8 end:0x80039450
+	.sdata2     start:0x8043D0C0 end:0x8043D0C4
+
+nw4r/snd/snd_FrameHeap.cpp:
+	.text       start:0x80039450 end:0x80039D20
+
+nw4r/snd/snd_FxChorus.cpp:
+	.text       start:0x80039D20 end:0x8003A118
+	.rodata     start:0x8030A740 end:0x8030A74C
+	.data       start:0x8032B778 end:0x8032B798
+	.sdata2     start:0x8043D0C8 end:0x8043D0CC
+
+nw4r/snd/snd_FxDelay.cpp:
+	.text       start:0x8003A118 end:0x8003A600
+	.rodata     start:0x8030A750 end:0x8030A75C
+	.data       start:0x8032B798 end:0x8032B7B8
+	.sdata2     start:0x8043D0D0 end:0x8043D0D4
+
+nw4r/snd/snd_FxReverbHi.cpp:
+	.text       start:0x8003A600 end:0x8003AA90
+	.rodata     start:0x8030A760 end:0x8030A778
+	.data       start:0x8032B7B8 end:0x8032B7D8
+	.sdata2     start:0x8043D0D8 end:0x8043D0E8
+
+nw4r/snd/snd_FxReverbHiDpl2.cpp:
+	.text       start:0x8003AA90 end:0x8003AF28
+	.rodata     start:0x8030A778 end:0x8030A790
+	.data       start:0x8032B7D8 end:0x8032B7F8
+	.sdata2     start:0x8043D0E8 end:0x8043D0F8
+
+nw4r/snd/snd_InstancePool.cpp:
+	.text       start:0x8003AF28 end:0x8003B1E0
+
+nw4r/snd/snd_Lfo.cpp:
+	.text       start:0x8003B1E0 end:0x8003B3D0
+	.rodata     start:0x8030A790 end:0x8030A7B1
+	.sdata2     start:0x8043D0F8 end:0x8043D128
+
+nw4r/snd/snd_MemorySoundArchive.cpp:
+	.text       start:0x8003B3D0 end:0x8003B7FC
+	.data       start:0x8032B7F8 end:0x8032B878
+
+nw4r/snd/snd_MidiSeqPlayer.cpp:
+	.text       start:0x8003B7FC end:0x8003B850
+
+nw4r/snd/snd_MmlParser.cpp:
+	.text       start:0x8003B850 end:0x8003C73C
+	.data       start:0x8032B878 end:0x8032BAA8
+	.sdata      start:0x8043AB38 end:0x8043AB41
+	.sbss       start:0x8043BA20 end:0x8043BA28
+	.sdata2     start:0x8043D128 end:0x8043D148
+
+nw4r/snd/snd_MmlSeqTrack.cpp:
+	.text       start:0x8003C73C end:0x8003C7FC
+	.data       start:0x8032BAA8 end:0x8032BAB8
+
+nw4r/snd/snd_MmlSeqTrackAllocator.cpp:
+	.text       start:0x8003C7FC end:0x8003C928
+	.data       start:0x8032BAB8 end:0x8032BAD0
+
+nw4r/snd/snd_NandSoundArchive.cpp:
+	.text       start:0x8003C928 end:0x8003D0F4
+	.data       start:0x8032BAD0 end:0x8032BB50
+	.sbss       start:0x8043BA28 end:0x8043BA30
+
+nw4r/snd/snd_RemoteSpeaker.cpp:
+	.text       start:0x8003D0F4 end:0x8003DAB4
+
+nw4r/snd/snd_RemoteSpeakerManager.cpp:
+	.text       start:0x8003DAB4 end:0x8003DD34
+	.bss        start:0x80365340 end:0x80365618
+	.sbss       start:0x8043BA30 end:0x8043BA38
+
+nw4r/snd/snd_SeqFile.cpp:
+	.text       start:0x8003DD34 end:0x8003DDB0
+
+nw4r/snd/snd_SeqPlayer.cpp:
+	.text       start:0x8003DDB0 end:0x8003F4C8
+	.data       start:0x8032BB50 end:0x8032BBD8
+	.bss        start:0x80365618 end:0x80365638
+	.sbss       start:0x8043BA38 end:0x8043BA3C
+	.sdata2     start:0x8043D148 end:0x8043D15C
+
+nw4r/snd/snd_SeqSound.cpp:
+	.text       start:0x8003F4C8 end:0x8003FCD0
+	.ctors      start:0x802E9CF8 end:0x802E9CFC
+	.data       start:0x8032BBD8 end:0x8032BC60
+	.sbss       start:0x8043BA40 end:0x8043BA44
+
+nw4r/snd/snd_SeqSoundHandle.cpp:
+	.text       start:0x8003FCD0 end:0x8003FE10
+
+nw4r/snd/snd_SeqTrack.cpp:
+	.text       start:0x8003FE10 end:0x80041028
+	.rodata     start:0x8030A7B8 end:0x8030A7DC
+	.data       start:0x8032BC60 end:0x8032BC70
+	.sdata2     start:0x8043D160 end:0x8043D190
+
+nw4r/snd/snd_Sound3DActor.cpp:
+	.text       start:0x80041028 end:0x800413CC
+	.rodata     start:0x8030A7E0 end:0x8030A7F4
+	.data       start:0x8032BC70 end:0x8032BC94
+
+nw4r/snd/snd_Sound3DListener.cpp:
+	.text       start:0x800413CC end:0x800413E0
+	.sdata2     start:0x8043D190 end:0x8043D194
+
+nw4r/snd/snd_Sound3DManager.cpp:
+	.text       start:0x800413E0 end:0x80041E14
+	.data       start:0x8032BC98 end:0x8032BCC0
+	.sbss       start:0x8043BA48 end:0x8043BA88
+	.sdata2     start:0x8043D198 end:0x8043D1E8
+
+nw4r/snd/snd_SoundActor.cpp:
+	.text       start:0x80041E14 end:0x80041E34
+	.data       start:0x8032BCC0 end:0x8032BCD4
+
+nw4r/snd/snd_SoundArchive.cpp:
+	.text       start:0x80041E34 end:0x80042454
+	.data       start:0x8032BCD8 end:0x8032BCF8
+
+nw4r/snd/snd_SoundArchiveFile.cpp:
+	.text       start:0x80042454 end:0x80043550
+	.sbss       start:0x8043BA88 end:0x8043BA90
+
+nw4r/snd/snd_SoundArchiveLoader.cpp:
+	.text       start:0x80043550 end:0x80043BA0
+
+nw4r/snd/snd_SoundArchivePlayer.cpp:
+	.text       start:0x80043BA0 end:0x80045BB8
+	.data       start:0x8032BCF8 end:0x8032BD48
+	.sdata2     start:0x8043D1E8 end:0x8043D1F8
+
+nw4r/snd/snd_SoundHandle.cpp:
+	.text       start:0x80045BB8 end:0x80045CD0
+
+nw4r/snd/snd_SoundHeap.cpp:
+	.text       start:0x80045CD0 end:0x80046008
+	.data       start:0x8032BD58 end:0x8032BD68
+
+nw4r/snd/snd_SoundPlayer.cpp:
+	.text       start:0x80046008 end:0x80047524
+	.sdata2     start:0x8043D1F8 end:0x8043D200
+
+nw4r/snd/snd_SoundStartable.cpp:
+	.text       start:0x80047524 end:0x80047674
+
+nw4r/snd/snd_SoundSystem.cpp:
+	.text       start:0x80047674 end:0x800479FC
+	.ctors      start:0x802E9CFC end:0x802E9D00
+	.data       start:0x8032BD68 end:0x8032BDB0
+	.bss        start:0x80365640 end:0x8037C2F0
+	.sdata      start:0x8043AB48 end:0x8043AB4C
+	.sbss       start:0x8043BA90 end:0x8043BA94
+
+nw4r/snd/snd_SoundThread.cpp:
+	.text       start:0x800479FC end:0x800480F0
+	.bss        start:0x8037C2F0 end:0x8037C698
+	.sbss       start:0x8043BA98 end:0x8043BA9C
+
+nw4r/snd/snd_StrmChannel.cpp:
+	.text       start:0x800480F0 end:0x80048310
+
+nw4r/snd/snd_StrmFile.cpp:
+	.text       start:0x80048310 end:0x800488DC
+
+nw4r/snd/snd_StrmPlayer.cpp:
+	.text       start:0x800488DC end:0x8004AD6C
+	.data       start:0x8032BDB0 end:0x8032BE28
+	.bss        start:0x8037C6A0 end:0x803806D8
+	.sbss       start:0x8043BAA0 end:0x8043BAA4
+	.sdata2     start:0x8043D200 end:0x8043D208
+
+nw4r/snd/snd_StrmSound.cpp:
+	.text       start:0x8004AD6C end:0x8004B0A4
+	.ctors      start:0x802E9D00 end:0x802E9D04
+	.data       start:0x8032BE28 end:0x8032BE98
+	.sbss       start:0x8043BAA8 end:0x8043BAAC
+
+nw4r/snd/snd_StrmSoundHandle.cpp:
+	.text       start:0x8004B0A4 end:0x8004B0DC
+
+nw4r/snd/snd_Task.cpp:
+	.text       start:0x8004B0DC end:0x8004B11C
+
+nw4r/snd/snd_TaskManager.cpp:
+	.text       start:0x8004B11C end:0x8004B888
+	.bss        start:0x803806D8 end:0x80380720
+	.sbss       start:0x8043BAB0 end:0x8043BAB4
+
+nw4r/snd/snd_TaskThread.cpp:
+	.text       start:0x8004B888 end:0x8004BAA4
+
+nw4r/snd/snd_Voice.cpp:
+	.text       start:0x8004BAA4 end:0x8004E1D8
+	.data       start:0x8032BE98 end:0x8032BED0
+	.sdata2     start:0x8043D208 end:0x8043D23C
+
+nw4r/snd/snd_VoiceManager.cpp:
+	.text       start:0x8004E1D8 end:0x8004E960
+	.bss        start:0x80380720 end:0x80380748
+	.sbss       start:0x8043BAB8 end:0x8043BABC
+
+nw4r/snd/snd_Util.cpp:
+	.text       start:0x8004E960 end:0x8004EDC4
+	.rodata     start:0x8030A7F8 end:0x8030CC48
+	.data       start:0x8032BED0 end:0x8032BEDC
+	.sdata      start:0x8043AB50 end:0x8043AB54
+	.sdata2     start:0x8043D240 end:0x8043D288
+
+nw4r/snd/snd_WaveFile.cpp:
+	.text       start:0x8004EDC4 end:0x8004F004
+
+nw4r/snd/snd_WaveSound.cpp:
+	.text       start:0x8004F004 end:0x8004F35C
+	.ctors      start:0x802E9D04 end:0x802E9D08
+	.data       start:0x8032BEE0 end:0x8032BF50
+	.sbss       start:0x8043BAC0 end:0x8043BAC4
+
+nw4r/snd/snd_WaveSoundHandle.cpp:
+	.text       start:0x8004F35C end:0x8004F394
+
+nw4r/snd/snd_WsdFile.cpp:
+	.text       start:0x8004F394 end:0x8004F6DC
+	.sdata2     start:0x8043D288 end:0x8043D28C
+
+nw4r/snd/snd_WsdPlayer.cpp:
+	.text       start:0x8004F6DC end:0x800506E4
+	.data       start:0x8032BF50 end:0x8032BFB0
+	.sdata2     start:0x8043D290 end:0x8043D2B8
+
+nw4r/snd/snd_adpcm.cpp:
+	.text       start:0x800506E4 end:0x80050770
+
 runtime/__mem.c:
 	.init       start:0x80004000 end:0x80004134
 	.text       start:0x800B1BD4 end:0x800B1BF0

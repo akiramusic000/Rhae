@@ -158,6 +158,8 @@ public:
         mPriority = priority;
     }
 
+    bool GetStartedFlag() const { return mStartedFlag; };
+    
     u32 GetId() const {
         return mId;
     }

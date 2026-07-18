@@ -106,6 +106,10 @@ void SeqSound::SetPlayerPriority(int priority) {
     mManager->UpdatePriority(this, BasicSound::CalcCurrentPlayerPriority());
 }
 
+void SeqSound::SetTrackMute(u32 trackFlags, SeqMute mute) {
+    mSeqPlayer.SetTrackMute(trackFlags, mute);
+}
+
 void SeqSound::SetTrackVolume(u32 trackFlags, f32 volume) {
     mSeqPlayer.SetTrackVolume(trackFlags, volume);
 }
@@ -114,8 +118,17 @@ void SeqSound::SetTrackPitch(u32 trackFlags, f32 pitch) {
     mSeqPlayer.SetTrackPitch(trackFlags, pitch);
 }
 
-bool SeqSound::WriteVariable(int idx, s16 value) {
-    mSeqPlayer.SetLocalVariable(idx, value);
+bool SeqSound::ReadVariable(int idx, s16 *value) const {
+    if (!GetStartedFlag()) {
+		*value = -1;
+	} else {
+		*value = mSeqPlayer.GetLocalVariable(idx);
+	}
+	return true;
+}
+
+bool SeqSound::ReadGlobalVariable(int idx, s16 *value) {
+    *value = SeqPlayer::GetGlobalVariable(idx);
     return true;
 }
 
