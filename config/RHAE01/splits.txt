@@ -1090,6 +1090,16 @@ revolution/AXFX/AXFXReverbHiDpl2.c:
 	.text       start:0x801070CC end:0x80107208
 	.sdata2     start:0x8043E360 end:0x8043E368
 
+revolution/AXFX/AXFXReverbHiExp.c:
+	.text       start:0x80107208 end:0x80108138
+	.data       start:0x803442A0 end:0x80344440
+	.sdata2     start:0x8043E368 end:0x8043E3A8
+
+revolution/AXFX/AXFXReverbHiExpDpl2.c:
+	.text       start:0x80108138 end:0x80109134
+	.data       start:0x80344440 end:0x80344600
+	.sdata2     start:0x8043E3A8 end:0x8043E3E8
+
 revolution/AXFX/AXFXDelay.c:
 	.text       start:0x80109134 end:0x801097C8
 	.sdata2     start:0x8043E3E8 end:0x8043E3F8
@@ -1097,6 +1107,10 @@ revolution/AXFX/AXFXDelay.c:
 revolution/AXFX/AXFXChorus.c:
 	.text       start:0x801097C8 end:0x8010992C
 	.sdata2     start:0x8043E3F8 end:0x8043E410
+
+revolution/AXFX/AXFXChorusExp.c:
+	.text       start:0x8010992C end:0x8010A3A8
+	.sdata2     start:0x8043E410 end:0x8043E448
 
 revolution/AXFX/AXFXLfoTable.c:
 	.text       start:0x8010A3A8 end:0x8010A3B4
