@@ -20,8 +20,8 @@ struct ResAnmScnInfoData {
     u16 numResLightSetData;       // at 0x8
     u16 numResAnmAmbLightData;    // at 0xA
     u16 numResAnmLightData;       // at 0xC
-    u16 numResAnmFogData;         // at 0xE
-    u16 numResAnmCameraData;      // at 0x10
+    u16 numResAnmCameraData;      // at 0xE
+    u16 numResAnmFogData;         // at 0x10
     u8 PADDING_0x12[0x14 - 0x12]; // at 0x12
 };
 
@@ -33,8 +33,8 @@ struct ResAnmScnData {
     s32 toResLightSetDataArray;    // at 0x14
     s32 toResAnmAmbLightDataArray; // at 0x18
     s32 toResAnmLightDataArray;    // at 0x1C
-    s32 toResAnmFogDataArray;      // at 0x20
-    s32 toResAnmCameraDataArray;   // at 0x24
+    s32 toResAnmCameraDataArray;   // at 0x20
+    s32 toResAnmFogDataArray;      // at 0x24
     s32 name;                      // at 0x28
     s32 original_path;             // at 0x2C
     ResAnmScnInfoData info;        // at 0x30

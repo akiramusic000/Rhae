@@ -46,6 +46,7 @@ struct ResAnmFogData {
     ResAnmData startz;     // at 0x1C
     ResAnmData endz;       // at 0x20
     ResColorAnmData color; // at 0x24
+    char padding[0x32];    // at 0x28
 };
 
 class ResAnmFog : public ResCommon<ResAnmFogData> {

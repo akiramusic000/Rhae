@@ -828,49 +828,6 @@ void ChrAnmResult::GetScale(math::VEC3* pScale) const {
     }
 }
 
-bool ChrAnmResult::GetRotateDeg(math::VEC3* pRotate) const {
-    if (flags & FLAG_ROT_ZERO) {
-        pRotate->x = 0.0f;
-        pRotate->y = 0.0f;
-        pRotate->z = 0.0f;
-        return true;
-    }
-
-    if (flags & FLAG_ROT_RAW_FMT) {
-        pRotate->x = rawR.x;
-        pRotate->y = rawR.y;
-        pRotate->z = rawR.z;
-        return true;
-    }
-
-    // FSqrt returns 0 when -sin(y) <= -1 or -sin(y) >= 1
-    f32 y = math::FSqrt(-(rt._20 * rt._20 - 1.0f));
-
-    if (y == 0.0f) {
-        pRotate->x = math::Atan2Deg(rt._02 + rt._11, rt._12 + rt._01);
-        pRotate->y = math::FSelect(rt._20, -90, 90);
-        pRotate->z = math::Atan2Deg(rt._02 + rt._11, rt._12 - rt._01);
-    } else {
-        pRotate->x = math::Atan2Deg(rt._21, rt._22);
-        pRotate->y = math::Atan2Deg(-rt._20, y);
-        pRotate->z = math::Atan2Deg(rt._10, rt._00);
-    }
-
-    return false;
-}
-
-void ChrAnmResult::GetTranslate(math::VEC3* pTrans) const {
-    if (flags & FLAG_TRANS_ZERO) {
-        pTrans->x = 0.0f;
-        pTrans->y = 0.0f;
-        pTrans->z = 0.0f;
-    } else {
-        pTrans->x = rt._03;
-        pTrans->y = rt._13;
-        pTrans->z = rt._23;
-    }
-}
-
 void ChrAnmResult::GetRotTrans(math::MTX34* pRotTrans) const {
     if (flags & FLAG_ROT_ZERO) {
         if (flags & FLAG_TRANS_ZERO) {
