@@ -563,6 +563,90 @@ nw4r/snd/snd_WsdPlayer.cpp:
 nw4r/snd/snd_adpcm.cpp:
 	.text       start:0x800506E4 end:0x80050770
 
+nw4r/lyt/lyt_init.cpp:
+	.text       start:0x80078FE4 end:0x80079038
+	.data       start:0x8032CBA0 end:0x8032CBE8
+	.sdata      start:0x8043ABB0 end:0x8043ABB4
+
+nw4r/lyt/lyt_pane.cpp:
+	.text       start:0x80079038 end:0x80079F48
+	.ctors      start:0x802E9D0C end:0x802E9D10
+	.data       start:0x8032CBE8 end:0x8032CC4C
+	.sbss       start:0x8043BB00 end:0x8043BB04
+	.sdata2     start:0x8043D530 end:0x8043D54C
+
+nw4r/lyt/lyt_group.cpp:
+	.text       start:0x80079F48 end:0x8007A26C
+	.data       start:0x8032CC50 end:0x8032CC5C
+
+nw4r/lyt/lyt_layout.cpp:
+	.text       start:0x8007A26C end:0x8007AEDC
+	.data       start:0x8032CC60 end:0x8032CC94
+	.sbss       start:0x8043BB08 end:0x8043BB0C
+	.sdata2     start:0x8043D550 end:0x8043D558
+
+nw4r/lyt/lyt_picture.cpp:
+	.text       start:0x8007AEDC end:0x8007B404
+	.ctors      start:0x802E9D10 end:0x802E9D14
+	.data       start:0x8032CC98 end:0x8032CD00
+	.sbss       start:0x8043BB10 end:0x8043BB14
+	.sdata2     start:0x8043D558 end:0x8043D55C
+
+nw4r/lyt/lyt_textBox.cpp:
+	.text       start:0x8007B404 end:0x8007BFE4
+	.ctors      start:0x802E9D14 end:0x802E9D18
+	.data       start:0x8032CD00 end:0x8032CD74
+	.sbss       start:0x8043BB18 end:0x8043BB1C
+	.sdata2     start:0x8043D560 end:0x8043D578
+
+nw4r/lyt/lyt_window.cpp:
+	.text       start:0x8007BFE4 end:0x8007E61C
+	.ctors      start:0x802E9D18 end:0x802E9D1C
+	.data       start:0x8032CD78 end:0x8032CE30
+	.sbss       start:0x8043BB20 end:0x8043BB24
+	.sdata2     start:0x8043D578 end:0x8043D590
+
+nw4r/lyt/lyt_bounding.cpp:
+	.text       start:0x8007E61C end:0x8007E6C8
+	.ctors      start:0x802E9D1C end:0x802E9D20
+	.data       start:0x8032CE30 end:0x8032CE94
+	.sbss       start:0x8043BB28 end:0x8043BB2C
+
+nw4r/lyt/lyt_material.cpp:
+	.text       start:0x8007E6C8 end:0x80081678
+	.data       start:0x8032CE98 end:0x8032CF00
+	.sdata2     start:0x8043D590 end:0x8043D5B0
+	.sbss2      start:0x80441968 end:0x80441970
+
+nw4r/lyt/lyt_texMap.cpp:
+	.text       start:0x80081678 end:0x80081978
+	.sdata2     start:0x8043D5B0 end:0x8043D5C4
+
+nw4r/lyt/lyt_drawInfo.cpp:
+	.text       start:0x80081978 end:0x80081A2C
+	.data       start:0x8032CF00 end:0x8032CF10
+	.sdata2     start:0x8043D5C8 end:0x8043D5D0
+
+nw4r/lyt/lyt_animation.cpp:
+	.text       start:0x80081A2C end:0x800825E4
+	.data       start:0x8032CF10 end:0x8032CF30
+	.sdata2     start:0x8043D5D0 end:0x8043D5F0
+
+nw4r/lyt/lyt_resourceAccessor.cpp:
+	.text       start:0x800825E4 end:0x8008263C
+	.data       start:0x8032CF30 end:0x8032CF44
+
+nw4r/lyt/lyt_arcResourceAccessor.cpp:
+	.text       start:0x8008263C end:0x80082A1C
+	.data       start:0x8032CF48 end:0x8032CF5C
+	.sdata      start:0x8043ABB8 end:0x8043ABC0
+
+nw4r/lyt/lyt_common.cpp:
+	.text       start:0x80082A1C end:0x80083528
+	.bss        start:0x8039E180 end:0x8039E1A0
+	.sbss       start:0x8043BB30 end:0x8043BB34
+	.sdata2     start:0x8043D5F0 end:0x8043D5F8
+
 runtime/__mem.c:
 	.init       start:0x80004000 end:0x80004134
 	.text       start:0x800B1BD4 end:0x800B1BF0

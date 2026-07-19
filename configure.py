@@ -320,6 +320,16 @@ cflags_libnw4r_snd = [
     "-i include/nw4r",
 ]
 
+# NW4R layout library flags
+cflags_libnw4r_lyt = [
+    *cflags_base,
+    *cflags_pedantic,
+    "-enc SJIS",
+    "-fp_contract off",
+    "-ipa file",
+    "-i include/nw4r",
+]
+
 
 config.linker_version = "GC/3.0a5.2"
 
@@ -602,6 +612,18 @@ config.libs = [
         ],
     },
     {
+        "lib": "libnw4r_math",
+        "mw_version": config.linker_version,
+        "cflags": cflags_libnw4r_math,
+        "progress_category": "nw4r",  # str | List[str]
+        "objects": [
+            Object(Matching, "nw4r/math/math_arithmetic.cpp"),
+            Object(Matching, "nw4r/math/math_triangular.cpp"),
+            Object(Matching, "nw4r/math/math_types.cpp"),
+            Object(Matching, "nw4r/math/math_geometry.cpp"),
+        ],
+    },
+    {
         "lib": "libnw4r_snd",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_snd,
@@ -675,15 +697,26 @@ config.libs = [
         ],
     },
     {
-        "lib": "libnw4r_math",
+        "lib": "libnw4r_lyt",
         "mw_version": config.linker_version,
-        "cflags": cflags_libnw4r_math,
+        "cflags": cflags_libnw4r_lyt,
         "progress_category": "nw4r",  # str | List[str]
         "objects": [
-            Object(Matching, "nw4r/math/math_arithmetic.cpp"),
-            Object(Matching, "nw4r/math/math_triangular.cpp"),
-            Object(Matching, "nw4r/math/math_types.cpp"),
-            Object(Matching, "nw4r/math/math_geometry.cpp"),
+            Object(Matching, "nw4r/lyt/lyt_init.cpp"),
+            Object(Matching, "nw4r/lyt/lyt_pane.cpp"),
+            Object(Matching, "nw4r/lyt/lyt_group.cpp"),
+            Object(Matching, "nw4r/lyt/lyt_layout.cpp"),
+            Object(Matching, "nw4r/lyt/lyt_picture.cpp"),
+            Object(Matching, "nw4r/lyt/lyt_textBox.cpp"),
+            Object(NonMatching, "nw4r/lyt/lyt_window.cpp"),
+            Object(Matching, "nw4r/lyt/lyt_bounding.cpp"),
+            Object(NonMatching, "nw4r/lyt/lyt_material.cpp"),
+            Object(Matching, "nw4r/lyt/lyt_texMap.cpp"),
+            Object(Matching, "nw4r/lyt/lyt_drawInfo.cpp"),
+            Object(Matching, "nw4r/lyt/lyt_animation.cpp"),
+            Object(Matching, "nw4r/lyt/lyt_resourceAccessor.cpp"),
+            Object(Matching, "nw4r/lyt/lyt_arcResourceAccessor.cpp"),
+            Object(Matching, "nw4r/lyt/lyt_common.cpp"),
         ],
     },
 ]

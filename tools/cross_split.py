@@ -51,7 +51,7 @@ current_syms = parse_symbols(current_syms_txt)
 
 filename_regex = re.compile(r"(?P<filename>.*):")
 split_regex = re.compile(
-    r"\t(?P<section>[a-zA-Z.]*)\s*start:0x(?P<start>[0-9A-Za-z]*) end:0x(?P<end>[0-9A-Za-z]*)"
+    r"\s*(?P<section>[a-zA-Z.]*)\s*start:0x(?P<start>[0-9A-Za-z]*) end:0x(?P<end>[0-9A-Za-z]*)"
 )
 
 for line in splits.splitlines():
