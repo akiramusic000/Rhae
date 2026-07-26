@@ -907,6 +907,19 @@ nw4r/lyt/lyt_common.cpp:
 	.sbss       start:0x8043BB30 end:0x8043BB34
 	.sdata2     start:0x8043D5F0 end:0x8043D5F8
 
+EGG/egg_unsplit.o:
+	extab       start:0x800064E0 end:0x800065D8
+	extabindex  start:0x80006CA0 end:0x80006DE4
+	.text       start:0x80083528 end:0x800B1BD4
+	.ctors      start:0x802E9D20 end:0x802E9D4C
+	.rodata     start:0x8030D818 end:0x8030FE48
+	.data       start:0x8032CF60 end:0x8032E1F4
+	.bss        start:0x8039E1A0 end:0x803A03D0
+	.sdata      start:0x8043ABC0 end:0x8043AC70
+	.sbss       start:0x8043BB38 end:0x8043BCE0
+	.sdata2     start:0x8043D5F8 end:0x8043E108
+	.sbss2      start:0x80441970 end:0x80441988
+
 runtime/__mem.c:
 	.init       start:0x80004000 end:0x80004134
 	.text       start:0x800B1BD4 end:0x800B1BF0
