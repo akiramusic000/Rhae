@@ -967,9 +967,13 @@ revolution/NdevExi2AD/DebuggerDriver.c:
 revolution/NdevExi2AD/exi2.c:
 	.text       start:0x800C7054 end:0x800C77E0
 
+revolution/KPAD/Kpad.c:
+	.text       start:0x800C77E0 end:0x800CA884
+
 revolution/PAD/Pad.c:
-	.text       start:0x800CA93C end:0x800CA998
-	.sbss       start:0x8043BD50 end:0x8043BD54
+	.text       start:0x800CA884 end:0x800CA998
+	.sdata      start:0x8043AD08 end:0x8043AD10
+	.sbss       start:0x8043BD50 end:0x8043BD58
 
 revolution/WPAD/WPAD.c:
 	.text       start:0x800CA998 end:0x800D1FE4
