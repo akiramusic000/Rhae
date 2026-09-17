@@ -4,10 +4,14 @@ import argparse
 from pathlib import Path
 from symbols import Symbols, parse_symbols
 import re
+import sys
 
 
 def translate(address: int, current_syms: Symbols, ref_syms: Symbols) -> int | None:
-    ref_idx = ref_syms.addresses[address]
+    ref_idx = ref_syms.addresses.get(address)
+    if ref_idx is None:
+        print(f"No symbol at 0x{address:X}", file=sys.stderr)
+        return None
 
     ref_sym = ref_syms.symbols[ref_idx]
 
@@ -18,18 +22,21 @@ def translate(address: int, current_syms: Symbols, ref_syms: Symbols) -> int | N
             if final_sym == None:
                 final_sym = sym
             else:
-                print(f"Duplicate symbol! {ref_sym.name}")
+                print(f"Duplicate symbol! {ref_sym.name}", file=sys.stderr)
                 return None
 
     if final_sym != None:
         return final_sym.address
     else:
-        print(f"Not found! {ref_sym.name}")
+        print(f"Not found! {ref_sym.name}", file=sys.stderr)
         return None
 
 
 parser = argparse.ArgumentParser(
     description="Cross splits one decomp project to another, using symbol names to translate addresses."
+)
+parser.add_argument(
+    "splits_path", type=Path, help="Path to the splits.txt for the reference game."
 )
 parser.add_argument(
     "ref_path", type=Path, help="Path to the symbols.txt for the reference game."
@@ -40,7 +47,7 @@ parser.add_argument(
 args = parser.parse_args()
 ref_path: Path = args.ref_path
 current_path: Path = args.current_path
-splits_path = Path("splits.txt")
+splits_path: Path = args.splits_path
 
 ref_syms_txt = ref_path.read_text()
 current_syms_txt = current_path.read_text()
