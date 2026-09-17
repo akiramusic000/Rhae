@@ -161,11 +161,11 @@ u32 ResMdl::GetResShpNumEntries() const {
 
 /******************************************************************************
  *
- * ResTexPlttInfo
+ * ResTexPlttInfoOffset
  *
  ******************************************************************************/
-ResTexPlttInfo ResMdl::GetResTexPlttInfoOffsetFromTexName(int idx) const {
-    return ResTexPlttInfo(
+ResTexPlttInfoOffset ResMdl::GetResTexPlttInfoOffsetFromTexName(int idx) const {
+    return ResTexPlttInfoOffset(
         ofs_to_obj<ResDic>(ref().toResTexNameToTexPlttInfoDic)[idx]);
 }
 
@@ -244,3 +244,4 @@ void ResMdl::Terminate() {
 
 } // namespace g3d
 } // namespace nw4r
+

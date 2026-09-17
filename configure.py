@@ -317,6 +317,17 @@ cflags_runtime = [
     "-inline auto",
 ]
 
+# EGG flags
+cflags_egg = [
+    *cflags_base,
+    # *cflags_pedantic,
+    "-enc SJIS",
+    "-use_lmw_stmw on",
+    "-str reuse,pool,readonly",
+    "-i include/nw4r",
+    "-ir include/egg",  # TODO(kiwi) remove after refactor
+]
+
 # RVL SDK flags
 cflags_rvl = [
     *cflags_base,
@@ -592,6 +603,112 @@ config.libs = [
             Object(Matching, "nw4r/g3d/g3d_fog.cpp"),
             Object(Matching, "nw4r/g3d/g3d_light.cpp"),
             Object(Matching, "nw4r/g3d/g3d_calcvtx.cpp"),
+        ],
+    },
+    {
+        "lib": "egg",
+        "mw_version": config.linker_version,
+        "cflags": cflags_egg,
+        "progress_category": "egg",  # str | List[str]
+        "objects": [
+            Object(NonMatching, "egg/gfxe/eggShadowTextureManager.cpp"),
+            Object(NonMatching, "egg/gfxe/eggStateGX.cpp"),
+            Object(NonMatching, "egg/gfxe/eggTextureBuffer.cpp"),
+            Object(NonMatching, "egg/gfxe/eggAnalizeDL.cpp"),
+            Object(NonMatching, "egg/gfxe/eggCapTexture.cpp"),
+            Object(NonMatching, "egg/gfxe/eggCpuTexture.cpp"),
+            Object(NonMatching, "egg/gfxe/eggDrawGX.cpp"),
+            Object(NonMatching, "egg/gfxe/eggDrawPathBase.cpp"),
+            Object(NonMatching, "egg/gfxe/eggDrawPathBloom.cpp"),
+            Object(NonMatching, "egg/gfxe/eggDrawPathDOF.cpp"),
+            Object(NonMatching, "egg/gfxe/eggDrawPathHDR.cpp"),
+            Object(NonMatching, "egg/gfxe/eggDrawPathShadowVolume.cpp"),
+            Object(NonMatching, "egg/gfxe/eggDrawPathXluSnap.cpp"),
+            Object(NonMatching, "egg/gfxe/eggFog.cpp"),
+            Object(NonMatching, "egg/gfxe/eggFogManager.cpp"),
+            Object(NonMatching, "egg/gfxe/eggG3DUtility.cpp"),
+            Object(NonMatching, "egg/gfxe/eggGfxEngine.cpp"),
+            Object(NonMatching, "egg/gfxe/eggLightManager.cpp"),
+            Object(NonMatching, "egg/gfxe/eggLightTexture.cpp"),
+            Object(NonMatching, "egg/gfxe/eggLightTextureManager.cpp"),
+            Object(NonMatching, "egg/gfxe/eggModelBoundingInfo.cpp"),
+            Object(NonMatching, "egg/gfxe/eggModelEx.cpp"),
+            Object(NonMatching, "egg/gfxe/eggModelSnapshot.cpp"),
+            Object(NonMatching, "egg/gfxe/eggPostEffectBase.cpp"),
+            Object(NonMatching, "egg/gfxe/eggPostEffectBlur.cpp"),
+            Object(NonMatching, "egg/gfxe/eggPostEffectBlurGather.cpp"),
+            Object(NonMatching, "egg/gfxe/eggPostEffectBlurSimple.cpp"),
+            Object(NonMatching, "egg/gfxe/eggPostEffectHDR.cpp"),
+            Object(NonMatching, "egg/gfxe/eggPostEffectMask.cpp"),
+            Object(NonMatching, "egg/gfxe/eggPostEffectSimple.cpp"),
+            Object(NonMatching, "egg/gfxe/eggScnRootEx.cpp"),
+            Object(NonMatching, "egg/gfxe/eggScreen.cpp"),
+            Object(NonMatching, "egg/gfxe/eggShadowTexture.cpp"),
+            Object(NonMatching, "egg/gfxe/eggIScnProc.cpp"),
+            Object(NonMatching, "egg/gfxe/eggScnRenderer.cpp"),
+            Object(NonMatching, "egg/gfxe/eggLightObject.cpp"),
+            Object(NonMatching, "egg/gfxe/eggPostEffectMaskDOF.cpp"),
+            Object(NonMatching, "egg/gfxe/eggScreenEffectBase.cpp"),
+            Object(NonMatching, "egg/gfxe/eggFrustum.cpp"),
+            Object(NonMatching, "egg/gfxe/eggGXUtility.cpp"),
+            Object(NonMatching, "egg/gfxe/eggIDrawGX.cpp"),
+            Object(NonMatching, "egg/gfx/eggDrawHelper.cpp"),
+            Object(NonMatching, "egg/gfx/eggProjection.cpp"),
+            Object(
+                NonMatching, "egg/prim/eggAssert.cpp", extra_cflags=["-Cpp_exceptions on"]
+            ),
+            Object(
+                NonMatching,
+                "egg/geom/eggPlane.cpp",
+                extra_cflags=["-Cpp_exceptions on"],
+            ),
+            Object(
+                NonMatching, "egg/math/eggMath.cpp", extra_cflags=["-Cpp_exceptions on"]
+            ),
+            Object(
+                NonMatching, "egg/math/eggMatrix.cpp", extra_cflags=["-Cpp_exceptions on"]
+            ),
+            Object(
+                NonMatching, "egg/math/eggQuat.cpp", extra_cflags=["-Cpp_exceptions on"]
+            ),
+            Object(
+                NonMatching, "egg/math/eggVector.cpp", extra_cflags=["-Cpp_exceptions on"]
+            ),
+            Object(NonMatching, "egg/core/eggExpHeap.cpp"),
+            Object(NonMatching, "egg/core/eggFrmHeap.cpp"),
+            Object(NonMatching, "egg/core/eggHeap.cpp"),
+            Object(NonMatching, "egg/core/eggAllocator.cpp"),
+            Object(NonMatching, "egg/core/eggThread.cpp"),
+            Object(NonMatching, "egg/core/eggSystem.cpp"),
+            Object(NonMatching, "egg/core/eggTaskThread.cpp"),
+            Object(NonMatching, "egg/core/eggGraphicsFifo.cpp"),
+            Object(NonMatching, "egg/core/eggColorFader.cpp"),
+            Object(NonMatching, "egg/core/eggSceneManager.cpp"),
+            Object(NonMatching, "egg/core/eggController.cpp"),
+            Object(NonMatching, "egg/core/eggStream.cpp"),
+            Object(NonMatching, "egg/core/eggDisplay.cpp"),
+            Object(NonMatching, "egg/core/eggVideo.cpp"),
+            Object(NonMatching, "egg/core/eggXfb.cpp"),
+            Object(NonMatching, "egg/core/eggXfbManager.cpp"),
+            Object(NonMatching, "egg/core/eggDvdRipper.cpp"),
+            Object(NonMatching, "egg/core/eggDvdFile.cpp"),
+            Object(NonMatching, "egg/core/eggScene.cpp"),
+            Object(NonMatching, "egg/core/eggProcessMeter.cpp"),
+            Object(NonMatching, "egg/core/eggDisposer.cpp"),
+            Object(NonMatching, "egg/core/eggArchive.cpp"),
+            Object(NonMatching, "egg/core/eggDecomp.cpp"),
+            Object(NonMatching, "egg/core/eggAsyncDisplay.cpp"),
+            Object(NonMatching, "egg/core/eggCntFile.cpp"),
+            Object(NonMatching, "egg/audio/eggAudioArcPlayerMgr.cpp"),
+            Object(NonMatching, "egg/audio/eggAudioExpMgr.cpp"),
+            Object(NonMatching, "egg/audio/eggAudioFxMgr.cpp"),
+            Object(NonMatching, "egg/audio/eggAudioHeapMgr.cpp"),
+            Object(NonMatching, "egg/audio/eggAudioMgr.cpp"),
+            Object(NonMatching, "egg/audio/eggAudio3DActor.cpp"),
+            Object(NonMatching, "egg/audio/eggAudioSystem.cpp"),
+            Object(NonMatching, "egg/util/eggMsgRes.cpp"),
+            Object(NonMatching, "egg/util/eggEffect.cpp"),
+            Object(NonMatching, "egg/util/eggException.cpp"),
         ],
     },
     {
@@ -992,6 +1109,7 @@ def link_order_callback(module_id: int, objects: List[str]) -> List[str]:
 # Adjust as desired for your project
 config.progress_categories = [
     ProgressCategory("nw4r", "NW4R"),
+    ProgressCategory("egg", "EGG"),
     ProgressCategory("sdk", "SDK Code"),
     ProgressCategory("rfl", "RFL"),
     ProgressCategory("game", "Game Code"),
