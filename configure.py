@@ -707,8 +707,8 @@ config.libs = [
             Object(NonMatching, "egg/audio/eggAudio3DActor.cpp"),
             Object(Matching, "egg/audio/eggAudioSystem.cpp"),
             Object(NonMatching, "egg/util/eggMsgRes.cpp"),
-            Object(NonMatching, "egg/util/eggEffect.cpp"),
-            Object(NonMatching, "egg/util/eggException.cpp"),
+            Object(Matching, "egg/util/eggEffect.cpp"),
+            Object(Matching, "egg/util/eggException.cpp"),
         ],
     },
     {

@@ -1265,6 +1265,7 @@ egg/util/eggMsgRes.cpp:
 egg/util/eggEffect.cpp:
 	.text       start:0x800B1B64 end:0x800B1BC8
 	.ctors      start:0x802E9D48 end:0x802E9D4C
+	.sbss       start:0x8043BCD8 end:0x8043BCE0
 
 egg/util/eggException.cpp:
 	.text       start:0x800B1BC8 end:0x800B1BD4
