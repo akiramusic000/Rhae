@@ -38,10 +38,6 @@ class Split:
     start: int
     end: int
 
-    @property
-    def size(self) -> int:
-        return self.start - self.end
-
     def __format__(self, _: str, /) -> str:
         return f"\t{self.section:<12} start:0x{self.start:08X} end:0x{self.end:08X}"
 

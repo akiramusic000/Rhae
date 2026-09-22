@@ -38,9 +38,12 @@ def cross_symbols(
 
     while i < len(current_syms.symbols):
         sym = current_syms.symbols[i]
-        ref_sym = ref_syms.symbols[ref_idx + current_match]
+        try:
+            ref_sym = ref_syms.symbols[ref_idx + current_match]
+        except IndexError:
+            break
 
-        if sym.size == ref_sym.size:
+        if (sym.size == ref_sym.size) and (sym.section == ref_sym.section):
             if current_match == 0:
                 current_match_address = sym.address
 
@@ -82,7 +85,6 @@ if __name__ == "__main__":
     for i in range(longest_match):
         sym = current_syms.symbols[base_idx + i]
         ref_sym = ref_syms.symbols[ref_syms.addresses[base_address] + i]
-        sym.name = ref_sym.name
-        sym.scope = ref_sym.scope
+        sym.copy_attributes_from(ref_sym)
 
         print(f"{sym}")

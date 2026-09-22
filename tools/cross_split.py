@@ -38,7 +38,7 @@ def translate(split: Split, current_syms: Symbols, ref_syms: Symbols) -> Split |
         final_sym = None
 
         for sym in current_syms.symbols:
-            if ref_sym.name == sym.name:
+            if (ref_sym.name == sym.name) and (ref_sym.section == sym.section):
                 if final_sym == None:
                     final_sym = sym
                 else:

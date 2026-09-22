@@ -1,6 +1,8 @@
 import re
 from dataclasses import dataclass
 
+from typing import Self
+
 
 @dataclass
 class Symbol:
@@ -15,6 +17,11 @@ class Symbol:
 
     def __format__(self, _: str) -> str:
         return f"{self.name} = {self.section}:0x{self.address:X}; // type:{self.type}{f" size:0x{self.size:X}" if self.size != 0 else ""} scope:{self.scope}{f" align:{self.align}" if self.align != 1 else ""}{f" data:{self.data}" if self.data != None else ""}"
+
+    def copy_attributes_from(self, _o: Self) -> None:
+        self.name = _o.name
+        self.type = _o.type
+        self.scope = _o.scope
 
 
 @dataclass
