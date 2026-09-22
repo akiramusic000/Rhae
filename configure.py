@@ -611,9 +611,9 @@ config.libs = [
         "cflags": cflags_egg,
         "progress_category": "egg",  # str | List[str]
         "objects": [
-            Object(NonMatching, "egg/gfxe/eggShadowTextureManager.cpp"),
+            Object(Matching, "egg/gfxe/eggShadowTextureManager.cpp"),
             Object(NonMatching, "egg/gfxe/eggStateGX.cpp"),
-            Object(NonMatching, "egg/gfxe/eggTextureBuffer.cpp"),
+            Object(Matching, "egg/gfxe/eggTextureBuffer.cpp"),
             Object(NonMatching, "egg/gfxe/eggAnalizeDL.cpp"),
             Object(NonMatching, "egg/gfxe/eggCapTexture.cpp"),
             Object(NonMatching, "egg/gfxe/eggCpuTexture.cpp"),
@@ -705,7 +705,7 @@ config.libs = [
             Object(NonMatching, "egg/audio/eggAudioHeapMgr.cpp"),
             Object(NonMatching, "egg/audio/eggAudioMgr.cpp"),
             Object(NonMatching, "egg/audio/eggAudio3DActor.cpp"),
-            Object(NonMatching, "egg/audio/eggAudioSystem.cpp"),
+            Object(Matching, "egg/audio/eggAudioSystem.cpp"),
             Object(NonMatching, "egg/util/eggMsgRes.cpp"),
             Object(NonMatching, "egg/util/eggEffect.cpp"),
             Object(NonMatching, "egg/util/eggException.cpp"),

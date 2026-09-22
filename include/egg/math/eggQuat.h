@@ -9,7 +9,7 @@ namespace EGG {
 class Quatf {
 public:
     Quatf() {}
-    Quatf(f32 fw, Vector3f vxyz) : v(vxyz), w(fw) {}
+    Quatf(f32 fw, const Vector3f& vxyz);
     ~Quatf() {}
 
     void multScalar(f32 scale) {

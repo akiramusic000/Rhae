@@ -12,11 +12,13 @@ void Quatf::set(f32 fw, f32 fx, f32 fy, f32 fz) {
     v.z = fz;
 }
 
+Quatf::Quatf(f32 fw, const Vector3f& vxyz): v(vxyz), w(fw){}
+
 void Quatf::setAxisRotation(const Vector3f& rAxis, f32 angle) {
     f32 half = angle * 0.5f;
     f32 cosa = Math<f32>::cos(half);
     f32 sina = Math<f32>::sin(half);
     set(cosa, sina * rAxis.x, sina * rAxis.y, sina * rAxis.z);
-}
+} 
 
 } // namespace EGG
