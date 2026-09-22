@@ -1,0 +1,75 @@
+---
+BasedOnStyle: LLVM
+Language: Cpp
+Standard: Cpp03
+
+AccessModifierOffset: -4
+AllowShortFunctionsOnASingleLine: Empty
+AttributeMacros: [DECOMP_INLINE, DECOMP_DONT_INLINE]
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+FixNamespaceComments: true
+ForEachMacros: [EGG_NW4R_LIST_FOREACH]
+IncludeBlocks: Regroup
+IndentWidth: 4
+InsertNewlineAtEOF: true
+PointerAlignment: Left
+ShortNamespaceLines: 0
+SortIncludes: "true"
+SortUsingDeclarations: "true"
+UseTab: Never
+WhitespaceSensitiveMacros:
+  [
+    ASM,
+    ASM_VOLATILE,
+    DECOMP_FORCEACTIVE_DTOR,
+    DECOMP_FORCEACTIVE,
+    DECOMP_FORCELITERAL,
+    OS_ASSERT,
+    OS_ERROR,
+    EGG_ASSERT,
+    EGG_ASSERT_MSG,
+    RP_ASSERT,
+    RP_ASSERT_MSG,
+    NW4R_EF_LIST_FOREACH_SAFE,
+    NW4R_EF_LIST_FOREACH,
+    NW4R_UT_LINKLIST_FOREACH,
+    NW4R_UT_LINKLIST_FOREACH_SAFE,
+    NW4R_UT_LIST_FOREACH_SAFE,
+    NW4R_UT_LIST_FOREACH,
+  ]
+
+IncludeCategories:
+  - Regex: '^<(nw4r|egg|Pack)?(\/)?types' # "Types" headers
+    Priority: 0
+    CaseSensitive: true
+
+  - Regex: '(<|")Pack\/' # RP public headers
+    Priority: 2
+    CaseSensitive: true
+
+  - Regex: '(<|")RVLFaceLib(\/)?' # RFL headers
+    Priority: 3
+    CaseSensitive: true
+
+  - Regex: '(<|")homebuttonMiniLib(\/)?' # HBM headers
+    Priority: 4
+    CaseSensitive: true
+
+  - Regex: '(<|")egg\/' # EGG public headers
+    Priority: 5
+    CaseSensitive: true
+
+  - Regex: '(<|")nw4r\/' # NW4R public headers
+    Priority: 6
+    CaseSensitive: true
+
+  - Regex: '(<|")revolution\/' # RVL SDK public headers
+    Priority: 7
+    CaseSensitive: true
+
+  - Regex: "<[[:alnum:].]+>" # STL headers
+    Priority: 8
+    CaseSensitive: true
+
+  - Regex: ".*" # All other headers
+    Priority: 1
