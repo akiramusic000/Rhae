@@ -1,6 +1,8 @@
 import re
 from dataclasses import dataclass
 
+from typing import Self
+
 
 @dataclass
 class Symbol:
@@ -14,13 +16,25 @@ class Symbol:
     data: str | None
 
     def __format__(self, _: str) -> str:
-        return f"{self.name} = {self.section}:0x{self.address:X}; // type:{self.type}{f" size:0x{self.size:X}" if self.size != 0 else ""} scope:{self.scope}{f" align:{self.align}" if self.align != 1 else ""}{f" data:{self.data}" if self.data != None else ""}"
+        return f"{self.name} = {self.section}:0x{self.address:X}; // type:{self.type}{f' size:0x{self.size:X}' if self.size != 0 else ''} scope:{self.scope}{f' align:{self.align}' if self.align != 1 else ''}{f' data:{self.data}' if self.data != None else ''}"
+
+    def copy_attributes_from(self, _o: Self) -> None:
+        self.name = _o.name
+        self.type = _o.type
+        self.scope = _o.scope
 
 
 @dataclass
 class Symbols:
     symbols: list[Symbol]
     addresses: dict[int, int]
+
+    @classmethod
+    def of(cls, symbols: list[Symbol]) -> Self:
+        addresses: dict[int, int] = {}
+        for i, s in enumerate(symbols):
+            addresses.setdefault(s.address, i)
+        return cls(symbols, addresses)
 
 
 sym_regex = re.compile(
@@ -30,8 +44,6 @@ sym_regex = re.compile(
 
 def parse_symbols(symbols_txt: str) -> Symbols:
     symbol_list = []
-    addresses = {}
-    i = 0
 
     for line in symbols_txt.splitlines():
         sym_match = sym_regex.match(line)
@@ -70,8 +82,5 @@ def parse_symbols(symbols_txt: str) -> Symbols:
                     data,
                 )
             )
-            if not address in addresses:
-                addresses[address] = i
-            i += 1
 
-    return Symbols(symbol_list, addresses)
+    return Symbols.of(symbol_list)
