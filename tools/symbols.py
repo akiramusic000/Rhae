@@ -16,7 +16,7 @@ class Symbol:
     data: str | None
 
     def __format__(self, _: str) -> str:
-        return f"{self.name} = {self.section}:0x{self.address:X}; // type:{self.type}{f" size:0x{self.size:X}" if self.size != 0 else ""} scope:{self.scope}{f" align:{self.align}" if self.align != 1 else ""}{f" data:{self.data}" if self.data != None else ""}"
+        return f"{self.name} = {self.section}:0x{self.address:X}; // type:{self.type}{f' size:0x{self.size:X}' if self.size != 0 else ''} scope:{self.scope}{f' align:{self.align}' if self.align != 1 else ''}{f' data:{self.data}' if self.data != None else ''}"
 
     def copy_attributes_from(self, _o: Self) -> None:
         self.name = _o.name
@@ -29,6 +29,13 @@ class Symbols:
     symbols: list[Symbol]
     addresses: dict[int, int]
 
+    @classmethod
+    def of(cls, symbols: list[Symbol]) -> Self:
+        addresses: dict[int, int] = {}
+        for i, s in enumerate(symbols):
+            addresses.setdefault(s.address, i)
+        return cls(symbols, addresses)
+
 
 sym_regex = re.compile(
     r"(?P<name>.+) = (?P<section>\.?[a-zA-Z0-9]+):0x(?P<address>[0-9A-Fa-f]{8}); // type:(?P<type>[a-z]*)( size:0x(?P<size>[0-9A-Za-z]*))?( scope:(?P<scope>[a-z]*))?( align:(?P<align>[0-9]*))?( data:(?P<data>\d?[a-z]*))?"
@@ -37,8 +44,6 @@ sym_regex = re.compile(
 
 def parse_symbols(symbols_txt: str) -> Symbols:
     symbol_list = []
-    addresses = {}
-    i = 0
 
     for line in symbols_txt.splitlines():
         sym_match = sym_regex.match(line)
@@ -77,8 +82,5 @@ def parse_symbols(symbols_txt: str) -> Symbols:
                     data,
                 )
             )
-            if not address in addresses:
-                addresses[address] = i
-            i += 1
 
-    return Symbols(symbol_list, addresses)
+    return Symbols.of(symbol_list)

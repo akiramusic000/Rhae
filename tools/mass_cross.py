@@ -395,7 +395,6 @@ class CrossTextRun:
     def _get_overlapping_syms(
         self,
         m: Match,
-        new_split: Split,
     ) -> tuple[list[Symbol], list[Symbol]]:
         needle_start_idx = (
             self.needle_syms.addresses[self._get_needle_split(m).start]
@@ -404,12 +403,9 @@ class CrossTextRun:
         overlapping_needle_syms = self.needle_syms.symbols[
             needle_start_idx : needle_start_idx + m.needle_bounds.size
         ]
-
-        haystack_start_idx = self.haystack_syms.addresses[new_split.start]
         overlapping_haystack_syms = self.haystack_syms.symbols[
-            haystack_start_idx : haystack_start_idx + m.haystack_bounds.size
+            m.haystack_bounds.start : m.haystack_bounds.start + m.haystack_bounds.size
         ]
-
         return overlapping_needle_syms, overlapping_haystack_syms
 
     def _copy_symbols(
@@ -434,15 +430,26 @@ class CrossTextRun:
     def _get_orphaned_addresses(self) -> list[tuple[str | None, str | None, Bounds]]:
         orphaned = sorted(set(range(len(self.haystack))) - self.haystack_space.keys())
         contiguous: list[Bounds] = []
+        symbols = self.haystack_syms.symbols
+
+        def bound_addr(i: int) -> int:
+            return (
+                symbols[i].address
+                if i < len(symbols)
+                else symbols[-1].address + symbols[-1].size
+            )
+
         for idx in orphaned:
-            if contiguous:
-                prev_bounds = contiguous[-1]
-                if prev_bounds.end == idx:
-                    contiguous[-1] = Bounds(prev_bounds.start, idx + 1)
+            if contiguous and contiguous[-1].end == idx:
+                contiguous[-1] = Bounds(contiguous[-1].start, idx + 1)
             else:
                 contiguous.append(Bounds(idx, idx + 1))
         return [
-            (self.haystack_space.get(b.start - 1), self.haystack_space.get(b.end), b)
+            (
+                self.haystack_space.get(b.start - 1),
+                self.haystack_space.get(b.end),
+                Bounds(bound_addr(b.start), bound_addr(b.end)),
+            )
             for b in contiguous
         ]
 
@@ -485,7 +492,7 @@ class CrossTextRun:
             new_split = Split(".text", start_addr, end_addr)
 
             overlapping_needle_syms, overlapping_haystack_syms = (
-                self._get_overlapping_syms(m, new_split)
+                self._get_overlapping_syms(m)
             )
             self._copy_symbols(
                 m,
@@ -520,8 +527,8 @@ def do_mass_cross(
     text_run = CrossTextRun(
         needles_by_section[".text"],
         haystacks_by_section[".text"],
-        needle_syms,
-        haystack_syms,
+        Symbols.of([s for s in needle_syms.symbols if s.section == ".text"]),
+        Symbols.of([s for s in haystack_syms.symbols if s.section == ".text"]),
     )
     return text_run.run()
 
