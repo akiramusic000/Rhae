@@ -1960,6 +1960,7 @@ revolution/VF/pf_clib.c:
 
 revolution/VF/pf_code.c:
 	.text       start:0x8014AD8C end:0x8014ADA8
+	.rodata     start:0x80311758 end:0x803117B8
 
 revolution/VF/pf_service.c:
 	.text       start:0x8014ADA8 end:0x8014AED0
@@ -1999,12 +2000,16 @@ revolution/VF/pf_dir.c:
 
 revolution/VF/pf_entry.c:
 	.text       start:0x80151DF0 end:0x80153888
+	.data       start:0x8034D9E0 end:0x8034D9F0
+	.sdata2     start:0x8043E4A8 end:0x8043E4B0
 
 revolution/VF/pf_entry_iterator.c:
 	.text       start:0x80153888 end:0x801551C4
+	.sdata      start:0x8043B238 end:0x8043B260
 
 revolution/VF/pf_fat.c:
 	.text       start:0x801551C4 end:0x8015803C
+	.rodata     start:0x803117B8 end:0x803117F8
 
 revolution/VF/pf_fat12.c:
 	.text       start:0x8015803C end:0x80158B24
@@ -2023,6 +2028,7 @@ revolution/VF/pf_file.c:
 
 revolution/VF/pf_path.c:
 	.text       start:0x8015CC84 end:0x8015F9C4
+	.sdata2     start:0x8043E4B0 end:0x8043E4C0
 
 revolution/VF/pf_sector.c:
 	.text       start:0x8015F9C4 end:0x801600B4
@@ -2032,9 +2038,11 @@ revolution/VF/pf_volume.c:
 
 revolution/VF/pf_cp932.c:
 	.text       start:0x801617BC end:0x80161CCC
+	.rodata     start:0x803117F8 end:0x80315A70
 
 revolution/VF/pf_api_util.c:
 	.text       start:0x80161CCC end:0x80161E38
+	.data       start:0x8034D9F0 end:0x8034DA90
 
 revolution/VF/pf_attach.c:
 	.text       start:0x80161E38 end:0x80161EBC
@@ -2083,9 +2091,12 @@ revolution/VF/pf_system.c:
 
 revolution/VF/d_vf.c:
 	.text       start:0x801621CC end:0x80162C88
+	.sbss       start:0x8043C408 end:0x8043C410
 
 revolution/VF/d_vf_sys.c:
 	.text       start:0x80162C88 end:0x80164764
+	.data       start:0x8034DA90 end:0x8034DAA0
+	.sbss       start:0x8043C410 end:0x8043C428
 
 revolution/VF/d_hash.c:
 	.text       start:0x80164764 end:0x80164DE4
@@ -2098,6 +2109,7 @@ revolution/VF/d_common.c:
 
 revolution/VF/nand_drv.c:
 	.text       start:0x801659BC end:0x80167770
+	.rodata     start:0x80315A70 end:0x80315A90
 
 revolution/VF/sd_drv.c:
 	.text       start:0x80167770 end:0x80167774
