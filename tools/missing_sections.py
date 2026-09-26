@@ -2,7 +2,7 @@ from pathlib import Path
 
 import argparse
 
-from splits import parse_splits, ObjectSplit, Split, SplitSection
+from splits import parse_splits, ObjectSplit, Split, SectionType
 
 parser = argparse.ArgumentParser(
     description="Crosses missing section splits from decomp project to another by looking for identical names "
@@ -23,7 +23,7 @@ parser.add_argument(
 )
 
 
-def _get_section_addresses(object_splits: ObjectSplit) -> dict[SplitSection, int]:
+def _get_section_addresses(object_splits: ObjectSplit) -> dict[SectionType, int]:
     return {s.section: s.end for s in object_splits.splits}
 
 
@@ -40,7 +40,7 @@ def delta_splits(
     else:
         raise ValueError(f"'{file_name}' not found in reference 'splits.txt'")
 
-    last_section_addresses: dict[SplitSection, int] = {}
+    last_section_addresses: dict[SectionType, int] = {}
     for idx, s in enumerate(current_splits):
         if s.file == file_name:
             current_base_idx = idx
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     ref_splits_path: Path = args.ref_splits_path
     current_splits_path: Path = args.current_splits_path
-    file_name: str = args.file_name
+    file_name: str = args.file_name.rstrip(":")
 
     ref_splits_txt = ref_splits_path.read_text()
     current_splits_txt = current_splits_path.read_text()

@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 from typing import cast, get_args, Literal, Self, TypeAlias
 
-SplitSection: TypeAlias = Literal[
+SectionType: TypeAlias = Literal[
     ".init",
     "extab",
     "extabindex",
@@ -21,10 +21,10 @@ SplitSection: TypeAlias = Literal[
 ]
 
 
-def _check_is_split_section(section: str) -> SplitSection:
-    if section not in get_args(SplitSection):
+def check_is_section_type(section: str) -> SectionType:
+    if section not in get_args(SectionType):
         raise ValueError(f"Unknown section '{section}'")
-    return cast(SplitSection, section)
+    return cast(SectionType, section)
 
 
 _SPLIT_RE = re.compile(
@@ -34,7 +34,7 @@ _SPLIT_RE = re.compile(
 
 @dataclass
 class Split:
-    section: SplitSection
+    section: SectionType
     start: int
     end: int
 
@@ -47,7 +47,7 @@ class Split:
         if re_match is None:
             raise ValueError(f"No split detected for '{split_txt}'")
         groups = re_match.groupdict()
-        section = _check_is_split_section((groups["section"] or "").lower())
+        section = check_is_section_type((groups["section"] or "").lower())
         start_str = groups["start"]
         if not start_str:
             raise ValueError(f"Can't find start addr in section '{section}'")

@@ -26,7 +26,7 @@ def cross_symbols(
     ref_syms: Symbols,
     current_syms: Symbols,
     base_address: int,
-) -> tuple[int, int]:
+) -> tuple[int, int, list[int]]:
 
     ref_idx = ref_syms.addresses[base_address]
 

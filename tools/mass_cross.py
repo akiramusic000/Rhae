@@ -1,312 +1,586 @@
-"""Cross-reference large amounts symbols and splits between two decomp projects.
-
-The usual use of `cross_symbol` is to find where reference code lives in the
-current game. But here, we turn it around: for each symbol of the current game,
-we look up the longest matching run (`_Crossing`) in the further-decompiled
-reference game.
-
-We then aggregate all of said 'crossings' and filter those that are consistent
-with each other (no overlaps), taking also advantage of the fact that objects
-are usually compiled in memory addresses following a consistent order.
-
-This way, we're able to sweep large address ranges and recover names and splits
-very quickly.
-"""
-
-import argparse
+from bisect import bisect_left
 from collections import defaultdict
-from copy import deepcopy
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from rapidfuzz.fuzz import partial_ratio, partial_ratio_alignment
+from rapidfuzz.distance.Levenshtein import opcodes
+from splits import Split, ObjectSplit, SectionType, parse_splits, check_is_section_type
+from symbols import Symbols, Symbol, parse_symbols
 from pathlib import Path
+from pprint import pp
 from typing import Self
 
-from cross_split import cross_splits
-from cross_symbol import cross_symbols
-from splits import ObjectSplit, parse_splits
-from symbols import Symbol, Symbols, parse_symbols
-
+import argparse
+import functools
+import sys
 
 parser = argparse.ArgumentParser(
     description="Attempts to perform a mass cross-reference of symbols and splits "
-    + "from one decomp project to another, by composing and filtering operations "
-    + "from cross_symbol and cross_split."
+    + "from one decomp project to another."
 )
 parser.add_argument(
     "ref_splits_path", type=Path, help="Path to the splits.txt for the reference game."
 )
 parser.add_argument(
-    "ref_path", type=Path, help="Path to the symbols.txt for the reference game."
+    "ref_syms_path", type=Path, help="Path to the symbols.txt for the reference game."
 )
 parser.add_argument(
-    "current_path", type=Path, help="Path to the symbols.txt of the current game."
+    "current_syms_path", type=Path, help="Path to the symbols.txt of the current game."
 )
 parser.add_argument(
-    "address_ranges",
-    type=lambda x: int(x, 0),
-    nargs="*",
-    help="Ints separated by spaces: pairs of ints (address ranges) to be processed. "
-    + "in the CURRENT code. By default, the whole map is processed",
+    "start_split_filename", type=str, help="Split filename to start matching from."
+)
+parser.add_argument(
+    "end_split_filename",
+    type=str,
+    help="Split filename to stop matching at. Use '-' to include the final split.",
 )
 
 
-# Minimum run length before a match is considered. Short runs are dominated by
-# coincidental size/section matches.
-_MIN_CROSSING_LENGTH = 4
-# How far the ref/current symbol-index offset may jump between two chained
-# crossings. Library code links in roughly the same order, so this stays small;
-# it also bounds how far a chain is allowed to wander.
-_MAX_OFFSET_DRIFT = 30
+_NEEDLE_SIZE_THRESHOLD = 5
+_NEEDLE_CONFIDENCE_THRESHOLD = 0.7
+
+_HOLE_FILLING_CONFIDENCE_THRESHOLD = 0.6
+
+_MASK = -1
 
 
-@dataclass
-class _Crossing:
-    current_address_idx: int
-    ref_address_idx: int
-    length: int
-
-    @property
-    def idx_offset(self) -> int:
-        return self.ref_address_idx - self.current_address_idx
-
-    def is_mergeable_with(self, _o: Self) -> bool:
-        return (self.idx_offset == _o.idx_offset) and (
-            min(self.ref_address_idx + self.length, _o.ref_address_idx + _o.length)
-            >= max(self.ref_address_idx, _o.ref_address_idx)
-        )
-
-    def merge(self, _o: Self) -> Self:
-        current_address_idx = min(self.current_address_idx, _o.current_address_idx)
-        max_current_address = max(
-            self.current_address_idx + self.length, _o.current_address_idx + _o.length
-        )
-        length = max_current_address - current_address_idx
-        ref_address_idx = current_address_idx + self.idx_offset
-        return type(self)(current_address_idx, ref_address_idx, length)
+# ------------------------------------------
+# %% Preprocessing functions
+# ------------------------------------------
 
 
-class _AddressCrossings:
-    def __init__(self) -> None:
-        self._crossings_by_offset: dict[int, list[_Crossing]] = defaultdict(list)
-
-    def add(self, x: _Crossing) -> None:
-        self._crossings_by_offset[x.idx_offset].append(x)
-
-    def _merge_crossings(self) -> None:
-        # Crossings are appended in increasing current-index order, so a single
-        # forward pass coalesces all overlapping runs sharing an offset.
-        for _, crossings in self._crossings_by_offset.items():
-            i = 1
-            while i < len(crossings):
-                if crossings[i].is_mergeable_with(crossings[i - 1]):
-                    crossings[i - 1] = crossings[i - 1].merge(crossings[i])
-                    del crossings[i]
-                else:
-                    i += 1
-
-    def get_crossings(self) -> list[_Crossing]:
-        self._merge_crossings()
-        flat_crossings = sorted(
-            [c for crossings in self._crossings_by_offset.values() for c in crossings],
-            key=lambda c: c.current_address_idx,
-        )
-        if not flat_crossings:
-            return []
-        best_length = [0] * len(flat_crossings)
-        previous_crossing = [-1] * len(flat_crossings)
-
-        for i, c_i in enumerate(flat_crossings):
-            best_length[i] = c_i.length
-            for j, c_j in enumerate(flat_crossings[:i]):
-                # Library code should compile next to each other.
-                if abs(c_i.idx_offset - c_j.idx_offset) > _MAX_OFFSET_DRIFT:
-                    continue
-                # A valid predecessor must not overlap in either index space.
-                if (c_j.ref_address_idx + c_j.length <= c_i.ref_address_idx) and (
-                    c_j.current_address_idx + c_j.length <= c_i.current_address_idx
-                ):
-                    if best_length[j] + c_i.length > best_length[i]:
-                        best_length[i] = best_length[j] + c_i.length
-                        previous_crossing[i] = j
-
-        final_crossing_idx = max(
-            range(len(flat_crossings)),
-            key=lambda i: best_length[i],
-        )
-        output: list[_Crossing] = []
-        i = final_crossing_idx
-        while i != -1:
-            output.append(flat_crossings[i])
-            i = previous_crossing[i]
-        output.reverse()
-        return output
-
-
-def get_longest_crossings(
-    ref_syms: Symbols,
-    current_syms: Symbols,
-    current_address_start: int,
-    current_address_end: int,
-) -> list[_Crossing]:
-    """Returns the longest, mutually-consistent crossings found within
-    `current_address_start:current_address_end`, by iterating `cross_symbols(...)`
-    over every current address in the range (and resolving conflicts).
-
-    We pass arguments to said function the other way around, as the code originally
-    was used to find where the _reference_ code lied in the _current_ code, whereas
-    here we're trying to find _what parts of the current code_ have a strong correlation
-    in the target code.
-    """
-
-    output = _AddressCrossings()
-
-    assert current_address_end > current_address_start
-
-    for current_address, current_address_idx in current_syms.addresses.items():
-        if current_address < current_address_start:
-            continue
-        elif current_address >= current_address_end:
-            break
-
-        ref_longest_match_address, longest_match = cross_symbols(
-            ref_syms=current_syms,
-            current_syms=ref_syms,
-            base_address=current_address,
-        )
-        if longest_match >= _MIN_CROSSING_LENGTH:
-            ref_longest_match_address_idx = ref_syms.addresses[
-                ref_longest_match_address
-            ]
-            output.add(
-                _Crossing(
-                    current_address_idx,
-                    ref_longest_match_address_idx,
-                    longest_match,
-                )
-            )
-
-    return output.get_crossings()
-
-
-def process_symbol_names_inplace(
-    ref_syms: Symbols,
-    crossings: list[_Crossing],
-    out_current_syms: Symbols,
-    out_indexed_current_syms: Symbols,
-    out_indexed_ref_syms: Symbols,
-) -> None:
-
-    for c in crossings:
-        for i in range(c.length):
-            ref_idx = c.ref_address_idx + i
-            current_idx = c.current_address_idx + i
-
-            r_sym = ref_syms.symbols[ref_idx]
-            out_current_syms.symbols[current_idx].copy_attributes_from(r_sym)
-            out_indexed_ref_syms.symbols[
-                ref_idx
-            ].name = f"{r_sym.name}@0x{r_sym.address:x}"
-            out_indexed_current_syms.symbols[current_idx].copy_attributes_from(
-                out_indexed_ref_syms.symbols[ref_idx]
-            )
-
-
-def filter_splits(
-    splits: list[ObjectSplit],
-    address_ranges: list[tuple[int, int]],
-) -> list[ObjectSplit]:
-    output: list[ObjectSplit] = []
-    for obj_split in splits:
-        new_splits = [
-            s
-            for s in obj_split.splits
-            if any((start < s.start < s.end < end) for start, end in address_ranges)
-        ]
-        if new_splits:
-            output.append(
-                ObjectSplit(
-                    file=obj_split.file,
-                    splits=new_splits,
-                )
-            )
-
-    return output
-
-
-def filter_symbols(
+def _symbols_to_size_seq(
     symbols: Symbols,
-    address_ranges: list[tuple[int, int]],
-) -> list[Symbol]:
+    start_addr: int | None = None,
+    end_addr: int | None = None,
+) -> list[int]:
+    def index_in_symbols(addr: int | None) -> int | None:
+        if addr is None:
+            return None
+
+        # We can't use symbols.addresses as symbols and splits sometimes don't align,
+        # so we do O(log(n)) slicing instead
+        return bisect_left(symbols.symbols, addr, key=lambda s: s.address)
+
     return [
-        s
-        for s in symbols.symbols
-        if any(
-            s.address > start and s.address + s.size < end
-            for start, end in address_ranges
-        )
+        s.size
+        for s in symbols.symbols[
+            index_in_symbols(start_addr) : index_in_symbols(end_addr)
+        ]
     ]
 
 
-def do_mass_crossing(
-    ref_syms: Symbols,
-    current_syms: Symbols,
-    ref_splits: list[ObjectSplit],
-    address_ranges: list[tuple[int, int]],
-) -> tuple[list[Symbol], list[ObjectSplit]]:
-    indexed_current_syms = deepcopy(current_syms)
-    indexed_ref_syms = deepcopy(ref_syms)
+def _object_splits_to_size_sequence(
+    symbols: Symbols,
+    object_splits: list[ObjectSplit],
+) -> dict[SectionType, dict[str, tuple[Split, list[int]]]]:
 
-    for start, end in address_ranges:
-        crossings = get_longest_crossings(
-            ref_syms,
-            current_syms,
-            start,
-            end,
+    output: dict[SectionType, dict[str, tuple[Split, list[int]]]] = defaultdict(dict)
+    for o_split in object_splits:
+        for s in o_split.splits:
+            end_addr = s.end if s.end <= symbols.symbols[-1].address else None
+            output[s.section][o_split.file] = (
+                s,
+                _symbols_to_size_seq(symbols, s.start, end_addr),
+            )
+    return output
+
+
+def _symbols_to_size_sequences(
+    symbols: Symbols,
+) -> dict[SectionType, list[int]]:
+
+    first_symbol = symbols.symbols[0]
+    start_addr = first_symbol.address
+    current_section = check_is_section_type(first_symbol.section)
+    section_addresses: dict[SectionType, tuple[int, int | None]] = {}
+
+    for s in symbols.symbols:
+        if s.section != current_section:
+            section_addresses[current_section] = (start_addr, s.address)
+            start_addr = s.address
+            current_section = check_is_section_type(s.section)
+    section_addresses[current_section] = (start_addr, None)
+
+    return {
+        section: _symbols_to_size_seq(symbols, start, end)
+        for section, (start, end) in section_addresses.items()
+    }
+
+
+def _slice_object_splits(
+    object_splits: list[ObjectSplit],
+    filename_start: str,
+    filename_end: str | None,
+) -> list[ObjectSplit]:
+    filename_start = filename_start.rstrip(":")
+
+    for idx, o_split in enumerate(object_splits):
+        if o_split.file == filename_start:
+            start_idx = idx
+            break
+    else:
+        raise ValueError(f"'{filename_start}' not found in 'splits.txt'")
+
+    if filename_end is None:
+        end_idx = None
+    else:
+        filename_end = filename_end.rstrip(":")
+        for idx, o_split in enumerate(object_splits[start_idx:]):
+            if o_split.file == filename_end:
+                end_idx = idx + start_idx
+                break
+        else:
+            raise ValueError(
+                f"'{filename_end}' not found in 'splits.txt' after '{filename_start}'"
+            )
+
+    return object_splits[start_idx:end_idx]
+
+
+# ------------------------------------------
+# %% Matching functions
+# ------------------------------------------
+
+
+def _first_matching_index(needle: list[int], haystack: list[int]) -> int:
+    haystack = haystack.copy()
+    base_score = partial_ratio(needle, haystack)
+
+    for i, x in enumerate(haystack):
+        haystack[i] = _MASK
+        degraded = partial_ratio(needle, haystack) < base_score
+        haystack[i] = x
+        if degraded:
+            return i
+
+    return 0
+
+
+@dataclass(frozen=True)
+class Bounds:
+    start: int
+    end: int
+
+    @property
+    def size(self) -> int:
+        return self.end - self.start
+
+    def shift(self, delta: int) -> Self:
+        return type(self)(self.start + delta, self.end + delta)
+
+
+@dataclass(frozen=True)
+class Match:
+    filename: str
+    needle_bounds: Bounds
+    haystack_bounds: Bounds
+    score: float
+
+    @property
+    def final_score(self) -> float:
+        return self.needle_bounds.size * self.score**2
+
+    def _equalize(self) -> Self:
+        """Fixes an issue where the needle and haystack are of different size when matching on edges"""
+        needle, haystack = self.needle_bounds, self.haystack_bounds
+        if needle.size > haystack.size:
+            haystack = (
+                Bounds(haystack.start, needle.size)
+                if haystack.start == 0
+                else Bounds(haystack.end - needle.size, haystack.end)
+            )
+        elif needle.size < haystack.size:
+            needle = (
+                Bounds(needle.start, haystack.size)
+                if needle.start == 0
+                else Bounds(needle.end - haystack.size, needle.end)
+            )
+        return self.with_bounds(needle_bounds=needle, haystack_bounds=haystack)
+
+    def _trim(self, needle: list[int], haystack: list[int]) -> Self:
+        """Resizes needle and haystack bounds because rapidfuzz makes them the same size on most cases"""
+        nb, hb = self.needle_bounds, self.haystack_bounds
+        n, h = needle[nb.start : nb.end], haystack[hb.start : hb.end]
+        rel_start = _first_matching_index(n, h)
+        rel_end = nb.size - _first_matching_index(n[::-1], h[::-1])
+        return self.with_bounds(
+            needle_bounds=Bounds(nb.start + rel_start, nb.start + rel_end),
+            haystack_bounds=Bounds(hb.start + rel_start, hb.start + rel_end),
         )
-        process_symbol_names_inplace(
-            ref_syms,
-            crossings,
-            current_syms,
-            indexed_current_syms,
-            indexed_ref_syms,
+
+    @classmethod
+    def of(cls, filename: str, needle: list[int], haystack: list[int]) -> Self | None:
+        raw = partial_ratio_alignment(needle, haystack)
+        if raw is None:
+            return None
+        match = cls(
+            filename,
+            Bounds(raw.src_start, raw.src_end),
+            Bounds(raw.dest_start, raw.dest_end),
+            raw.score / 100,  # [0,100] -> [0,1]
         )
-    new_current_splits = cross_splits(
-        ref_splits, indexed_ref_syms, indexed_current_syms
+        if match.score < 1.0:
+            match = match._equalize()._trim(needle, haystack)
+        return match
+
+    def with_bounds(
+        self,
+        *,
+        needle_bounds: Bounds | None = None,
+        haystack_bounds: Bounds | None = None,
+    ) -> Self:
+        needle_bounds = needle_bounds or self.needle_bounds
+        haystack_bounds = haystack_bounds or self.haystack_bounds
+        return type(self)(self.filename, needle_bounds, haystack_bounds, self.score)
+
+
+def _get_bounded_haystack_holes(
+    haystack_space: dict[int, str],
+) -> list[tuple[tuple[str, str], Bounds]]:
+
+    if not haystack_space:
+        return []
+    used_idxs = haystack_space.keys()
+    leftover_hole_idxs = set(range(min(used_idxs), max(used_idxs) + 1)).difference(
+        used_idxs
     )
-    return (
-        filter_symbols(current_syms, address_ranges),
-        filter_splits(new_current_splits, address_ranges),
+
+    sequences: list[list[int]] = []
+    prev_value: int | None = None
+    for idxs in sorted(leftover_hole_idxs):
+        if idxs - 1 != prev_value:
+            sequences.append([idxs])
+        else:
+            sequences[-1].append(idxs)
+        prev_value = idxs
+
+    return [
+        (
+            (haystack_space[seq[0] - 1], haystack_space[seq[-1] + 1]),
+            Bounds(seq[0], seq[-1] + 1),
+        )
+        for seq in sequences
+    ]
+
+
+# ------------------------------------------
+# %% Matching lifetime
+# ------------------------------------------
+
+
+@dataclass
+class CrossTextResult:
+    matches: dict[str, tuple[Split, list[Symbol]]]
+    holes: list[tuple[str | None, str | None, Bounds]]
+    unmatched: set[str]
+
+
+@dataclass
+class CrossTextRun:
+    needle_map: dict[str, tuple[Split, list[int]]]
+    haystack: list[int]
+    needle_syms: Symbols
+    haystack_syms: Symbols
+    accepted_matches: list[Match] = field(default_factory=list)
+    haystack_space: dict[int, str] = field(default_factory=dict)
+    rejected: set[str] = field(default_factory=set)
+
+    def _get_needle(self, m: Match) -> list[int]:
+        return self.needle_map[m.filename][1]
+
+    def _get_needle_split(self, m: Match) -> Split:
+        return self.needle_map[m.filename][0]
+
+    def _get_overlapping_needle(self, m: Match) -> list[int]:
+        needle = self._get_needle(m)
+        return needle[m.needle_bounds.start : m.needle_bounds.end]
+
+    def _dilate(self, m: Match) -> Match:
+        overlapping_needle = self._get_overlapping_needle(m)
+        base_score = partial_ratio(
+            overlapping_needle,
+            self.haystack[m.haystack_bounds.start : m.haystack_bounds.end],
+        )
+
+        for dilating_right in (True, False):
+            while True:
+                start, end = m.haystack_bounds.start, m.haystack_bounds.end
+
+                if dilating_right:
+                    new_addr = end
+                    end += 1
+                else:
+                    start -= 1
+                    new_addr = start
+
+                if new_addr in self.haystack_space:
+                    break
+
+                working_haystack = self.haystack[start:end]
+                padding = [_MASK] * (len(working_haystack) - len(overlapping_needle))
+                padded_needle = (
+                    (not dilating_right) * padding
+                    + overlapping_needle
+                    + dilating_right * padding
+                )
+                new_score = partial_ratio(padded_needle, working_haystack)
+
+                if new_score > base_score:
+                    m = m.with_bounds(haystack_bounds=Bounds(start, end))
+                    base_score = new_score
+                    self.haystack_space[new_addr] = m.filename
+                else:
+                    break
+        return m
+
+    def _filter(self, candidate_matches: list[Match]) -> None:
+        for m in candidate_matches:
+            start, end = m.haystack_bounds.start, m.haystack_bounds.end
+            if any(i in self.haystack_space for i in range(start, end)):
+                self.rejected.add(m.filename)
+            else:
+                for i in range(start, end):
+                    self.haystack_space[i] = m.filename
+                if m.score < 1.0:
+                    m = self._dilate(m)
+                self.accepted_matches.insert(
+                    bisect_left(
+                        self.accepted_matches,
+                        start,
+                        key=lambda m: m.haystack_bounds.start,
+                    ),
+                    m,
+                )
+
+    def _fill(self) -> None:
+        haystack_holes = _get_bounded_haystack_holes(self.haystack_space)
+        all_objects = list(self.needle_map.keys())
+        object_order = {filename: idx for idx, filename in enumerate(all_objects)}
+
+        for (previous_split, next_split), hole_bounds in haystack_holes:
+            objects_in_between = all_objects[
+                object_order[previous_split] + 1 : object_order[next_split]
+            ]
+            leftover_splits_in_between = list(
+                sorted(
+                    (
+                        (filename, self.needle_map[filename])
+                        for filename in objects_in_between
+                        if filename in self.rejected
+                    ),
+                    key=lambda i: len(i[1][1]),
+                    reverse=True,
+                )
+            )
+            candidate_matches: list[Match] = []
+
+            for filename, (_, needle) in leftover_splits_in_between:
+                match = Match.of(
+                    filename,
+                    needle,
+                    self.haystack[hole_bounds.start : hole_bounds.end],
+                )
+                if match is None:
+                    print("Weird match error!", file=sys.stderr)
+                    continue
+                match = match.with_bounds(
+                    haystack_bounds=match.haystack_bounds.shift(hole_bounds.start)
+                )
+                if match.score > _HOLE_FILLING_CONFIDENCE_THRESHOLD:
+                    self.rejected.remove(filename)
+                    candidate_matches.append(match)
+            self._filter(candidate_matches)
+
+    def _get_overlapping_syms(
+        self,
+        m: Match,
+        new_split: Split,
+    ) -> tuple[list[Symbol], list[Symbol]]:
+        needle_start_idx = (
+            self.needle_syms.addresses[self._get_needle_split(m).start]
+            + m.needle_bounds.start
+        )
+        overlapping_needle_syms = self.needle_syms.symbols[
+            needle_start_idx : needle_start_idx + m.needle_bounds.size
+        ]
+
+        haystack_start_idx = self.haystack_syms.addresses[new_split.start]
+        overlapping_haystack_syms = self.haystack_syms.symbols[
+            haystack_start_idx : haystack_start_idx + m.haystack_bounds.size
+        ]
+
+        return overlapping_needle_syms, overlapping_haystack_syms
+
+    def _copy_symbols(
+        self,
+        m: Match,
+        overlapping_needle_syms: list[Symbol],
+        overlapping_haystack_syms: list[Symbol],
+    ) -> None:
+        overlapping_haystack = self.haystack[
+            m.haystack_bounds.start : m.haystack_bounds.end
+        ]
+        for op in opcodes(self._get_overlapping_needle(m), overlapping_haystack):
+            if op.tag != "equal":
+                continue
+            op_length = op.dest_end - op.dest_start
+            assert op_length == op.src_end - op.src_start
+            for idx in range(op_length):
+                overlapping_haystack_syms[op.dest_start + idx].copy_attributes_from(
+                    overlapping_needle_syms[op.src_start + idx]
+                )
+
+    def _get_orphaned_addresses(self) -> list[tuple[str | None, str | None, Bounds]]:
+        orphaned = sorted(set(range(len(self.haystack))) - self.haystack_space.keys())
+        contiguous: list[Bounds] = []
+        for idx in orphaned:
+            if contiguous:
+                prev_bounds = contiguous[-1]
+                if prev_bounds.end == idx:
+                    contiguous[-1] = Bounds(prev_bounds.start, idx + 1)
+            else:
+                contiguous.append(Bounds(idx, idx + 1))
+        return [
+            (self.haystack_space.get(b.start - 1), self.haystack_space.get(b.end), b)
+            for b in contiguous
+        ]
+
+    def run(self) -> CrossTextResult:
+        candidate_matches: list[Match] = []
+
+        for filename, (_, needle) in self.needle_map.items():
+            if len(needle) < _NEEDLE_SIZE_THRESHOLD:
+                self.rejected.add(filename)
+                continue
+
+            match = Match.of(filename, needle, self.haystack)
+            if match is None:
+                self.rejected.add(filename)
+                continue
+
+            if match.score < _NEEDLE_CONFIDENCE_THRESHOLD:
+                self.rejected.add(filename)
+                continue
+
+            candidate_matches.append(match)
+
+        candidate_matches.sort(reverse=True, key=lambda m: m.final_score)
+
+        self._filter(candidate_matches)
+        self._fill()
+
+        matches: dict[str, tuple[Split, list[Symbol]]] = {}
+
+        for m in self.accepted_matches:
+            start_idx, end_idx = m.haystack_bounds.start, m.haystack_bounds.end
+            start_addr = self.haystack_syms.symbols[start_idx].address
+            try:
+                end_addr = self.haystack_syms.symbols[end_idx].address
+            except IndexError:
+                end_addr = (
+                    self.haystack_syms.symbols[-1].address
+                    + self.haystack_syms.symbols[-1].size
+                )
+            new_split = Split(".text", start_addr, end_addr)
+
+            overlapping_needle_syms, overlapping_haystack_syms = (
+                self._get_overlapping_syms(m, new_split)
+            )
+            self._copy_symbols(
+                m,
+                overlapping_needle_syms,
+                overlapping_haystack_syms,
+            )
+            matches[m.filename] = (new_split, overlapping_haystack_syms)
+
+        return CrossTextResult(matches, self._get_orphaned_addresses(), self.rejected)
+
+
+# ------------------------------------------
+# %% Main
+# ------------------------------------------
+
+
+def do_mass_cross(
+    needle_splits: list[ObjectSplit],
+    needle_syms: Symbols,
+    haystack_syms: Symbols,
+    start_split_filename: str,
+    end_split_filename: str | None,
+) -> CrossTextResult:
+    selected_splits = _slice_object_splits(
+        needle_splits,
+        start_split_filename,
+        end_split_filename,
     )
+    needles_by_section = _object_splits_to_size_sequence(needle_syms, selected_splits)
+    haystacks_by_section = _symbols_to_size_sequences(haystack_syms)
+
+    text_run = CrossTextRun(
+        needles_by_section[".text"],
+        haystacks_by_section[".text"],
+        needle_syms,
+        haystack_syms,
+    )
+    return text_run.run()
+
+
+def print_crosstext_results(results: CrossTextResult) -> None:
+    ww = functools.partial(pp, stream=sys.stderr)
+    warn = functools.partial(print, file=sys.stderr, flush=True)
+    warn("\nHoles (preceding_split; posterior_split; bounds):")
+    for preceding_split, posterior_split, bounds in results.holes:
+        warn(
+            f"\t{preceding_split}; {posterior_split}; (0x{bounds.start:08X} : 0x{bounds.end:08X})"
+        )
+
+    warn("\nUnmatched files:")
+    ww(results.unmatched)
+
+    print("\n" * 5 + "-" * 15)
+    print("Matches (splits.txt):")
+    print("\n" * 3)
+    for filename, (split, _) in results.matches.items():
+        object_split = ObjectSplit(filename, [split])
+        print(f"{object_split}")
+
+    print("\n" * 5 + "-" * 15)
+    print("Matches (symbols.txt):")
+    print("\n" * 3)
+
+    for filename, (_, syms) in results.matches.items():
+        print(f"\t// {filename}:")
+        for s in syms:
+            print(f"{s}")
+        print("\n" * 3)
+
+    pass
 
 
 if __name__ == "__main__":
     args = parser.parse_args()
     ref_splits_path: Path = args.ref_splits_path
-    ref_path: Path = args.ref_path
-    current_path: Path = args.current_path
-    address_ranges_raw: list[int] = args.address_ranges
-    if len(address_ranges_raw) % 2 != 0:
-        parser.error("Address ranges should come in pairs.")
-    address_ranges = list(zip(address_ranges_raw[::2], address_ranges_raw[1::2]))
+    ref_syms_path: Path = args.ref_syms_path
+    current_syms_path: Path = args.current_syms_path
 
     ref_splits_txt = ref_splits_path.read_text()
-    ref_syms_txt = ref_path.read_text()
-    current_syms_txt = current_path.read_text()
+    ref_syms_txt = ref_syms_path.read_text()
+    current_syms_txt = current_syms_path.read_text()
 
     ref_splits = parse_splits(ref_splits_txt)
     ref_syms = parse_symbols(ref_syms_txt)
     current_syms = parse_symbols(current_syms_txt)
-    if not address_ranges:
-        all_addresses = current_syms.addresses.keys()
-        address_ranges = [(min(all_addresses), max(all_addresses) + 1)]
 
-    symbols, splits = do_mass_crossing(
+    start_split_filename: str = args.start_split_filename
+    end_split_filename: str | None = args.end_split_filename
+    end_split_filename = None if end_split_filename == "-" else end_split_filename
+
+    results = do_mass_cross(
+        ref_splits,
         ref_syms,
         current_syms,
-        ref_splits,
-        address_ranges,
+        start_split_filename,
+        end_split_filename,
     )
-    for sym in symbols:
-        print(f"{sym}")
-    print("\n" * 10)
-    for spl in splits:
-        print(f"{spl}")
+    print_crosstext_results(results)
