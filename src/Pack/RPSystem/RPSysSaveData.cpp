@@ -186,10 +186,18 @@ void RPSysSaveData::write(EGG::RamStream& rStrm, const void* pRawSave) const {
     rStrm.write_u32(SIGNATURE_PACK);
     rStrm.write_u32(SIGNATURE_VERSION);
 
+#if defined(PACK_SPORTS)
     mpSportsSystemData->write(rStrm);
+#elif defined(PACK_PARTY)
+    mpPartySystemData->write(rStrm);
+#endif
 
     for (int i = 0; i < PLAYER_LIST_SIZE; i++) {
+#if defined(PACK_SPORTS)
         mpSportsPlayerList[i].write(rStrm);
+#elif defined(PACK_PARTY)
+        mpPartyPlayerList[i].write(rStrm);
+#endif
     }
 
     rStrm.write_u32(calcCrc(pRawSave, rStrm.getPosition()));

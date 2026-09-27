@@ -1,3 +1,4 @@
+#include "RPSystem/RPPartyPlayerData.h"
 #include <Pack/RPSystem.h>
 
 /**
@@ -28,6 +29,74 @@ void RPPartyPlayerData::reset() {
     }
 
     mMedalDemoFlags.makeAllZero();
+}
+
+/**
+ * @brief Gets a record for a specified game
+ *
+ * @param game Game index to get a record for
+ * @param record Record index to get
+ */
+s32 RPPartyPlayerData::getRecord(EGame game, u32 record) const {
+    return mMyRecords[game][record];
+}
+/**
+ * @brief Sets a record for a specified game
+ *
+ * @param game Game index to set record for
+ * @param record Record index to set
+ */
+void RPPartyPlayerData::setRecord(s32 newRecord, EGame game, u32 record) {
+    mMyRecords[game][record] = newRecord;
+}
+
+/**
+ * @brief Gets the medal achieved in a minigame
+ *
+ * @param game Game to get the medal for
+ */
+u8 RPPartyPlayerData::getMedal(EGame game) const {
+    return mMedals[game];
+}
+/**
+ * @brief Sets the medal achieved in a minigame
+ *
+ * @param medal Medal type to set to
+ * @param game Minigame to set the medal for
+ */
+void RPPartyPlayerData::setMedal(u8 medal, EGame game) {
+    mMedals[game] = medal;
+}
+
+/**
+ * @brief Tests whether a player hasn't played a minigame yet
+ */
+bool RPPartyPlayerData::isFirstPlay() const {
+    return mPlayerFlags.offBit(EFlag_FirstPlay);
+}
+/**
+ * @brief Sets that a player has played a minigame
+ */
+void RPPartyPlayerData::setFirstPlay() {
+    mPlayerFlags.setBit(EFlag_FirstPlay);
+}
+
+/**
+ * @brief Gets whether a medal cutscene has played.
+ *
+ * @param cutscene Medal custscene
+ */
+bool RPPartyPlayerData::isMedalDemo(u8 cutscene) const {
+    return mMedalDemoFlags.onBit(cutscene);
+}
+/**
+ * @brief Sets whether a medal cutscene has played.
+ *
+ * @param cutscene Medal custscene
+ * @param played Played status
+ */
+void RPPartyPlayerData::setMedalDemo(u8 cutscene) {
+    mMedalDemoFlags.setBit(cutscene);
 }
 
 /**
@@ -82,4 +151,53 @@ RPTime32 RPPartyPlayerData::getDebutTime() const {
  */
 void RPPartyPlayerData::setDebutTime(RPTime32 time) {
     mDebutTime = time;
+}
+
+/**
+ * @brief Deserializes this object from the specified stream
+ *
+ * @param rStrm Memory stream
+ */
+void RPPartyPlayerData::read(EGG::RamStream& rStrm) {
+    mPlayerFlags = rStrm.read_u32();
+
+    for (int i = 0; i < RFL_CREATEID_LEN; i++) {
+        mCreateID.data[i] = rStrm.read_u8();
+    }
+
+    mDebutTime = rStrm.read_u32();
+
+    for (int i = 0; i < EGame_Max; i++) {
+        for (int j = 0; j < MY_RECORDS_LENGTH; j++) {
+            mMyRecords[i][j] = rStrm.read_s32();
+        }
+
+        mMedals[i] = rStrm.read_u8();
+    }
+
+    mMedalDemoFlags = rStrm.read_u8();
+}
+/**
+ * @brief Serializes this object to the specified stream
+ *
+ * @param rStrm Memory stream
+ */
+void RPPartyPlayerData::write(EGG::RamStream& rStrm) {
+    rStrm.write_u32(mPlayerFlags);
+
+    for (int i = 0; i < RFL_CREATEID_LEN; i++) {
+        rStrm.write_u8(mCreateID.data[i]);
+    }
+
+    rStrm.write_u32(mDebutTime);
+
+    for (int i = 0; i < EGame_Max; i++) {
+        for (int j = 0; j < MY_RECORDS_LENGTH; j++) {
+            rStrm.write_s32(mMyRecords[i][j]);
+        }
+
+        rStrm.write_u8(mMedals[i]);
+    }
+
+    rStrm.write_u8(mMedalDemoFlags);
 }

@@ -2,6 +2,7 @@
 #include <Pack/RPSystem.h>
 #include <Pack/common_message.h>
 #include <Pack/sports_message.h>
+#include <Pack/party_message.h>
 
 #include <egg/core.h>
 
@@ -573,10 +574,17 @@ void RPSysSaveDataMgr::initBanner() {
 
     RPSysMessage* pMessage = new (pHeap) RPSysMessage(pMessageRes, pHeap);
 
+#if defined(PACK_SPORTS)
     const wchar_t* pSaveTitleMsg =
         pMessage->GetMsg(MSG_TUPLE(SP_MSG_29940_000));
     const wchar_t* pSaveSubTitleMsg =
         pMessage->GetMsg(MSG_TUPLE(SP_MSG_29941_000));
+#elif defined(PACK_PARTY)
+    const wchar_t* pSaveTitleMsg =
+        pMessage->GetMsg(MSG_TUPLE(PT_MSG_01001_000));
+    const wchar_t* pSaveSubTitleMsg =
+        pMessage->GetMsg(MSG_TUPLE(PT_MSG_01002_000));
+#endif
 
     NANDInitBanner(mpBannerFile, 0, pSaveTitleMsg, pSaveSubTitleMsg);
 
