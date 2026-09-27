@@ -959,6 +959,16 @@ runtime/GCN_mem_alloc.c:
 	.text       start:0x800B2860 end:0x800B2918
 	.rodata     start:0x8030FE70 end:0x8030FEE0
 
+MSL/alloc.c:
+	extab       start:0x80006620 end:0x80006638
+	extabindex  start:0x80006E20 end:0x80006E44
+	.text       start:0x800B2918 end:0x800B2E2C
+
+MSL/ansi_files.c:
+	extab       start:0x80006638 end:0x80006648
+	extabindex  start:0x80006E44 end:0x80006E5C
+	.text       start:0x800B2E2C end:0x800B2F3C
+
 MSL/ansi_fp.c:
 	extab       start:0x80006648 end:0x80006680
 	extabindex  start:0x80006E5C end:0x80006EB0
@@ -1001,9 +1011,9 @@ MSL/mem_funcs.c:
 	.text       start:0x800B546C end:0x800B573C
 
 MSL/math_api.c:
-	extab       start:0x800066C8 end:0x800066D8
-	extabindex  start:0x80006F1C end:0x80006F34
-	.text       start:0x800B57A0 end:0x800B5838
+	extab       start:0x800066C0 end:0x800066D8
+	extabindex  start:0x80006F10 end:0x80006F34
+	.text       start:0x800B573C end:0x800B5838
 
 MSL/misc_io.c:
 	.text       start:0x800B5838 end:0x800B5848
