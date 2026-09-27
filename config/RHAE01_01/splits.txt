@@ -1141,6 +1141,90 @@ MSL/math_ppc.c:
 MSL/w_sqrt.c:
 	.text       start:0x800C15E0 end:0x800C15E4
 
+MetroTRK/debugger/Portable/mainloop.c:
+	.text       start:0x800C15E4 end:0x800C16DC
+
+MetroTRK/debugger/Portable/nubevent.c:
+	.text       start:0x800C16DC end:0x800C1904
+
+MetroTRK/debugger/Portable/nubinit.c:
+	.text       start:0x800C1904 end:0x800C1A88
+
+MetroTRK/debugger/Portable/msg.c:
+	.text       start:0x800C1A88 end:0x800C1AB4
+
+MetroTRK/debugger/Portable/msgbuf.c:
+	.text       start:0x800C1AB4 end:0x800C22F0
+
+MetroTRK/debugger/Portable/serpoll.c:
+	.text       start:0x800C22F0 end:0x800C249C
+
+MetroTRK/debugger/Os/dolphin/usr_put.c:
+	.text       start:0x800C249C end:0x800C2528
+
+MetroTRK/debugger/Portable/dispatch.c:
+	.text       start:0x800C2528 end:0x800C2670
+
+MetroTRK/debugger/Portable/msghndlr.c:
+	.text       start:0x800C2670 end:0x800C374C
+
+MetroTRK/debugger/Portable/support.c:
+	.text       start:0x800C374C end:0x800C3E00
+
+MetroTRK/debugger/Portable/mutex_TRK.c:
+	.text       start:0x800C3E00 end:0x800C3E18
+
+MetroTRK/debugger/Portable/notify.c:
+	.text       start:0x800C3E18 end:0x800C3EB0
+
+MetroTRK/debugger/Processor/flush_cache.c:
+	.text       start:0x800C3EB0 end:0x800C3EE8
+
+MetroTRK/debugger/Portable/mem_TRK.c:
+	.text       start:0x800C3EE8 end:0x800C3FA0
+
+MetroTRK/debugger/Portable/string_TRK.c:
+	.text       start:0x800C3FA0 end:0x800C3FBC
+
+MetroTRK/debugger/Processor/targimpl.c:
+	.text       start:0x800C3FBC end:0x800C59E0
+
+MetroTRK/debugger/Processor/targsupp.c:
+	.text       start:0x800C59E0 end:0x800C5A00
+
+MetroTRK/debugger/Processor/mpc_7xx_603e.c:
+	.text       start:0x800C5A00 end:0x800C5D70
+
+MetroTRK/debugger/Export/mslsupp.c:
+	.text       start:0x800C5D70 end:0x800C5EE8
+
+MetroTRK/debugger/Os/dolphin/dolphin_trk.c:
+	.text       start:0x800C5EE8 end:0x800C6204
+
+MetroTRK/debugger/Portable/main_TRK.c:
+	.text       start:0x800C6204 end:0x800C6248
+
+MetroTRK/debugger/Os/dolphin/dolphin_trk_glue.c:
+	.text       start:0x800C6248 end:0x800C6708
+
+MetroTRK/debugger/Os/dolphin/targcont.c:
+	.text       start:0x800C6708 end:0x800C673C
+
+MetroTRK/debugger/Os/dolphin/target_options.c:
+	.text       start:0x800C673C end:0x800C6758
+
+MetroTRK/debugger/Os/dolphin/UDP_Stubs.c:
+	.text       start:0x800C6758 end:0x800C67A0
+
+MetroTRK/gamedev/main.c:
+	.text       start:0x800C67A0 end:0x800C6A60
+
+MetroTRK/gamedev/CircleBuffer.c:
+	.text       start:0x800C6A60 end:0x800C6CC8
+
+MetroTRK/gamedev/MWCriticalSection_gc.c:
+	.text       start:0x800C6CC8 end:0x800C6D20
+
 revolution/NdevExi2AD/DebuggerDriver.c:
 	.text       start:0x800C6D20 end:0x800C7054
 	.sdata      start:0x8043AC90 end:0x8043AC98
