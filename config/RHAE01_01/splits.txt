@@ -959,6 +959,178 @@ runtime/GCN_mem_alloc.c:
 	.text       start:0x800B2860 end:0x800B2918
 	.rodata     start:0x8030FE70 end:0x8030FEE0
 
+MSL/ansi_fp.c:
+	extab       start:0x80006648 end:0x80006680
+	extabindex  start:0x80006E5C end:0x80006EB0
+	.text       start:0x800B2F3C end:0x800B48AC
+
+MSL/arith.c:
+	.text       start:0x800B48AC end:0x800B48BC
+
+MSL/buffer_io.c:
+	extab       start:0x80006680 end:0x80006688
+	extabindex  start:0x80006EB0 end:0x80006EBC
+	.text       start:0x800B48BC end:0x800B499C
+
+MSL/direct_io.c:
+	extab       start:0x80006688 end:0x80006690
+	extabindex  start:0x80006EBC end:0x80006EC8
+	.text       start:0x800B499C end:0x800B4CA4
+
+MSL/file_io.c:
+	extab       start:0x80006690 end:0x800066A0
+	extabindex  start:0x80006EC8 end:0x80006EE0
+	.text       start:0x800B4CA4 end:0x800B4E94
+
+MSL/FILE_POS.c:
+	extab       start:0x800066A0 end:0x800066A8
+	extabindex  start:0x80006EE0 end:0x80006EEC
+	.text       start:0x800B4E94 end:0x800B5104
+
+MSL/mbstring.c:
+	extab       start:0x800066A8 end:0x800066B8
+	extabindex  start:0x80006EEC end:0x80006F04
+	.text       start:0x800B5104 end:0x800B52FC
+
+MSL/mem.c:
+	extab       start:0x800066B8 end:0x800066C0
+	extabindex  start:0x80006F04 end:0x80006F10
+	.text       start:0x800B52FC end:0x800B546C
+
+MSL/mem_funcs.c:
+	.text       start:0x800B546C end:0x800B573C
+
+MSL/math_api.c:
+	extab       start:0x800066C8 end:0x800066D8
+	extabindex  start:0x80006F1C end:0x80006F34
+	.text       start:0x800B57A0 end:0x800B5838
+
+MSL/misc_io.c:
+	.text       start:0x800B5838 end:0x800B5848
+
+MSL/printf.c:
+	extab       start:0x800066D8 end:0x80006738
+	extabindex  start:0x80006F34 end:0x80006FC4
+	.text       start:0x800B5848 end:0x800B7C10
+
+MSL/scanf.c:
+	extab       start:0x80006738 end:0x80006750
+	extabindex  start:0x80006FC4 end:0x80006FE8
+	.text       start:0x800B7C10 end:0x800B917C
+
+MSL/string.c:
+	.text       start:0x800B917C end:0x800B94F0
+
+MSL/strtold.c:
+	extab       start:0x80006750 end:0x80006758
+	extabindex  start:0x80006FE8 end:0x80006FF4
+	.text       start:0x800B94F0 end:0x800BA8E4
+
+MSL/strtoul.c:
+	extab       start:0x80006758 end:0x80006768
+	extabindex  start:0x80006FF4 end:0x8000700C
+	.text       start:0x800BA8E4 end:0x800BB1D8
+
+MSL/wmem.c:
+	.text       start:0x800BB1D8 end:0x800BB208
+
+MSL/wprintf.c:
+	extab       start:0x80006768 end:0x800067A0
+	extabindex  start:0x8000700C end:0x80007060
+	.text       start:0x800BB208 end:0x800BD3C4
+
+MSL/wstring.c:
+	extab       start:0x800067A8 end:0x800067B8
+	extabindex  start:0x8000706C end:0x80007084
+	.text       start:0x800BD44C end:0x800BD6C4
+
+MSL/extras.c:
+	.text       start:0x800BD6C4 end:0x800BD76C
+
+MSL/e_acos.c:
+	.text       start:0x800BD76C end:0x800BDA30
+
+MSL/e_asin.c:
+	.text       start:0x800BDA30 end:0x800BDCC8
+
+MSL/e_atan2.c:
+	.text       start:0x800BDCC8 end:0x800BDF38
+
+MSL/e_fmod.c:
+	.text       start:0x800BDF38 end:0x800BE268
+
+MSL/e_pow.c:
+	.text       start:0x800BE268 end:0x800BEAB0
+
+MSL/e_rem_pio2.c:
+	.text       start:0x800BEAB0 end:0x800BEE48
+
+MSL/k_cos.c:
+	.text       start:0x800BEE48 end:0x800BEF58
+
+MSL/k_rem_pio2.c:
+	.text       start:0x800BEF58 end:0x800C0664
+
+MSL/k_sin.c:
+	.text       start:0x800C0664 end:0x800C0724
+
+MSL/k_tan.c:
+	.text       start:0x800C0724 end:0x800C097C
+
+MSL/s_atan.c:
+	.text       start:0x800C097C end:0x800C0BBC
+
+MSL/s_ceil.c:
+	.text       start:0x800C0BBC end:0x800C0CFC
+
+MSL/s_copysign.c:
+	.text       start:0x800C0CFC end:0x800C0D28
+
+MSL/s_cos.c:
+	.text       start:0x800C0D28 end:0x800C0DFC
+
+MSL/s_floor.c:
+	.text       start:0x800C0DFC end:0x800C0F40
+
+MSL/s_frexp.c:
+	.text       start:0x800C0F40 end:0x800C0FC8
+
+MSL/s_ldexp.c:
+	.text       start:0x800C0FC8 end:0x800C1134
+
+MSL/s_modf.c:
+	.text       start:0x800C1134 end:0x800C1230
+
+MSL/s_sin.c:
+	.text       start:0x800C1230 end:0x800C1308
+
+MSL/s_tan.c:
+	.text       start:0x800C1308 end:0x800C1380
+
+MSL/w_acos.c:
+	.text       start:0x800C1380 end:0x800C1384
+
+MSL/w_asin.c:
+	.text       start:0x800C1384 end:0x800C1388
+
+MSL/w_atan2.c:
+	.text       start:0x800C1388 end:0x800C138C
+
+MSL/w_fmod.c:
+	.text       start:0x800C138C end:0x800C1390
+
+MSL/w_pow.c:
+	.text       start:0x800C1390 end:0x800C1394
+
+MSL/e_sqrt.c:
+	.text       start:0x800C1394 end:0x800C15DC
+
+MSL/math_ppc.c:
+	.text       start:0x800C15DC end:0x800C15E0
+
+MSL/w_sqrt.c:
+	.text       start:0x800C15E0 end:0x800C15E4
+
 revolution/NdevExi2AD/DebuggerDriver.c:
 	.text       start:0x800C6D20 end:0x800C7054
 	.sdata      start:0x8043AC90 end:0x8043AC98
