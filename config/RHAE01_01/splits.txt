@@ -1922,6 +1922,153 @@ revolution/NWC24/NWC24System.c:
 	.sdata      start:0x8043B230 end:0x8043B234
 	.sbss       start:0x8043C3F0 end:0x8043C400
 
+revolution/VF/pf_clib.c:
+	.text       start:0x8014AA8C end:0x8014AD8C
+
+revolution/VF/pf_code.c:
+	.text       start:0x8014AD8C end:0x8014ADA8
+
+revolution/VF/pf_service.c:
+	.text       start:0x8014ADA8 end:0x8014AED0
+
+revolution/VF/pf_str.c:
+	.text       start:0x8014AED0 end:0x8014B458
+
+revolution/VF/pf_w_clib.c:
+	.text       start:0x8014B458 end:0x8014B4EC
+
+revolution/VF/pf_driver.c:
+	.text       start:0x8014B4EC end:0x8014BEE8
+
+revolution/VF/pdm_bpb.c:
+	.text       start:0x8014BEE8 end:0x8014C808
+
+revolution/VF/pdm_disk.c:
+	.text       start:0x8014C808 end:0x8014DD58
+
+revolution/VF/pdm_partition.c:
+	.text       start:0x8014DD58 end:0x8014F190
+
+revolution/VF/pdm_mbr.c:
+	.text       start:0x8014F190 end:0x8014F750
+
+revolution/VF/pdm_dskmng.c:
+	.text       start:0x8014F750 end:0x8014F974
+
+revolution/VF/pf_cache.c:
+	.text       start:0x8014F974 end:0x801518A8
+
+revolution/VF/pf_cluster.c:
+	.text       start:0x801518A8 end:0x80151D60
+
+revolution/VF/pf_dir.c:
+	.text       start:0x80151D60 end:0x80151DF0
+
+revolution/VF/pf_entry.c:
+	.text       start:0x80151DF0 end:0x80153888
+
+revolution/VF/pf_entry_iterator.c:
+	.text       start:0x80153888 end:0x801551C4
+
+revolution/VF/pf_fat.c:
+	.text       start:0x801551C4 end:0x8015803C
+
+revolution/VF/pf_fat12.c:
+	.text       start:0x8015803C end:0x80158B24
+
+revolution/VF/pf_fat16.c:
+	.text       start:0x80158B24 end:0x8015909C
+
+revolution/VF/pf_fat32.c:
+	.text       start:0x8015909C end:0x801596DC
+
+revolution/VF/pf_fatfs.c:
+	.text       start:0x801596DC end:0x801596E0
+
+revolution/VF/pf_file.c:
+	.text       start:0x801596E0 end:0x8015CC84
+
+revolution/VF/pf_path.c:
+	.text       start:0x8015CC84 end:0x8015F9C4
+
+revolution/VF/pf_sector.c:
+	.text       start:0x8015F9C4 end:0x801600B4
+
+revolution/VF/pf_volume.c:
+	.text       start:0x801600B4 end:0x801617BC
+
+revolution/VF/pf_cp932.c:
+	.text       start:0x801617BC end:0x80161CCC
+
+revolution/VF/pf_api_util.c:
+	.text       start:0x80161CCC end:0x80161E38
+
+revolution/VF/pf_attach.c:
+	.text       start:0x80161E38 end:0x80161EBC
+
+revolution/VF/pf_detach.c:
+	.text       start:0x80161EBC end:0x80161EE4
+
+revolution/VF/pf_errnum.c:
+	.text       start:0x80161EE4 end:0x80161F08
+
+revolution/VF/pf_fclose.c:
+	.text       start:0x80161F08 end:0x80161F2C
+
+revolution/VF/pf_finfo.c:
+	.text       start:0x80161F2C end:0x80161F50
+
+revolution/VF/pf_fopen.c:
+	.text       start:0x80161F50 end:0x80161FEC
+
+revolution/VF/pf_fread.c:
+	.text       start:0x80161FEC end:0x80162014
+
+revolution/VF/pf_fseek.c:
+	.text       start:0x80162014 end:0x80162038
+
+revolution/VF/pf_fwrite.c:
+	.text       start:0x80162038 end:0x80162060
+
+revolution/VF/pf_getdev.c:
+	.text       start:0x80162060 end:0x80162088
+
+revolution/VF/pf_init_prfile2.c:
+	.text       start:0x80162088 end:0x801620C8
+
+revolution/VF/pf_remove.c:
+	.text       start:0x801620C8 end:0x80162118
+
+revolution/VF/pf_unmount.c:
+	.text       start:0x80162118 end:0x80162140
+
+revolution/VF/pf_filelock.c:
+	.text       start:0x80162140 end:0x80162154
+
+revolution/VF/pf_system.c:
+	.text       start:0x80162154 end:0x801621CC
+
+revolution/VF/d_vf.c:
+	.text       start:0x801621CC end:0x80162C88
+
+revolution/VF/d_vf_sys.c:
+	.text       start:0x80162C88 end:0x80164764
+
+revolution/VF/d_hash.c:
+	.text       start:0x80164764 end:0x80164DE4
+
+revolution/VF/d_time.c:
+	.text       start:0x80164DE4 end:0x80164E74
+
+revolution/VF/d_common.c:
+	.text       start:0x80164E74 end:0x801659BC
+
+revolution/VF/nand_drv.c:
+	.text       start:0x801659BC end:0x80167770
+
+revolution/VF/sd_drv.c:
+	.text       start:0x80167770 end:0x80167774
+
 RVLFaceLib/RFL_System.c:
 	extab       start:0x800067B8 end:0x800067E8
 	extabindex  start:0x80007084 end:0x800070CC
