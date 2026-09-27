@@ -361,6 +361,20 @@ cflags_rfl = [
     "-ipa file",
 ]
 
+# homeButtonMiniLib flags
+cflags_hbm = [
+    *cflags_base,
+    *cflags_pedantic,
+    "-sdata 0",
+    "-sdata2 0",
+    "-enc SJIS",
+    "-lang c++",
+    "-fp_contract off",
+    "-ipa file",
+    "-i include/nw4r",
+    "-i include/homeButtonMiniLib",
+]
+
 # RP flags
 cflags_rp = [
     *cflags_base,
@@ -846,6 +860,20 @@ config.libs = [
         ],
     },
     {
+        "lib": "homebuttonMiniLib",
+        "mw_version": config.linker_version,
+        "cflags": cflags_hbm,
+        "progress_category": "hbm",  # str | List[str]
+        "objects": [
+            Object(Matching, "homebuttonMiniLib/HBMBase.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMAnmController.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMFrameController.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMGUIManager.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMController.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMRemoteSpk.cpp"),
+        ],
+    },
+    {
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
@@ -912,6 +940,7 @@ config.progress_categories = [
     ProgressCategory("nw4r", "NW4R"),
     ProgressCategory("sdk", "SDK Code"),
     ProgressCategory("rfl", "RFL"),
+    ProgressCategory("hbm", "homeButtonMiniLib"),
     ProgressCategory("kernel", "RPKernel"),
     ProgressCategory("system", "RPSystem"),
     ProgressCategory("graphics", "RPGraphics"),

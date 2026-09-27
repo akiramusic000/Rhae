@@ -1749,6 +1749,36 @@ RVLFaceLib/RFL_Format.c:
 	extabindex  start:0x80007768 end:0x800077E0
 	.text       start:0x80176BE4 end:0x80177124
 
+homebuttonMiniLib/HBMBase.cpp:
+	.text       start:0x80177124 end:0x80180030
+	.rodata     start:0x80316928 end:0x80316C90
+	.data       start:0x8034E1D8 end:0x8034EE68
+	.bss        start:0x804385F8 end:0x80438628
+
+homebuttonMiniLib/HBMAnmController.cpp:
+	.text       start:0x80180030 end:0x8018013C
+	.data       start:0x8034EE98 end:0x8034EEA8
+
+homebuttonMiniLib/HBMFrameController.cpp:
+	.text       start:0x8018013C end:0x801802E4
+	.rodata     start:0x80316C90 end:0x80316C94
+
+homebuttonMiniLib/HBMGUIManager.cpp:
+	.text       start:0x801802E4 end:0x8018174C
+	.rodata     start:0x80316C98 end:0x80316CA8
+	.data       start:0x8034EEA8 end:0x8034F000
+	.bss        start:0x80438628 end:0x8043862C
+
+homebuttonMiniLib/HBMController.cpp:
+	.text       start:0x8018174C end:0x80181FE8
+	.rodata     start:0x80316CA8 end:0x80316CB4
+	.bss        start:0x80438630 end:0x804387C8
+
+homebuttonMiniLib/HBMRemoteSpk.cpp:
+	.text       start:0x80181FE8 end:0x801827F4
+	.data       start:0x8034F000 end:0x8034F00C
+	.bss        start:0x804387C8 end:0x804387CC
+
 Pack/RPKernel/RPSysSystem.cpp:
 	.text       start:0x801827F4 end:0x80183B1C
 	.ctors      start:0x802E9D4C end:0x802E9D50
