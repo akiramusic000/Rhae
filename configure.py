@@ -14,6 +14,8 @@
 
 import argparse
 import sys
+from os import walk
+from os.path import join as joinpath
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -137,6 +139,31 @@ args = parser.parse_args()
 config = ProjectConfig()
 config.version = str(args.version)
 version_num = VERSIONS.index(config.version)
+
+# Extra flags for clangd parser
+config.extra_clang_flags = [
+    "-Iinclude/MSL/internal",  # Allow clangd to see internal MSL headers
+    "-Wno-invalid-offsetof",  # Silence non-POD offsetof
+    "-fshort-wchar",  # Force wide characters as 16-bit
+]
+
+
+def find_directories(root_path: str, recursive: bool) -> list[str]:
+    found = [root_path]
+
+    for dirpath, dirnames, _ in walk(root_path):
+        found += [joinpath(dirpath, x) for x in dirnames]
+
+        if not recursive:
+            break
+
+    return found
+
+
+# Add BTE directories
+config.extra_clang_flags.extend(
+    [f"-isystem{x}" for x in find_directories("include/revolution/BTE", recursive=True)]
+)
 
 # Apply arguments
 config.build_dir = args.build_dir
