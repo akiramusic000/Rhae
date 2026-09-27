@@ -19,7 +19,9 @@ class Symbol:
         return f"{self.name} = {self.section}:0x{self.address:X}; // type:{self.type}{f' size:0x{self.size:X}' if self.size != 0 else ''} scope:{self.scope}{f' align:{self.align}' if self.align != 1 else ''}{f' data:{self.data}' if self.data != None else ''}"
 
     def copy_attributes_from(self, _o: Self) -> None:
-        self.name = _o.name
+        # Don't copy name for unnamed symbols
+
+        self.name = _o.name.replace(f"{_o.address:X}", f"{self.address:X}")
         self.type = _o.type
         self.scope = _o.scope
 
