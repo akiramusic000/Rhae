@@ -40,7 +40,6 @@ const RPSysSceneCreator::ESceneID RPSysResourceManager::CACHED_SCENES[] = {
     RPSysSceneCreator::ESceneID_RPTnkScene,
     RPSysSceneCreator::ESceneID_RPBomScene,
     RPSysSceneCreator::ESceneID_RPPartyTitleScene,
-    RPSysSceneCreator::ESceneID_RPPartyMiiLoadScene,
     RPSysSceneCreator::ESceneID_RPPartyMenuScene,
 #endif
 };

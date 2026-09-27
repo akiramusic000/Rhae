@@ -119,11 +119,20 @@ void RPSysPlayer::loadData(const RPSysPlayerArg& rArg) {
     }
 
     RFLCreateID expected;
+#if defined(PACK_SPORTS)
     mpSportsPlayerData->getCreateID(&expected);
+#elif defined(PACK_PARTY)
+    mpPartyPlayerData->getCreateID(&expected);
+#endif
 
     if (!IsSameCreateID(mCreateID, expected)) {
+#if defined(PACK_SPORTS)
         mpSportsPlayerData->reset();
         mpSportsPlayerData->setCreateID(&mCreateID);
+#elif defined(PACK_PARTY)
+        mpPartyPlayerData->reset();
+        mpPartyPlayerData->setCreateID(&mCreateID);
+#endif
     }
 }
 
