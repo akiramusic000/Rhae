@@ -1045,8 +1045,8 @@ MSL/wmem.c:
 	.text       start:0x800BB1D8 end:0x800BB208
 
 MSL/wprintf.c:
-	extab       start:0x80006768 end:0x800067A0
-	extabindex  start:0x8000700C end:0x80007060
+	extab       start:0x80006768 end:0x800067A8
+	extabindex  start:0x8000700C end:0x8000706C
 	.text       start:0x800BB208 end:0x800BD44C
 
 MSL/wstring.c:
