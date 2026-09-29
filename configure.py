@@ -236,7 +236,6 @@ cflags_base = [
     "-RTTI off",
     "-fp_contract on",
     "-str reuse",
-    "-enc SJIS",
     "-i include",
     "-i include/MSL",
     "-i include/MSL/internal",
@@ -341,6 +340,15 @@ cflags_runtime = [
     "-str reuse,pool,readonly",
     "-fp_contract off",
     "-D_IEEE_LIBM",
+]
+
+# MetroTRK flags
+cflags_trk = [
+    *cflags_base,
+    "-use_lmw_stmw on",
+    "-str reuse,pool,readonly",
+    "-inline deferred",
+    "-sdata 0",
 ]
 
 # RVL SDK flags
@@ -744,6 +752,43 @@ config.libs = [
             Object(Matching, "runtime/__init_cpp_exceptions.cpp"),
             Object(Matching, "runtime/Gecko_ExceptionPPC.c"),
             Object(Matching, "runtime/GCN_mem_alloc.c"),
+        ],
+    },
+    {
+        "lib": "MetroTRK",
+        "mw_version": "GC/2.7",
+        "cflags": cflags_trk,
+        "progress_category": "sdk",  # str | List[str]
+        "objects": [
+            Object(NonMatching, "MetroTRK/debugger/Portable/mainloop.c"),
+            Object(Matching, "MetroTRK/debugger/Portable/nubevent.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/nubinit.c"),
+            Object(Matching, "MetroTRK/debugger/Portable/msg.c"),
+            Object(Matching, "MetroTRK/debugger/Portable/msgbuf.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/serpoll.c"),
+            Object(NonMatching, "MetroTRK/debugger/Os/dolphin/usr_put.c"),
+            Object(Matching, "MetroTRK/debugger/Portable/dispatch.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/msghndlr.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/support.c"),
+            Object(Matching, "MetroTRK/debugger/Portable/mutex_TRK.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/notify.c"),
+            Object(NonMatching, "MetroTRK/debugger/Processor/flush_cache.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/mem_TRK.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/string_TRK.c"),
+            Object(NonMatching, "MetroTRK/debugger/Processor/targimpl.c"),
+            Object(NonMatching, "MetroTRK/debugger/Processor/targsupp.c"),
+            Object(NonMatching, "MetroTRK/debugger/Processor/mpc_7xx_603e.c"),
+            Object(NonMatching, "MetroTRK/debugger/Export/mslsupp.c"),
+            Object(NonMatching, "MetroTRK/debugger/Processor/__exception.c"),
+            Object(NonMatching, "MetroTRK/debugger/Os/dolphin/dolphin_trk.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/main_TRK.c"),
+            Object(NonMatching, "MetroTRK/debugger/Os/dolphin/dolphin_trk_glue.c"),
+            Object(NonMatching, "MetroTRK/debugger/Os/dolphin/targcont.c"),
+            Object(NonMatching, "MetroTRK/debugger/Os/dolphin/target_options.c"),
+            Object(NonMatching, "MetroTRK/debugger/Os/dolphin/UDP_Stubs.c"),
+            Object(NonMatching, "MetroTRK/gamedev/main.c"),
+            Object(NonMatching, "MetroTRK/gamedev/CircleBuffer.c"),
+            Object(NonMatching, "MetroTRK/gamedev/MWCriticalSection_gc.c"),
         ],
     },
     {

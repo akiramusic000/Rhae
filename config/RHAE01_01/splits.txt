@@ -1170,6 +1170,7 @@ MetroTRK/debugger/Portable/mainloop.c:
 
 MetroTRK/debugger/Portable/nubevent.c:
 	.text       start:0x800C16DC end:0x800C1904
+	.bss        start:0x803A0718 end:0x803A0740
 
 MetroTRK/debugger/Portable/nubinit.c:
 	.text       start:0x800C1904 end:0x800C1A88
@@ -1179,6 +1180,8 @@ MetroTRK/debugger/Portable/msg.c:
 
 MetroTRK/debugger/Portable/msgbuf.c:
 	.text       start:0x800C1AB4 end:0x800C22F0
+	.rodata     start:0x80310E88 end:0x80310EA8
+	.bss        start:0x803A0748 end:0x803A20F8
 
 MetroTRK/debugger/Portable/serpoll.c:
 	.text       start:0x800C22F0 end:0x800C249C
@@ -1188,6 +1191,7 @@ MetroTRK/debugger/Os/dolphin/usr_put.c:
 
 MetroTRK/debugger/Portable/dispatch.c:
 	.text       start:0x800C2528 end:0x800C2670
+	.data       start:0x8032ED38 end:0x8032EDA4
 
 MetroTRK/debugger/Portable/msghndlr.c:
 	.text       start:0x800C2670 end:0x800C374C
@@ -1205,6 +1209,7 @@ MetroTRK/debugger/Processor/flush_cache.c:
 	.text       start:0x800C3EB0 end:0x800C3EE8
 
 MetroTRK/debugger/Portable/mem_TRK.c:
+	.init       start:0x80004134 end:0x80004188
 	.text       start:0x800C3EE8 end:0x800C3FA0
 
 MetroTRK/debugger/Portable/string_TRK.c:
