@@ -917,7 +917,7 @@ EGG/egg_unsplit.o:
 	.bss        start:0x8039E1A0 end:0x803A03D0
 	.sdata      start:0x8043ABC0 end:0x8043AC70
 	.sbss       start:0x8043BB38 end:0x8043BCE0
-	.sdata2     start:0x8043D5F8 end:0x8043E108
+	.sdata2     start:0x8043D5F8 end:0x8043DC38
 	.sbss2      start:0x80441970 end:0x80441988
 
 runtime/__mem.c:
@@ -1059,63 +1059,86 @@ MSL/extras.c:
 
 MSL/e_acos.c:
 	.text       start:0x800BD76C end:0x800BDA30
+	.sdata2     start:0x8043DC40 end:0x8043DCC8
 
 MSL/e_asin.c:
 	.text       start:0x800BDA30 end:0x800BDCC8
+	.sdata2     start:0x8043DCC8 end:0x8043DD50
 
 MSL/e_atan2.c:
 	.text       start:0x800BDCC8 end:0x800BDF38
+	.sdata2     start:0x8043DD50 end:0x8043DDA8
 
 MSL/e_fmod.c:
 	.text       start:0x800BDF38 end:0x800BE268
+	.rodata     start:0x80310B50 end:0x80310B60
 
 MSL/e_pow.c:
 	.text       start:0x800BE268 end:0x800BEAB0
+	.rodata     start:0x80310B60 end:0x80310B90
+	.sdata2     start:0x8043DDA8 end:0x8043DEB8
 
 MSL/e_rem_pio2.c:
 	.text       start:0x800BEAB0 end:0x800BEE48
+	.rodata     start:0x80310B90 end:0x80310D18
+	.sdata2     start:0x8043DEB8 end:0x8043DF10
 
 MSL/k_cos.c:
 	.text       start:0x800BEE48 end:0x800BEF58
+	.sdata2     start:0x8043DF10 end:0x8043DF58
 
 MSL/k_rem_pio2.c:
 	.text       start:0x800BEF58 end:0x800C0664
+	.rodata     start:0x80310D18 end:0x80310D68
+	.sdata2     start:0x8043DF58 end:0x8043DF98
 
 MSL/k_sin.c:
 	.text       start:0x800C0664 end:0x800C0724
+	.sdata2     start:0x8043DF98 end:0x8043DFD0
 
 MSL/k_tan.c:
 	.text       start:0x800C0724 end:0x800C097C
+	.rodata     start:0x80310D68 end:0x80310DD0
+	.sdata2     start:0x8043DFD0 end:0x8043E008
 
 MSL/s_atan.c:
 	.text       start:0x800C097C end:0x800C0BBC
+	.rodata     start:0x80310DD0 end:0x80310E68
+	.sdata2     start:0x8043E008 end:0x8043E030
 
 MSL/s_ceil.c:
 	.text       start:0x800C0BBC end:0x800C0CFC
+	.sdata2     start:0x8043E030 end:0x8043E040
 
 MSL/s_copysign.c:
 	.text       start:0x800C0CFC end:0x800C0D28
 
 MSL/s_cos.c:
 	.text       start:0x800C0D28 end:0x800C0DFC
+	.sdata2     start:0x8043E040 end:0x8043E048
 
 MSL/s_floor.c:
 	.text       start:0x800C0DFC end:0x800C0F40
+	.sdata2     start:0x8043E048 end:0x8043E058
 
 MSL/s_frexp.c:
 	.text       start:0x800C0F40 end:0x800C0FC8
+	.sdata2     start:0x8043E058 end:0x8043E060
 
 MSL/s_ldexp.c:
 	.text       start:0x800C0FC8 end:0x800C1134
+	.sdata2     start:0x8043E060 end:0x8043E088
 
 MSL/s_modf.c:
 	.text       start:0x800C1134 end:0x800C1230
 
 MSL/s_sin.c:
 	.text       start:0x800C1230 end:0x800C1308
+	.sdata2     start:0x8043E088 end:0x8043E090
 
 MSL/s_tan.c:
 	.text       start:0x800C1308 end:0x800C1380
+	.sdata2     start:0x8043E090 end:0x8043E098
 
 MSL/w_acos.c:
 	.text       start:0x800C1380 end:0x800C1384
@@ -1134,6 +1157,7 @@ MSL/w_pow.c:
 
 MSL/e_sqrt.c:
 	.text       start:0x800C1394 end:0x800C15DC
+	.sdata2     start:0x8043E098 end:0x8043E0A0
 
 MSL/math_ppc.c:
 	.text       start:0x800C15DC end:0x800C15E0
