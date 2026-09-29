@@ -1227,7 +1227,11 @@ MetroTRK/debugger/Processor/mpc_7xx_603e.c:
 MetroTRK/debugger/Export/mslsupp.c:
 	.text       start:0x800C5D70 end:0x800C5EE8
 
+MetroTRK/debugger/Processor/__exception.c:
+	.init       start:0x80004188 end:0x800060BC
+
 MetroTRK/debugger/Os/dolphin/dolphin_trk.c:
+	.init       start:0x800060BC end:0x800060E8
 	.text       start:0x800C5EE8 end:0x800C6204
 
 MetroTRK/debugger/Portable/main_TRK.c:
