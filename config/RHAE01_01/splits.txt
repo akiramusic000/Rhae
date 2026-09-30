@@ -2010,7 +2010,7 @@ revolution/VF/pf_entry_iterator.c:
 
 revolution/VF/pf_fat.c:
 	.text       start:0x801551C4 end:0x8015803C
-	.rodata     start:0x803117B8 end:0x803117F8
+	.rodata     start:0x803117B8 end:0x803117F4
 
 revolution/VF/pf_fat12.c:
 	.text       start:0x8015803C end:0x80158B24
