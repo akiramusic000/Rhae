@@ -68,6 +68,57 @@ public:
     void reset();
 
     /**
+     * @brief Gets a record for a specified game
+     *
+     * @param game Game index to get a record for
+     * @param record Record index to get
+     */
+    s32 getRecord(EGame game, u32 record) const;
+    /**
+     * @brief Sets a record for a specified game
+     *
+     * @param game Game index to set record for
+     * @param record Record index to set
+     */
+    void setRecord(s32 newRecord, EGame game, u32 record);
+
+    /**
+     * @brief Gets the medal achieved in a minigame
+     *
+     * @param game Game to get the medal for
+     */
+    u8 getMedal(EGame game) const;
+    /**
+     * @brief Sets the medal achieved in a minigame
+     *
+     * @param medal Medal type to set to
+     * @param game Minigame to set the medal for
+     */
+    void setMedal(u8 medal, EGame game);
+
+    /**
+     * @brief Tests whether a player hasn't played a minigame yet
+     */
+    bool isFirstPlay() const;
+    /**
+     * @brief Sets that a player has played a minigame
+     */
+    void setFirstPlay();
+
+    /**
+     * @brief Gets whether a medal cutscene has played
+     *
+     * @param cutscene Medal custscene
+     */
+    bool isMedalDemo(u8 cutscene) const;
+    /**
+     * @brief Sets a medal cutscene to played
+     *
+     * @param cutscene Medal custscene
+     */
+    void setMedalDemo(u8 cutscene);
+
+    /**
      * @name Player list
      */
     /**@{*/
@@ -107,12 +158,26 @@ public:
     void setDebutTime(RPTime32 time);
     /**@}*/
 
+    /**
+     * @brief Deserializes this object from the specified stream
+     *
+     * @param rStrm Memory stream
+     */
+    void read(EGG::RamStream& rStrm);
+    /**
+     * @brief Serializes this object to the specified stream
+     *
+     * @param rStrm Memory stream
+     */
+    void write(EGG::RamStream& rStrm);
+
 private:
     /**
      * @brief Player data flags
      */
     enum {
         EFlag_Registered = 1, //!< Registered with the player list
+        EFlag_FirstPlay = 2, //!< Completed one minigame
     };
 
 private:

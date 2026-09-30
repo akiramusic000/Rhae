@@ -917,7 +917,7 @@ EGG/egg_unsplit.o:
 	.bss        start:0x8039E1A0 end:0x803A03D0
 	.sdata      start:0x8043ABC0 end:0x8043AC70
 	.sbss       start:0x8043BB38 end:0x8043BCE0
-	.sdata2     start:0x8043D5F8 end:0x8043E108
+	.sdata2     start:0x8043D5F8 end:0x8043DC38
 	.sbss2      start:0x80441970 end:0x80441988
 
 runtime/__mem.c:
@@ -958,6 +958,305 @@ runtime/Gecko_ExceptionPPC.c:
 runtime/GCN_mem_alloc.c:
 	.text       start:0x800B2860 end:0x800B2918
 	.rodata     start:0x8030FE70 end:0x8030FEE0
+
+MSL/alloc.c:
+	extab       start:0x80006620 end:0x80006638
+	extabindex  start:0x80006E20 end:0x80006E44
+	.text       start:0x800B2918 end:0x800B2E2C
+
+MSL/ansi_files.c:
+	extab       start:0x80006638 end:0x80006648
+	extabindex  start:0x80006E44 end:0x80006E5C
+	.text       start:0x800B2E2C end:0x800B2F3C
+
+MSL/ansi_fp.c:
+	extab       start:0x80006648 end:0x80006680
+	extabindex  start:0x80006E5C end:0x80006EB0
+	.text       start:0x800B2F3C end:0x800B48AC
+
+MSL/arith.c:
+	.text       start:0x800B48AC end:0x800B48BC
+
+MSL/buffer_io.c:
+	extab       start:0x80006680 end:0x80006688
+	extabindex  start:0x80006EB0 end:0x80006EBC
+	.text       start:0x800B48BC end:0x800B499C
+
+MSL/direct_io.c:
+	extab       start:0x80006688 end:0x80006690
+	extabindex  start:0x80006EBC end:0x80006EC8
+	.text       start:0x800B499C end:0x800B4CA4
+
+MSL/file_io.c:
+	extab       start:0x80006690 end:0x800066A0
+	extabindex  start:0x80006EC8 end:0x80006EE0
+	.text       start:0x800B4CA4 end:0x800B4E94
+
+MSL/FILE_POS.c:
+	extab       start:0x800066A0 end:0x800066A8
+	extabindex  start:0x80006EE0 end:0x80006EEC
+	.text       start:0x800B4E94 end:0x800B5104
+
+MSL/mbstring.c:
+	extab       start:0x800066A8 end:0x800066B8
+	extabindex  start:0x80006EEC end:0x80006F04
+	.text       start:0x800B5104 end:0x800B52FC
+
+MSL/mem.c:
+	extab       start:0x800066B8 end:0x800066C0
+	extabindex  start:0x80006F04 end:0x80006F10
+	.text       start:0x800B52FC end:0x800B546C
+
+MSL/mem_funcs.c:
+	.text       start:0x800B546C end:0x800B573C
+
+MSL/math_api.c:
+	extab       start:0x800066C0 end:0x800066D8
+	extabindex  start:0x80006F10 end:0x80006F34
+	.text       start:0x800B573C end:0x800B5838
+
+MSL/misc_io.c:
+	.text       start:0x800B5838 end:0x800B5848
+
+MSL/printf.c:
+	extab       start:0x800066D8 end:0x80006738
+	extabindex  start:0x80006F34 end:0x80006FC4
+	.text       start:0x800B5848 end:0x800B7C10
+
+MSL/scanf.c:
+	extab       start:0x80006738 end:0x80006750
+	extabindex  start:0x80006FC4 end:0x80006FE8
+	.text       start:0x800B7C10 end:0x800B917C
+
+MSL/string.c:
+	.text       start:0x800B917C end:0x800B94F0
+
+MSL/strtold.c:
+	extab       start:0x80006750 end:0x80006758
+	extabindex  start:0x80006FE8 end:0x80006FF4
+	.text       start:0x800B94F0 end:0x800BA8E4
+
+MSL/strtoul.c:
+	extab       start:0x80006758 end:0x80006768
+	extabindex  start:0x80006FF4 end:0x8000700C
+	.text       start:0x800BA8E4 end:0x800BB1D8
+
+MSL/wmem.c:
+	.text       start:0x800BB1D8 end:0x800BB208
+
+MSL/wprintf.c:
+	extab       start:0x80006768 end:0x800067A8
+	extabindex  start:0x8000700C end:0x8000706C
+	.text       start:0x800BB208 end:0x800BD44C
+
+MSL/wstring.c:
+	extab       start:0x800067A8 end:0x800067B8
+	extabindex  start:0x8000706C end:0x80007084
+	.text       start:0x800BD44C end:0x800BD6C4
+
+MSL/extras.c:
+	.text       start:0x800BD6C4 end:0x800BD76C
+
+MSL/e_acos.c:
+	.text       start:0x800BD76C end:0x800BDA30
+	.sdata2     start:0x8043DC40 end:0x8043DCC8
+
+MSL/e_asin.c:
+	.text       start:0x800BDA30 end:0x800BDCC8
+	.sdata2     start:0x8043DCC8 end:0x8043DD50
+
+MSL/e_atan2.c:
+	.text       start:0x800BDCC8 end:0x800BDF38
+	.sdata2     start:0x8043DD50 end:0x8043DDA8
+
+MSL/e_fmod.c:
+	.text       start:0x800BDF38 end:0x800BE268
+	.rodata     start:0x80310B50 end:0x80310B60
+
+MSL/e_pow.c:
+	.text       start:0x800BE268 end:0x800BEAB0
+	.rodata     start:0x80310B60 end:0x80310B90
+	.sdata2     start:0x8043DDA8 end:0x8043DEB8
+
+MSL/e_rem_pio2.c:
+	.text       start:0x800BEAB0 end:0x800BEE48
+	.rodata     start:0x80310B90 end:0x80310D18
+	.sdata2     start:0x8043DEB8 end:0x8043DF10
+
+MSL/k_cos.c:
+	.text       start:0x800BEE48 end:0x800BEF58
+	.sdata2     start:0x8043DF10 end:0x8043DF58
+
+MSL/k_rem_pio2.c:
+	.text       start:0x800BEF58 end:0x800C0664
+	.rodata     start:0x80310D18 end:0x80310D68
+	.sdata2     start:0x8043DF58 end:0x8043DF98
+
+MSL/k_sin.c:
+	.text       start:0x800C0664 end:0x800C0724
+	.sdata2     start:0x8043DF98 end:0x8043DFD0
+
+MSL/k_tan.c:
+	.text       start:0x800C0724 end:0x800C097C
+	.rodata     start:0x80310D68 end:0x80310DD0
+	.sdata2     start:0x8043DFD0 end:0x8043E008
+
+MSL/s_atan.c:
+	.text       start:0x800C097C end:0x800C0BBC
+	.rodata     start:0x80310DD0 end:0x80310E68
+	.sdata2     start:0x8043E008 end:0x8043E030
+
+MSL/s_ceil.c:
+	.text       start:0x800C0BBC end:0x800C0CFC
+	.sdata2     start:0x8043E030 end:0x8043E040
+
+MSL/s_copysign.c:
+	.text       start:0x800C0CFC end:0x800C0D28
+
+MSL/s_cos.c:
+	.text       start:0x800C0D28 end:0x800C0DFC
+	.sdata2     start:0x8043E040 end:0x8043E048
+
+MSL/s_floor.c:
+	.text       start:0x800C0DFC end:0x800C0F40
+	.sdata2     start:0x8043E048 end:0x8043E058
+
+MSL/s_frexp.c:
+	.text       start:0x800C0F40 end:0x800C0FC8
+	.sdata2     start:0x8043E058 end:0x8043E060
+
+MSL/s_ldexp.c:
+	.text       start:0x800C0FC8 end:0x800C1134
+	.sdata2     start:0x8043E060 end:0x8043E088
+
+MSL/s_modf.c:
+	.text       start:0x800C1134 end:0x800C1230
+
+MSL/s_sin.c:
+	.text       start:0x800C1230 end:0x800C1308
+	.sdata2     start:0x8043E088 end:0x8043E090
+
+MSL/s_tan.c:
+	.text       start:0x800C1308 end:0x800C1380
+	.sdata2     start:0x8043E090 end:0x8043E098
+
+MSL/w_acos.c:
+	.text       start:0x800C1380 end:0x800C1384
+
+MSL/w_asin.c:
+	.text       start:0x800C1384 end:0x800C1388
+
+MSL/w_atan2.c:
+	.text       start:0x800C1388 end:0x800C138C
+
+MSL/w_fmod.c:
+	.text       start:0x800C138C end:0x800C1390
+
+MSL/w_pow.c:
+	.text       start:0x800C1390 end:0x800C1394
+
+MSL/e_sqrt.c:
+	.text       start:0x800C1394 end:0x800C15DC
+	.sdata2     start:0x8043E098 end:0x8043E0A0
+
+MSL/math_ppc.c:
+	.text       start:0x800C15DC end:0x800C15E0
+
+MSL/w_sqrt.c:
+	.text       start:0x800C15E0 end:0x800C15E4
+
+MetroTRK/debugger/Portable/mainloop.c:
+	.text       start:0x800C15E4 end:0x800C16DC
+
+MetroTRK/debugger/Portable/nubevent.c:
+	.text       start:0x800C16DC end:0x800C1904
+	.bss        start:0x803A0718 end:0x803A0740
+
+MetroTRK/debugger/Portable/nubinit.c:
+	.text       start:0x800C1904 end:0x800C1A88
+
+MetroTRK/debugger/Portable/msg.c:
+	.text       start:0x800C1A88 end:0x800C1AB4
+
+MetroTRK/debugger/Portable/msgbuf.c:
+	.text       start:0x800C1AB4 end:0x800C22F0
+	.rodata     start:0x80310E88 end:0x80310EA8
+	.bss        start:0x803A0748 end:0x803A20F8
+
+MetroTRK/debugger/Portable/serpoll.c:
+	.text       start:0x800C22F0 end:0x800C249C
+
+MetroTRK/debugger/Os/dolphin/usr_put.c:
+	.text       start:0x800C249C end:0x800C2528
+
+MetroTRK/debugger/Portable/dispatch.c:
+	.text       start:0x800C2528 end:0x800C2670
+	.data       start:0x8032ED38 end:0x8032EDA4
+
+MetroTRK/debugger/Portable/msghndlr.c:
+	.text       start:0x800C2670 end:0x800C374C
+
+MetroTRK/debugger/Portable/support.c:
+	.text       start:0x800C374C end:0x800C3E00
+
+MetroTRK/debugger/Portable/mutex_TRK.c:
+	.text       start:0x800C3E00 end:0x800C3E18
+
+MetroTRK/debugger/Portable/notify.c:
+	.text       start:0x800C3E18 end:0x800C3EB0
+
+MetroTRK/debugger/Processor/flush_cache.c:
+	.text       start:0x800C3EB0 end:0x800C3EE8
+
+MetroTRK/debugger/Portable/mem_TRK.c:
+	.init       start:0x80004134 end:0x80004188
+	.text       start:0x800C3EE8 end:0x800C3FA0
+
+MetroTRK/debugger/Portable/string_TRK.c:
+	.text       start:0x800C3FA0 end:0x800C3FBC
+
+MetroTRK/debugger/Processor/targimpl.c:
+	.text       start:0x800C3FBC end:0x800C59E0
+
+MetroTRK/debugger/Processor/targsupp.c:
+	.text       start:0x800C59E0 end:0x800C5A00
+
+MetroTRK/debugger/Processor/mpc_7xx_603e.c:
+	.text       start:0x800C5A00 end:0x800C5D70
+
+MetroTRK/debugger/Export/mslsupp.c:
+	.text       start:0x800C5D70 end:0x800C5EE8
+
+MetroTRK/debugger/Processor/__exception.c:
+	.init       start:0x80004188 end:0x800060BC
+
+MetroTRK/debugger/Os/dolphin/dolphin_trk.c:
+	.init       start:0x800060BC end:0x800060E8
+	.text       start:0x800C5EE8 end:0x800C6204
+
+MetroTRK/debugger/Portable/main_TRK.c:
+	.text       start:0x800C6204 end:0x800C6248
+
+MetroTRK/debugger/Os/dolphin/dolphin_trk_glue.c:
+	.text       start:0x800C6248 end:0x800C6708
+
+MetroTRK/debugger/Os/dolphin/targcont.c:
+	.text       start:0x800C6708 end:0x800C673C
+
+MetroTRK/debugger/Os/dolphin/target_options.c:
+	.text       start:0x800C673C end:0x800C6758
+
+MetroTRK/debugger/Os/dolphin/UDP_Stubs.c:
+	.text       start:0x800C6758 end:0x800C67A0
+
+MetroTRK/gamedev/main.c:
+	.text       start:0x800C67A0 end:0x800C6A60
+
+MetroTRK/gamedev/CircleBuffer.c:
+	.text       start:0x800C6A60 end:0x800C6CC8
+
+MetroTRK/gamedev/MWCriticalSection_gc.c:
+	.text       start:0x800C6CC8 end:0x800C6D20
 
 revolution/NdevExi2AD/DebuggerDriver.c:
 	.text       start:0x800C6D20 end:0x800C7054
@@ -1102,7 +1401,7 @@ revolution/MEM/mem_heapCommon.c:
 	.sbss       start:0x8043BE78 end:0x8043BE7C
 
 revolution/MEM/mem_expHeap.c:
-	.text       start:0x800E631C end:0x800E6C20
+	.text       start:0x800E6118 end:0x800E6C20
 
 revolution/MEM/mem_frameHeap.c:
 	.text       start:0x800E6C20 end:0x800E71E8
@@ -1656,6 +1955,153 @@ revolution/NWC24/NWC24System.c:
 	.sdata      start:0x8043B230 end:0x8043B234
 	.sbss       start:0x8043C3F0 end:0x8043C400
 
+revolution/VF/pf_clib.c:
+	.text       start:0x8014AA8C end:0x8014AD8C
+
+revolution/VF/pf_code.c:
+	.text       start:0x8014AD8C end:0x8014ADA8
+
+revolution/VF/pf_service.c:
+	.text       start:0x8014ADA8 end:0x8014AED0
+
+revolution/VF/pf_str.c:
+	.text       start:0x8014AED0 end:0x8014B458
+
+revolution/VF/pf_w_clib.c:
+	.text       start:0x8014B458 end:0x8014B4EC
+
+revolution/VF/pf_driver.c:
+	.text       start:0x8014B4EC end:0x8014BEE8
+
+revolution/VF/pdm_bpb.c:
+	.text       start:0x8014BEE8 end:0x8014C808
+
+revolution/VF/pdm_disk.c:
+	.text       start:0x8014C808 end:0x8014DD58
+
+revolution/VF/pdm_partition.c:
+	.text       start:0x8014DD58 end:0x8014F190
+
+revolution/VF/pdm_mbr.c:
+	.text       start:0x8014F190 end:0x8014F750
+
+revolution/VF/pdm_dskmng.c:
+	.text       start:0x8014F750 end:0x8014F974
+
+revolution/VF/pf_cache.c:
+	.text       start:0x8014F974 end:0x801518A8
+
+revolution/VF/pf_cluster.c:
+	.text       start:0x801518A8 end:0x80151D60
+
+revolution/VF/pf_dir.c:
+	.text       start:0x80151D60 end:0x80151DF0
+
+revolution/VF/pf_entry.c:
+	.text       start:0x80151DF0 end:0x80153888
+
+revolution/VF/pf_entry_iterator.c:
+	.text       start:0x80153888 end:0x801551C4
+
+revolution/VF/pf_fat.c:
+	.text       start:0x801551C4 end:0x8015803C
+
+revolution/VF/pf_fat12.c:
+	.text       start:0x8015803C end:0x80158B24
+
+revolution/VF/pf_fat16.c:
+	.text       start:0x80158B24 end:0x8015909C
+
+revolution/VF/pf_fat32.c:
+	.text       start:0x8015909C end:0x801596DC
+
+revolution/VF/pf_fatfs.c:
+	.text       start:0x801596DC end:0x801596E0
+
+revolution/VF/pf_file.c:
+	.text       start:0x801596E0 end:0x8015CC84
+
+revolution/VF/pf_path.c:
+	.text       start:0x8015CC84 end:0x8015F9C4
+
+revolution/VF/pf_sector.c:
+	.text       start:0x8015F9C4 end:0x801600B4
+
+revolution/VF/pf_volume.c:
+	.text       start:0x801600B4 end:0x801617BC
+
+revolution/VF/pf_cp932.c:
+	.text       start:0x801617BC end:0x80161CCC
+
+revolution/VF/pf_api_util.c:
+	.text       start:0x80161CCC end:0x80161E38
+
+revolution/VF/pf_attach.c:
+	.text       start:0x80161E38 end:0x80161EBC
+
+revolution/VF/pf_detach.c:
+	.text       start:0x80161EBC end:0x80161EE4
+
+revolution/VF/pf_errnum.c:
+	.text       start:0x80161EE4 end:0x80161F08
+
+revolution/VF/pf_fclose.c:
+	.text       start:0x80161F08 end:0x80161F2C
+
+revolution/VF/pf_finfo.c:
+	.text       start:0x80161F2C end:0x80161F50
+
+revolution/VF/pf_fopen.c:
+	.text       start:0x80161F50 end:0x80161FEC
+
+revolution/VF/pf_fread.c:
+	.text       start:0x80161FEC end:0x80162014
+
+revolution/VF/pf_fseek.c:
+	.text       start:0x80162014 end:0x80162038
+
+revolution/VF/pf_fwrite.c:
+	.text       start:0x80162038 end:0x80162060
+
+revolution/VF/pf_getdev.c:
+	.text       start:0x80162060 end:0x80162088
+
+revolution/VF/pf_init_prfile2.c:
+	.text       start:0x80162088 end:0x801620C8
+
+revolution/VF/pf_remove.c:
+	.text       start:0x801620C8 end:0x80162118
+
+revolution/VF/pf_unmount.c:
+	.text       start:0x80162118 end:0x80162140
+
+revolution/VF/pf_filelock.c:
+	.text       start:0x80162140 end:0x80162154
+
+revolution/VF/pf_system.c:
+	.text       start:0x80162154 end:0x801621CC
+
+revolution/VF/d_vf.c:
+	.text       start:0x801621CC end:0x80162C88
+
+revolution/VF/d_vf_sys.c:
+	.text       start:0x80162C88 end:0x80164764
+
+revolution/VF/d_hash.c:
+	.text       start:0x80164764 end:0x80164DE4
+
+revolution/VF/d_time.c:
+	.text       start:0x80164DE4 end:0x80164E74
+
+revolution/VF/d_common.c:
+	.text       start:0x80164E74 end:0x801659BC
+
+revolution/VF/nand_drv.c:
+	.text       start:0x801659BC end:0x80167770
+
+revolution/VF/sd_drv.c:
+	.text       start:0x80167770 end:0x80167774
+
 RVLFaceLib/RFL_System.c:
 	extab       start:0x800067B8 end:0x800067E8
 	extabindex  start:0x80007084 end:0x800070CC
@@ -1749,6 +2195,36 @@ RVLFaceLib/RFL_Format.c:
 	extabindex  start:0x80007768 end:0x800077E0
 	.text       start:0x80176BE4 end:0x80177124
 
+homebuttonMiniLib/HBMBase.cpp:
+	.text       start:0x80177124 end:0x80180030
+	.rodata     start:0x80316928 end:0x80316C90
+	.data       start:0x8034E1D8 end:0x8034EE68
+	.bss        start:0x804385F8 end:0x80438628
+
+homebuttonMiniLib/HBMAnmController.cpp:
+	.text       start:0x80180030 end:0x8018013C
+	.data       start:0x8034EE98 end:0x8034EEA8
+
+homebuttonMiniLib/HBMFrameController.cpp:
+	.text       start:0x8018013C end:0x801802E4
+	.rodata     start:0x80316C90 end:0x80316C94
+
+homebuttonMiniLib/HBMGUIManager.cpp:
+	.text       start:0x801802E4 end:0x8018174C
+	.rodata     start:0x80316C98 end:0x80316CA8
+	.data       start:0x8034EEA8 end:0x8034F000
+	.bss        start:0x80438628 end:0x8043862C
+
+homebuttonMiniLib/HBMController.cpp:
+	.text       start:0x8018174C end:0x80181FE8
+	.rodata     start:0x80316CA8 end:0x80316CB4
+	.bss        start:0x80438630 end:0x804387C8
+
+homebuttonMiniLib/HBMRemoteSpk.cpp:
+	.text       start:0x80181FE8 end:0x801827F4
+	.data       start:0x8034F000 end:0x8034F00C
+	.bss        start:0x804387C8 end:0x804387CC
+
 Pack/RPKernel/RPSysSystem.cpp:
 	.text       start:0x801827F4 end:0x80183B1C
 	.ctors      start:0x802E9D4C end:0x802E9D50
@@ -1774,3 +2250,345 @@ Pack/RPSystem/RPSysProjectLocal.cpp:
 	.rodata     start:0x80317008 end:0x80317024
 	.data       start:0x8034F270 end:0x8034F2A0
 	.sbss       start:0x8043C470 end:0x8043C474
+
+Pack/RPSystem/RPSysGameConfig.cpp:
+	.text       start:0x80185CD0 end:0x80185FE0
+	.rodata     start:0x80317028 end:0x8031711C
+	.data       start:0x8034F2A0 end:0x8034F2C0
+	.sbss       start:0x8043C478 end:0x8043C47C
+
+Pack/RPSystem/RPSysTagParms.cpp:
+	.text       start:0x80185FE0 end:0x80186118
+	.data       start:0x8034F2C0 end:0x8034F2E8
+
+Pack/RPSystem/RPSysLoadScene.cpp:
+	.text       start:0x80186118 end:0x801866E0
+
+Pack/RPSystem/RP_801866E0.cpp:
+	.text       start:0x801866E0 end:0x80186754
+	.ctors      start:0x802E9D54 end:0x802E9D58
+
+Pack/RPSystem/RPSysResourceManager.cpp:
+	.text       start:0x80186754 end:0x8018741C
+	.rodata     start:0x80317178 end:0x80317268
+	.data       start:0x8034F2E8 end:0x8034F304
+	.sdata      start:0x8043B2B8 end:0x8043B2BC
+	.sbss       start:0x8043C480 end:0x8043C484
+
+Pack/RPSystem/RPSysQueuedScene.cpp:
+	.text       start:0x8018741C end:0x801874CC
+
+Pack/RPSystem/RPSysCommonObject.cpp:
+	.text       start:0x801874CC end:0x80187820
+
+Pack/RPSystem/RPSysDvdStatus.cpp:
+	.text       start:0x80187820 end:0x80187C24
+	.rodata     start:0x80317268 end:0x8031758C
+	.data       start:0x8034F340 end:0x8034F3D0
+	.sdata      start:0x8043B2C0 end:0x8043B2C4
+	.sbss       start:0x8043C490 end:0x8043C494
+	.sdata2     start:0x8043E610 end:0x8043E628
+
+Pack/RPSystem/RPSysSaveDataMgr.cpp:
+	.text       start:0x80187C24 end:0x80189BC4
+	.rodata     start:0x80317590 end:0x803175E0
+	.data       start:0x8034F3D0 end:0x8034F3E4
+	.sdata      start:0x8043B2C8 end:0x8043B2D4
+	.sbss       start:0x8043C498 end:0x8043C49C
+
+Pack/RPSystem/RPSysFontManager.cpp:
+	.text       start:0x8018A11C end:0x8018A3A4
+	.rodata     start:0x803175E0 end:0x803176A0
+	.data       start:0x8034F3E8 end:0x8034F410
+	.sbss       start:0x8043C4A0 end:0x8043C4A4
+
+Pack/RPSystem/RPSysSaveData.cpp:
+	.text       start:0x8018A3A4 end:0x8018AF1C
+
+Pack/RPSystem/RPSysPauseMgr.cpp:
+	.text       start:0x8018AF1C end:0x8018B6EC
+
+Pack/RPSystem/RPPartySystemData.cpp:
+	.text       start:0x8018B6EC end:0x8018BA94
+	.sdata2     start:0x8043E638 end:0x8043E648
+
+Pack/RPSystem/RPPartyPlayerData.cpp:
+	.text       start:0x8018BA94 end:0x8018BE70
+
+Pack/RPSystem/RPSysPlayerMgr.cpp:
+	.text       start:0x8018BE70 end:0x8018CC5C
+
+Pack/RPSystem/RPSysPlayer.cpp:
+	.text       start:0x8018CC5C end:0x8018ED00
+
+Pack/RPKernel/IRPSysHostIOSocket.cpp:
+	.text       start:0x8018ED50 end:0x8018EDFC
+
+Pack/RPKernel/RPSysHostIOSocketManager.cpp:
+	.text       start:0x8018EDFC end:0x8018EE80
+
+Pack/RPKernel/RPSysTextWriter.cpp:
+	.text       start:0x8018EE88 end:0x8018F2E0
+
+Pack/RPKernel/RPSysMessage.cpp:
+	.text       start:0x8018F2E0 end:0x8018F3E4
+
+Pack/RPKernel/RPSysKokeshi.cpp:
+	.text       start:0x8018F3E4 end:0x8018FA2C
+
+Pack/RPKernel/RPSysKokeshiManager.cpp:
+	.text       start:0x8018FA34 end:0x80190C24
+
+Pack/RPKernel/RP_DEBUG_STUB_1.cpp:
+	.text       start:0x80190C24 end:0x80190C74
+
+Pack/RPKernel/RPSysEffectMgr.cpp:
+	.text       start:0x80190C74 end:0x801926CC
+
+Pack/RPKernel/RPSysEffectBase.cpp:
+	.text       start:0x801926CC end:0x80193DB8
+	.ctors      start:0x802E9D58 end:0x802E9D5C
+
+Pack/RPKernel/RPSysLayout.cpp:
+	.text       start:0x80193DCC end:0x80195CE0
+
+Pack/RPKernel/RPSysFrameCtrl.cpp:
+	.text       start:0x80195CE0 end:0x80195F78
+
+Pack/RPKernel/RPSysEffectCreator.cpp:
+	.text       start:0x80195F78 end:0x80196A20
+
+Pack/RPKernel/RPSysWideTextWriter.cpp:
+	.text       start:0x80196CAC end:0x80196CD4
+
+Pack/RPKernel/RPSysLytAnmObj.cpp:
+	.text       start:0x80196CD4 end:0x80196EB0
+
+Pack/RPKernel/RPSysLytResAccessor.cpp:
+	.text       start:0x80196EB0 end:0x8019702C
+
+Pack/RPKernel/RPSysLytTextBox.cpp:
+	.text       start:0x8019702C end:0x801976A0
+
+Pack/RPKernel/RPSysLytBounding.cpp:
+	.text       start:0x801976A0 end:0x801978B0
+
+Pack/RPKernel/RPSysFile.cpp:
+	.text       start:0x801978B0 end:0x80197998
+
+Pack/RPKernel/RPSysAvatar.cpp:
+	.text       start:0x80197BC0 end:0x80197D98
+
+Pack/RPKernel/RPSysTutorialWinMgr.cpp:
+	.text       start:0x80197D98 end:0x80198758
+
+Pack/RPKernel/RPSysLytPicture.cpp:
+	.text       start:0x801987B8 end:0x80198824
+
+Pack/RPKernel/RPSysTagProcessor.cpp:
+	.text       start:0x80198824 end:0x8019922C
+	.ctors      start:0x802E9D5C end:0x802E9D60
+
+Pack/RPKernel/RPSysController.cpp:
+	.text       start:0x8019922C end:0x8019A6D0
+	.ctors      start:0x802E9D60 end:0x802E9D64
+
+Pack/RPKernel/RPSysKokeshiIcon.cpp:
+	.text       start:0x8019A6D0 end:0x8019BDFC
+
+Pack/RPKernel/RPSysKokeshiGenInfo.cpp:
+	.text       start:0x8019BDFC end:0x8019BF0C
+
+Pack/RPKernel/RPSysKokeshiLocation.cpp:
+	.text       start:0x8019BF0C end:0x8019BF6C
+
+Pack/RPKernel/RPSysKokeshiOverloadInfo.cpp:
+	.text       start:0x8019BF6C end:0x8019BFC8
+
+Pack/RPKernel/RPSysMiddleDBGenInfo.cpp:
+	.text       start:0x8019BFC8 end:0x8019C03C
+
+Pack/RPKernel/RPSysMiddleDB.cpp:
+	.text       start:0x8019C044 end:0x8019C368
+
+Pack/RPKernel/RPSysLytAllocator.cpp:
+	.text       start:0x8019C368 end:0x8019C420
+
+Pack/RPKernel/RPSysLytDynamicAnm.cpp:
+	.text       start:0x8019C420 end:0x8019C94C
+
+Pack/RPKernel/RPSysKokeshiIterater.cpp:
+	.text       start:0x8019C94C end:0x8019CB7C
+
+Pack/RPKernel/RPSysCursorDrawMgr.cpp:
+	.text       start:0x8019CB7C end:0x8019E0A4
+	.ctors      start:0x802E9D64 end:0x802E9D68
+
+Pack/RPKernel/RPSysKokeshiCtrlDataLoader.cpp:
+	.text       start:0x8019E450 end:0x8019E5D0
+
+Pack/RPKernel/RPSysPauseMenu.cpp:
+	.text       start:0x8019E5D0 end:0x8019F9D0
+
+Pack/RPKernel/RPSysSystemWinMgr.cpp:
+	.text       start:0x8019F9D0 end:0x801A2320
+
+Pack/RPKernel/RPSysHomeMenuMgr.cpp:
+	.text       start:0x801A2320 end:0x801A3148
+
+Pack/RPKernel/RPSysOfficialDB.cpp:
+	.text       start:0x801A3148 end:0x801A33DC
+
+Pack/RPKernel/RPSysLytWindow.cpp:
+	.text       start:0x801A33DC end:0x801A348C
+
+Pack/RPKernel/RPSysKokeshiCtrlDataMgr.cpp:
+	.text       start:0x801A348C end:0x801A39F0
+
+Pack/RPKernel/RPSysKokeshiCtrlMgr.cpp:
+	.text       start:0x801A39F0 end:0x801A3CA4
+
+Pack/RPKernel/RPSysPairingMgr.cpp:
+	.text       start:0x801A3CA4 end:0x801A3DD4
+
+Pack/RPKernel/RPSysControllerMgr.cpp:
+	.text       start:0x801A3DD4 end:0x801A4780
+
+Pack/RPKernel/RPSysNWC24Manager.cpp:
+	.text       start:0x801A4780 end:0x801A4F44
+
+Pack/RPKernel/RPSysParticleManager.cpp:
+	.text       start:0x801A5420 end:0x801A567C
+
+nw4r/g3d/g3d_scnrfl.cpp:
+	.text       start:0x801A567C end:0x801A6228
+
+Pack/RPGraphics/RPGrpCamera.cpp:
+	.text       start:0x801A6228 end:0x801A6DDC
+	.ctors      start:0x802E9D68 end:0x802E9D6C
+
+Pack/RPGraphics/RPGrpDrawPathManager.cpp:
+	.text       start:0x801A6DDC end:0x801A7758
+
+Pack/RPGraphics/RPGrpLightManager.cpp:
+	.text       start:0x801A7758 end:0x801A77D8
+
+Pack/RPGraphics/RPGrpModel.cpp:
+	.text       start:0x801A77D8 end:0x801A7FA8
+
+Pack/RPGraphics/RPGrpModelAnm.cpp:
+	.text       start:0x801A7FA8 end:0x801A881C
+
+Pack/RPGraphics/RPGrpModelAnmImplement.cpp:
+	.text       start:0x801A881C end:0x801AA9C0
+
+Pack/RPGraphics/RPGrpModelImplement.cpp:
+	.text       start:0x801AA9C0 end:0x801ABBF8
+
+Pack/RPGraphics/RPGrpModelManager.cpp:
+	.text       start:0x801ABBF8 end:0x801AC10C
+
+Pack/RPGraphics/RPGrpModelResManager.cpp:
+	.text       start:0x801AC10C end:0x801ACBC0
+
+Pack/RPGraphics/RPGrpRenderer.cpp:
+	.text       start:0x801ACBC0 end:0x801ADC30
+	.ctors      start:0x802E9D6C end:0x802E9D70
+
+Pack/RPGraphics/RPGrpScreen.cpp:
+	.text       start:0x801ADC30 end:0x801ADDA8
+	.ctors      start:0x802E9D70 end:0x802E9D74
+
+Pack/RPGraphics/RPGrpView.cpp:
+	.text       start:0x801ADDA8 end:0x801AEDDC
+	.ctors      start:0x802E9D74 end:0x802E9D78
+
+Pack/RPGraphics/RPGrpViewRender2D.cpp:
+	.text       start:0x801AEDDC end:0x801AEEB8
+
+Pack/RPGraphics/RPGrpViewRender3D.cpp:
+	.text       start:0x801AEEB8 end:0x801AF110
+
+Pack/RPGraphics/RPGrpModelScene.cpp:
+	.text       start:0x801AF110 end:0x801AFC04
+
+Pack/RPGraphics/RPGrpDrawPathLightMap.cpp:
+	.text       start:0x801AFC04 end:0x801AFD98
+
+Pack/RPGraphics/RPGrpModelBoundingInfo.cpp:
+	.text       start:0x801AFD98 end:0x801AFE30
+
+Pack/RPGraphics/RPGrpDrawPathShadowTexture.cpp:
+	.text       start:0x801AFE30 end:0x801AFEDC
+
+Pack/RPGraphics/RPGrpShadowTexture.cpp:
+	.text       start:0x801AFEDC end:0x801AFFA0
+
+Pack/RPGraphics/RPGrpModelMaterial.cpp:
+	.text       start:0x801AFFA0 end:0x801B1224
+
+Pack/RPGraphics/RPGrpTexture.cpp:
+	.text       start:0x801B1418 end:0x801B1574
+
+Pack/RPGraphics/RPGrpCaptureTexture.cpp:
+	.text       start:0x801B15B8 end:0x801B1820
+
+Pack/RPGraphics/RPGrpProjectionObject.cpp:
+	.text       start:0x801B1820 end:0x801B19E8
+
+Pack/RPGraphics/RPGrpModelRfl.cpp:
+	.text       start:0x801B19E8 end:0x801B2B34
+	.ctors      start:0x802E9D78 end:0x802E9D7C
+
+Pack/RPAudio/RPSndAudioMgr.cpp:
+	.text       start:0x801B2B34 end:0x801B4BE0
+
+Pack/RPAudio/RPSndSpeakerMgr.cpp:
+	.text       start:0x801B4BE0 end:0x801B5754
+
+Pack/RPAudio/RPSndUtility.cpp:
+	.text       start:0x801B5754 end:0x801B584C
+
+Pack/RPAudio/RPSndMoveParam.cpp:
+	.text       start:0x801B597C end:0x801B5CAC
+
+Pack/RPAudio/RPSndHomeMenuArcMgr.cpp:
+	.text       start:0x801B5CAC end:0x801B5E54
+
+Pack/RPAudio/RPSndStaticMgr.cpp:
+	.text       start:0x801B5E54 end:0x801B621C
+
+Pack/RPUtility/RP_DEBUG_STUB_2.cpp:
+	.text       start:0x801B6B78 end:0x801B6C0C
+
+Pack/RPUtility/RPUtlRandom.cpp:
+	.text       start:0x801B70A0 end:0x801B70F4
+
+Pack/RPUtility/RPUtlDebugStub3.cpp:
+	.text       start:0x801B76CC end:0x801B770C
+
+Pack/RPUtility/RPUtlCollisionModel.cpp:
+	.text       start:0x801B7748 end:0x801B8048
+
+Pack/RPUtility/RPUtlMapData.cpp:
+	.text       start:0x801B8888 end:0x801B8CE8
+
+Pack/RPUtility/RPSportsUtlModel_unsplit.cpp:
+	.text       start:0x801B8D54 end:0x801B90B0
+
+Pack/RPUtility/RPUtl_801C4B7C.cpp:
+	.text       start:0x801BB30C end:0x801BD7E4
+
+Pack/RPUtility/RPSportsUtlModelRigid.cpp:
+	.text       start:0x801BD7E4 end:0x801BDB38
+
+Pack/RPUtility/RPUtlLytFrameCursor.cpp:
+	.text       start:0x801BE0E8 end:0x801BFC34
+	.ctors      start:0x802E9D84 end:0x802E9D88
+
+Pack/RPUtility/RPUtl_801C9E7C.cpp:
+	.text       start:0x801C013C end:0x801C17C0
+	.ctors      start:0x802E9D88 end:0x802E9D8C
+
+Pack/RPSystem/RPUtlLoadSaveDataScene.cpp:
+	.text       start:0x801C28B8 end:0x801C28DC

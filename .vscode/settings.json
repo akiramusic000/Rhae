@@ -1,16 +1,16 @@
 {
   "[c]": {
     "files.encoding": "utf8",
-    "editor.formatOnSave": false
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
   },
   "[cpp]": {
     "files.encoding": "utf8",
-    "editor.formatOnSave": false
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  // "editor.tabSize": 2,
+  // "editor.tabSize": 4,
   "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
@@ -18,8 +18,8 @@
     "*.inc": "c",
     "*.pch": "c",
     "*.pch++": "cpp",
-    ".clangd": "yaml"
+    ".clangd": "yaml",
   },
   // Disable C/C++ IntelliSense, use clangd instead
-  "C_Cpp.intelliSenseEngine": "disabled"
+  "C_Cpp.intelliSenseEngine": "disabled",
 }

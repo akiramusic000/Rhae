@@ -14,6 +14,8 @@
 
 import argparse
 import sys
+from os import walk
+from os.path import join as joinpath
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -138,6 +140,31 @@ config = ProjectConfig()
 config.version = str(args.version)
 version_num = VERSIONS.index(config.version)
 
+# Extra flags for clangd parser
+config.extra_clang_flags = [
+    "-Iinclude/MSL/internal",  # Allow clangd to see internal MSL headers
+    "-Wno-invalid-offsetof",  # Silence non-POD offsetof
+    "-fshort-wchar",  # Force wide characters as 16-bit
+]
+
+
+def find_directories(root_path: str, recursive: bool) -> list[str]:
+    found = [root_path]
+
+    for dirpath, dirnames, _ in walk(root_path):
+        found += [joinpath(dirpath, x) for x in dirnames]
+
+        if not recursive:
+            break
+
+    return found
+
+
+# Add BTE directories
+config.extra_clang_flags.extend(
+    [f"-isystem{x}" for x in find_directories("include/revolution/BTE", recursive=True)]
+)
+
 # Apply arguments
 config.build_dir = args.build_dir
 config.dtk_path = args.dtk
@@ -156,12 +183,12 @@ if not config.non_matching:
     config.asm_dir = None
 
 # Tool versions
-config.binutils_tag = "2.42-1"
-config.compilers_tag = "20250812"
-config.dtk_tag = "v1.7.1"
+config.binutils_tag = "2.42-2"
+config.compilers_tag = "20251118"
+config.dtk_tag = "v1.8.3"
 config.objdiff_tag = "v3.8.1"
 config.sjiswrap_tag = "v1.2.2"
-config.wibo_tag = "1.0.0-beta.5"
+config.wibo_tag = "1.0.3"
 
 # Project
 config.config_path = Path("config") / config.version / "config.yml"
@@ -209,7 +236,6 @@ cflags_base = [
     "-RTTI off",
     "-fp_contract on",
     "-str reuse",
-    "-enc SJIS",
     "-i include",
     "-i include/MSL",
     "-i include/MSL/internal",
@@ -312,9 +338,17 @@ cflags_runtime = [
     *cflags_base,
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
-    "-gccinc",
-    "-common off",
-    "-inline auto",
+    "-fp_contract off",
+    "-D_IEEE_LIBM",
+]
+
+# MetroTRK flags
+cflags_trk = [
+    *cflags_base,
+    "-use_lmw_stmw on",
+    "-str reuse,pool,readonly",
+    "-inline deferred",
+    "-sdata 0",
 ]
 
 # RVL SDK flags
@@ -332,6 +366,20 @@ cflags_rfl = [
     "-fp_contract off",
     "-Cpp_exceptions on",
     "-ipa file",
+]
+
+# homeButtonMiniLib flags
+cflags_hbm = [
+    *cflags_base,
+    *cflags_pedantic,
+    "-sdata 0",
+    "-sdata2 0",
+    "-enc SJIS",
+    "-lang c++",
+    "-fp_contract off",
+    "-ipa file",
+    "-i include/nw4r",
+    "-i include/homeButtonMiniLib",
 ]
 
 # RP flags
@@ -618,6 +666,74 @@ config.libs = [
         ],
     },
     {
+        "lib": "MSL_C",
+        "mw_version": "GC/3.0a3",
+        "cflags": cflags_runtime,
+        "progress_category": "sdk",  # str | List[str]
+        "objects": [
+            Object(NonMatching, "MSL/alloc.c"),
+            Object(NonMatching, "MSL/ansi_files.c"),
+            Object(NonMatching, "MSL/ansi_fp.c"),
+            Object(NonMatching, "MSL/arith.c"),
+            Object(NonMatching, "MSL/buffer_io.c"),
+            Object(NonMatching, "MSL/direct_io.c"),
+            Object(NonMatching, "MSL/errno.c"),
+            Object(NonMatching, "MSL/file_io.c"),
+            Object(NonMatching, "MSL/FILE_POS.c"),
+            Object(NonMatching, "MSL/locale.c"),
+            Object(NonMatching, "MSL/mbstring.c"),
+            Object(NonMatching, "MSL/mem.c"),
+            Object(NonMatching, "MSL/mem_funcs.c"),
+            Object(NonMatching, "MSL/math_api.c"),
+            Object(NonMatching, "MSL/misc_io.c"),
+            Object(NonMatching, "MSL/printf.c"),
+            Object(NonMatching, "MSL/rand.c"),
+            Object(NonMatching, "MSL/scanf.c"),
+            Object(NonMatching, "MSL/string.c"),
+            Object(NonMatching, "MSL/strtold.c"),
+            Object(NonMatching, "MSL/strtoul.c"),
+            Object(NonMatching, "MSL/wctype.c"),
+            Object(NonMatching, "MSL/wmem.c"),
+            Object(NonMatching, "MSL/wprintf.c"),
+            Object(NonMatching, "MSL/wstring.c"),
+            Object(NonMatching, "MSL/wchar_io.c"),
+            Object(NonMatching, "MSL/uart_console_io_gcn.c"),
+            Object(NonMatching, "MSL/abort_exit_ppc_eabi.c"),
+            Object(NonMatching, "MSL/math_sun.c"),
+            Object(NonMatching, "MSL/math_float.c"),
+            Object(NonMatching, "MSL/extras.c"),
+            Object(Matching, "MSL/float.c"),
+            Object(Matching, "MSL/e_acos.c"),
+            Object(Matching, "MSL/e_asin.c"),
+            Object(Matching, "MSL/e_atan2.c"),
+            Object(Matching, "MSL/e_fmod.c"),
+            Object(Matching, "MSL/e_pow.c"),
+            Object(Matching, "MSL/e_rem_pio2.c"),
+            Object(Matching, "MSL/k_cos.c"),
+            Object(Matching, "MSL/k_rem_pio2.c"),
+            Object(Matching, "MSL/k_sin.c"),
+            Object(Matching, "MSL/k_tan.c"),
+            Object(Matching, "MSL/s_atan.c"),
+            Object(Matching, "MSL/s_ceil.c"),
+            Object(Matching, "MSL/s_copysign.c"),
+            Object(Matching, "MSL/s_cos.c"),
+            Object(Matching, "MSL/s_floor.c"),
+            Object(Matching, "MSL/s_frexp.c"),
+            Object(Matching, "MSL/s_ldexp.c"),
+            Object(Matching, "MSL/s_modf.c"),
+            Object(Matching, "MSL/s_sin.c"),
+            Object(Matching, "MSL/s_tan.c"),
+            Object(Matching, "MSL/w_acos.c"),
+            Object(Matching, "MSL/w_asin.c"),
+            Object(Matching, "MSL/w_atan2.c"),
+            Object(Matching, "MSL/w_fmod.c"),
+            Object(Matching, "MSL/w_pow.c"),
+            Object(Matching, "MSL/e_sqrt.c"),
+            Object(Matching, "MSL/math_ppc.c"),
+            Object(Matching, "MSL/w_sqrt.c"),
+        ],
+    },
+    {
         "lib": "Runtime.PPCEABI.H",
         "mw_version": config.linker_version,
         "cflags": cflags_runtime,
@@ -636,6 +752,43 @@ config.libs = [
             Object(Matching, "runtime/__init_cpp_exceptions.cpp"),
             Object(Matching, "runtime/Gecko_ExceptionPPC.c"),
             Object(Matching, "runtime/GCN_mem_alloc.c"),
+        ],
+    },
+    {
+        "lib": "MetroTRK",
+        "mw_version": "GC/2.7",
+        "cflags": cflags_trk,
+        "progress_category": "sdk",  # str | List[str]
+        "objects": [
+            Object(NonMatching, "MetroTRK/debugger/Portable/mainloop.c"),
+            Object(Matching, "MetroTRK/debugger/Portable/nubevent.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/nubinit.c"),
+            Object(Matching, "MetroTRK/debugger/Portable/msg.c"),
+            Object(Matching, "MetroTRK/debugger/Portable/msgbuf.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/serpoll.c"),
+            Object(NonMatching, "MetroTRK/debugger/Os/dolphin/usr_put.c"),
+            Object(Matching, "MetroTRK/debugger/Portable/dispatch.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/msghndlr.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/support.c"),
+            Object(Matching, "MetroTRK/debugger/Portable/mutex_TRK.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/notify.c"),
+            Object(NonMatching, "MetroTRK/debugger/Processor/flush_cache.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/mem_TRK.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/string_TRK.c"),
+            Object(NonMatching, "MetroTRK/debugger/Processor/targimpl.c"),
+            Object(NonMatching, "MetroTRK/debugger/Processor/targsupp.c"),
+            Object(NonMatching, "MetroTRK/debugger/Processor/mpc_7xx_603e.c"),
+            Object(NonMatching, "MetroTRK/debugger/Export/mslsupp.c"),
+            Object(NonMatching, "MetroTRK/debugger/Processor/__exception.c"),
+            Object(NonMatching, "MetroTRK/debugger/Os/dolphin/dolphin_trk.c"),
+            Object(NonMatching, "MetroTRK/debugger/Portable/main_TRK.c"),
+            Object(NonMatching, "MetroTRK/debugger/Os/dolphin/dolphin_trk_glue.c"),
+            Object(NonMatching, "MetroTRK/debugger/Os/dolphin/targcont.c"),
+            Object(NonMatching, "MetroTRK/debugger/Os/dolphin/target_options.c"),
+            Object(NonMatching, "MetroTRK/debugger/Os/dolphin/UDP_Stubs.c"),
+            Object(NonMatching, "MetroTRK/gamedev/main.c"),
+            Object(NonMatching, "MetroTRK/gamedev/CircleBuffer.c"),
+            Object(NonMatching, "MetroTRK/gamedev/MWCriticalSection_gc.c"),
         ],
     },
     {
@@ -819,61 +972,26 @@ config.libs = [
         ],
     },
     {
+        "lib": "homebuttonMiniLib",
+        "mw_version": config.linker_version,
+        "cflags": cflags_hbm,
+        "progress_category": "hbm",  # str | List[str]
+        "objects": [
+            Object(Matching, "homebuttonMiniLib/HBMBase.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMAnmController.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMFrameController.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMGUIManager.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMController.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMRemoteSpk.cpp"),
+        ],
+    },
+    {
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
         "progress_category": "kernel",  # str | List[str]
         "objects": [
             Object(Matching, "main.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysSystem.cpp"),
-            Object(Matching, "Pack/RPKernel/IRPSysHostIOSocket.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysHostIOSocketManager.cpp"),
-            Object(Matching, "Pack/RPKernel/RP_DEBUG_STUB_0.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysTextWriter.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysMessage.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysKokeshi.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysKokeshiManager.cpp"),
-            Object(Matching, "Pack/RPKernel/RP_DEBUG_STUB_1.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysEffectMgr.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysEffectBase.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysLayout.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysFrameCtrl.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysEffectCreator.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysWideTextWriter.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysLytAnmObj.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysLytResAccessor.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysLytTextBox.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysLytBounding.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysFile.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysAvatar.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysTutorialWinMgr.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysLytPicture.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysTagProcessor.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysController.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysKokeshiIcon.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysKokeshiGenInfo.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysKokeshiLocation.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysKokeshiOverloadInfo.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysMiddleDBGenInfo.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysMiddleDB.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysLytAllocator.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysLytDynamicAnm.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysKokeshiIterater.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysCursorDrawMgr.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysStringUtility.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysKokeshiCtrlDataLoader.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysPauseMenu.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysSystemWinMgr.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysHomeMenuMgr.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysOfficialDB.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysLytWindow.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysKokeshiCtrlDataMgr.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysKokeshiCtrlMgr.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysAppMiiManager.cpp"),
-            Object(Matching, "Pack/RPKernel/RPSysControllerSyncMgr.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysControllerMgr.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysNWC24Manager.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysParticleManager.cpp"),
         ],
     },
     {
@@ -907,66 +1025,6 @@ config.libs = [
             Object(Matching, "Pack/RPSystem/RPSysPlayer.cpp"),
         ],
     },
-    {
-        "lib": "RP",
-        "mw_version": config.linker_version,
-        "cflags": cflags_rp,
-        "progress_category": "graphics",  # str | List[str]
-        "objects": [
-            Object(Matching, "Pack/RPGraphics/RPGrpCamera.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpDrawPathManager.cpp"),
-            Object(Matching, "Pack/RPGraphics/RPGrpLightManager.cpp"),
-            Object(Matching, "Pack/RPGraphics/RPGrpModel.cpp"),
-            Object(Matching, "Pack/RPGraphics/RPGrpModelAnm.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpModelAnmImplement.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpModelImplement.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpModelMisc.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpModelManager.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpModelResManager.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpRenderer.cpp"),
-            Object(Matching, "Pack/RPGraphics/RPGrpScreen.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpView.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpViewRender2D.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpViewRender3D.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpModelScene.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpDrawPathLightMap.cpp"),
-            Object(Matching, "Pack/RPGraphics/RPGrpModelBoundingInfo.cpp"),
-            Object(Matching, "Pack/RPGraphics/RPGrpDrawPathShadowTexture.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpShadowTexture.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpModelMaterial.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpModelRecord.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpTexture.cpp"),
-            Object(Matching, "Pack/RPGraphics/RPGrpCaptureTexture.cpp"),
-            Object(Matching, "Pack/RPGraphics/RPGrpFogManager.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpProjectionObject.cpp"),
-            Object(NonMatching, "Pack/RPGraphics/RPGrpModelRfl.cpp"),
-        ],
-    },
-    {
-        "lib": "RP",
-        "mw_version": config.linker_version,
-        "cflags": cflags_rp,
-        "progress_category": "audio",  # str | List[str]
-        "objects": [
-            Object(NonMatching, "Pack/RPAudio/RPSndAudioMgr.cpp"),
-            Object(Matching, "Pack/RPAudio/RPSndSpeakerMgr.cpp"),
-            Object(Matching, "Pack/RPAudio/RPSndObject.cpp"),
-            Object(Matching, "Pack/RPAudio/RPSndUtility.cpp"),
-            Object(NonMatching, "Pack/RPAudio/RPSndMoveParam.cpp"),
-            Object(Matching, "Pack/RPAudio/RPSndHomeMenuArcMgr.cpp"),
-            Object(Matching, "Pack/RPAudio/RPSndStaticMgr.cpp"),
-        ],
-    },
-    {
-        "lib": "RP",
-        "mw_version": config.linker_version,
-        "cflags": cflags_rp,
-        "progress_category": "utility",  # str | List[str]
-        "objects": [
-            Object(NonMatching, "Pack/RPUtility/RPUtlDohMath.cpp"),
-            Object(NonMatching, "Pack/RPUtility_unsplit.o"),
-        ],
-    },
 ]
 
 
@@ -994,7 +1052,7 @@ config.progress_categories = [
     ProgressCategory("nw4r", "NW4R"),
     ProgressCategory("sdk", "SDK Code"),
     ProgressCategory("rfl", "RFL"),
-    ProgressCategory("game", "Game Code"),
+    ProgressCategory("hbm", "homeButtonMiniLib"),
     ProgressCategory("kernel", "RPKernel"),
     ProgressCategory("system", "RPSystem"),
     ProgressCategory("graphics", "RPGraphics"),

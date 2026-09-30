@@ -480,7 +480,7 @@ RPSysPlayerMgr::RPSysPlayerMgr(EGG::Heap* pHeap)
     mppCtrlPartyPlayerData = new RPPartyPlayerData*[RP_MAX_CONTROLLERS];
 
     for (int i = 0; i < RP_MAX_CONTROLLERS; i++) {
-        mppCtrlPartyPlayerData[i] = new RPSportsPlayerData[OLD_DATA_LEN];
+        mppCtrlPartyPlayerData[i] = new RPPartyPlayerData[OLD_DATA_LEN];
     }
 #endif
 
