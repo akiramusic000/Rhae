@@ -3,6 +3,7 @@
 #include <egg/types_egg.h>
 
 #include <egg/gfx/eggResTIMG.h>
+
 #include <egg/prim.h>
 
 #include <revolution/GX.h>
@@ -60,10 +61,10 @@ public:
     void flush() const;
 
     bool checkIsConfigure() const {
-        return testFlag(cFlag_Configured);
+        return testFlag(FLAG_CONFIGURED);
     }
     bool checkHasHeader() const {
-        return testFlag(cFlag_HasHeader);
+        return testFlag(FLAG_HAS_HEADER);
     }
 
     void setFlag(u8 flag) {
@@ -135,13 +136,13 @@ public:
         EGG_ASSERT(( u32 )pBuffer % 32 == 0);
 
         mpBuffer = pBuffer;
-        clearFlag(cFlag_HasHeader);
+        clearFlag(FLAG_HAS_HEADER);
     }
 
 private:
     enum {
-        cFlag_Configured = 1 << 0,
-        cFlag_HasHeader = 1 << 1,
+        FLAG_CONFIGURED = 1 << 0,
+        FLAG_HAS_HEADER = 1 << 1,
     };
 
 private:

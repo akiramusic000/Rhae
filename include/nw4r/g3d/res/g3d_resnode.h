@@ -149,7 +149,7 @@ public:
     }
 
     const math::VEC3& GetTranslate() const {
-        return static_cast<const math::VEC3&>(ref().translate);
+        return ref().translate;
     }
 
     ResNode GetParentNode() {

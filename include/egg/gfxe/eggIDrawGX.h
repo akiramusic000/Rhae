@@ -13,6 +13,13 @@ class Screen;
 
 class IDrawGX {
 public:
+    enum {
+        EFlag_ColorUpdate = 1 << 0,
+        EFlag_AlphaUpdate = 1 << 1,
+        EFlag_Dither = 1 << 2,
+    };
+
+public:
     static const Screen& getScreen() {
 #line 59
         EGG_ASSERT(spScreen);
@@ -25,41 +32,34 @@ public:
     static void setDrawSettingGX(bool opa);
 
     static bool isEnableColorUpdate() {
-        return sDrawFlag & cFlag_ColorUpdate;
+        return sDrawFlag & EFlag_ColorUpdate;
     }
     static void enableColorUpdate() {
-        sDrawFlag |= cFlag_ColorUpdate;
+        sDrawFlag |= EFlag_ColorUpdate;
     }
     static void disableColorUpdate() {
-        sDrawFlag &= ~cFlag_ColorUpdate;
+        sDrawFlag &= ~EFlag_ColorUpdate;
     }
 
     static bool isEnableAlphaUpdate() {
-        return sDrawFlag & cFlag_AlphaUpdate;
+        return sDrawFlag & EFlag_AlphaUpdate;
     }
     static void enableAlphaUpdate() {
-        sDrawFlag |= cFlag_AlphaUpdate;
+        sDrawFlag |= EFlag_AlphaUpdate;
     }
     static void disableAlphaUpdate() {
-        sDrawFlag &= ~cFlag_AlphaUpdate;
+        sDrawFlag &= ~EFlag_AlphaUpdate;
     }
 
     static bool isEnableDither() {
-        return sDrawFlag & cFlag_Dither;
+        return sDrawFlag & EFlag_Dither;
     }
     static void enableDither() {
-        sDrawFlag |= cFlag_Dither;
+        sDrawFlag |= EFlag_Dither;
     }
     static void disableDither() {
-        sDrawFlag &= ~cFlag_Dither;
+        sDrawFlag &= ~EFlag_Dither;
     }
-
-protected:
-    enum {
-        cFlag_ColorUpdate = 1 << 0,
-        cFlag_AlphaUpdate = 1 << 1,
-        cFlag_Dither = 1 << 2,
-    };
 
     static void setDrawFlag(u32 flag) {
         sDrawFlag = flag;

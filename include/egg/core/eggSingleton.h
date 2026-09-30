@@ -3,8 +3,8 @@
 #include <egg/types_egg.h>
 
 #include <egg/core/eggDisposer.h>
-#include <egg/prim.h>
 
+#include <egg/prim.h>
 
 /**
  * @brief Declares functions and data for a disposable singleton class
@@ -26,7 +26,7 @@ public:                                                                        \
         return sInstance;                                                      \
     }                                                                          \
                                                                                \
-protected:                                                                     \
+private:                                                                       \
     static T* sInstance;
 
 /**

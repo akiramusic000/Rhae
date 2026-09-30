@@ -13,10 +13,9 @@ class RPGrpDrawPathHDR : public RPGrpDrawPath {
 public:
     RPGrpDrawPathHDR(EGG::ScnRenderer* pRenderer)
         : RPGrpDrawPath(pRenderer, pRenderer->getDrawPathBase(
-                                       EGG::ScnRenderer::cDrawPath_HDR)) {}
+                                       EGG::ScnRenderer::DRAW_PATH_HDR)) {}
 };
 
 //! @}
 
 #endif
-

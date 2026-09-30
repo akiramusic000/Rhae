@@ -6,29 +6,24 @@
 
 namespace EGG {
 
-// Forward declarations
-class PostEffectHDR;
-
 class DrawPathHDR : public DrawPathBase {
-    friend class ScnRenderer;
-
 public:
     DrawPathHDR();
     virtual ~DrawPathHDR();              // at 0x8
-    virtual u16 getNumStep() const;      // at 0x1C
+    virtual int getNumStep() const;      // at 0x1C
     virtual void internalCalc();         // at 0x24
     virtual void internalDraw(u16 step); // at 0x28
 
 private:
-    enum Step {
-        cStep_Capture,
-        cStep_Draw,
+    enum EStep {
+        EStep_0,
+        EStep_1,
 
-        cStep_Max
+        EStep_Max
     };
 
 private:
-    PostEffectHDR* mpPostEffect; // at 0x7C
+    PostEffectHDR* mPostEffect; // at 0x7C
 };
 
 } // namespace EGG

@@ -60,10 +60,6 @@ public:
         return !HasAmbLight() || GetAmbLightID() != ResLightSetData::INVALID_ID;
     }
 
-    u32 GetLightID(u32 idx) const {
-        return ref().lightId[idx];
-    }
-
     ResName GetLightResName(u32 idx) const {
         const ResLightSetData& r = ref();
 

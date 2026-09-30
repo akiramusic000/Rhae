@@ -31,7 +31,7 @@ public:
 
 private:
     enum {
-        cFlag_CalcDone = 1 << 2,
+        EFlag_AwaitDraw = 1 << 2,
     };
 };
 

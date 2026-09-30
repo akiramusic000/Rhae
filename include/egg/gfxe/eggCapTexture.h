@@ -11,9 +11,9 @@ namespace EGG {
 class CapTexture : public CpuTexture {
 public:
     CapTexture() {}
-    CapTexture(u16 width, u16 height, GXTexFmt format)
-        : CpuTexture(width, height, format) {}
+    CapTexture(u16 w, u16 h, GXTexFmt fmt) : CpuTexture(w, h, fmt) {}
 
+    virtual ~CapTexture() {}           // at 0x8
     virtual void configure();          // at 0xC
     virtual void load(GXTexMapID map); // at 0x14
 
@@ -21,9 +21,6 @@ public:
 
     GXTexMapID getLoadMap() const {
         return mLoadMap;
-    }
-    void setLoadMap(GXTexMapID loadMap) {
-        mLoadMap = loadMap;
     }
 
     void setClearColor(const GXColor& rColor) {
@@ -46,62 +43,62 @@ public:
     }
 
     bool checkColorUpdate() const {
-        return testFlag(cFlag_ColorUpdate);
+        return testFlag(FLAG_COLOR_UPDATE);
     }
     void enableColorUpdate() {
-        setFlag(cFlag_ColorUpdate);
+        setFlag(FLAG_COLOR_UPDATE);
     }
     void disableColorUpdate() {
-        clearFlag(cFlag_ColorUpdate);
+        clearFlag(FLAG_COLOR_UPDATE);
     }
 
     bool checkAlphaUpdate() const {
-        return testFlag(cFlag_AlphaUpdate);
+        return testFlag(FLAG_ALPHA_UPDATE);
     }
     void enableAlphaUpdate() {
-        setFlag(cFlag_AlphaUpdate);
+        setFlag(FLAG_ALPHA_UPDATE);
     }
     void disableAlphaUpdate() {
-        clearFlag(cFlag_AlphaUpdate);
+        clearFlag(FLAG_ALPHA_UPDATE);
     }
 
     bool checkZBufferUpdate() const {
-        return testFlag(cFlag_ZBufferUpdate);
+        return testFlag(FLAG_ZBUFFER_UPDATE);
     }
     void enableZBufferUpdate() {
-        setFlag(cFlag_ZBufferUpdate);
+        setFlag(FLAG_ZBUFFER_UPDATE);
     }
     void disableZBufferUpdate() {
-        clearFlag(cFlag_ZBufferUpdate);
+        clearFlag(FLAG_ZBUFFER_UPDATE);
     }
 
     bool checkVFilterEnable() const {
-        return testFlag(cFlag_VFilterEnable);
+        return testFlag(FLAG_VFILTER_ENABLE);
     }
     void enableVFilter() {
-        setFlag(cFlag_VFilterEnable);
+        setFlag(FLAG_VFILTER_ENABLE);
     }
     void disableVFilter() {
-        clearFlag(cFlag_VFilterEnable);
+        clearFlag(FLAG_VFILTER_ENABLE);
     }
 
     bool checkPixModeSync() const {
-        return testFlag(cFlag_PixModeSync);
+        return testFlag(FLAG_PIXMODE_SYNC);
     }
     void enablePixModeSync() {
-        setFlag(cFlag_PixModeSync);
+        setFlag(FLAG_PIXMODE_SYNC);
     }
     void disablePixModeSync() {
-        clearFlag(cFlag_PixModeSync);
+        clearFlag(FLAG_PIXMODE_SYNC);
     }
 
 private:
     enum {
-        cFlag_ColorUpdate = 1 << 3,
-        cFlag_AlphaUpdate = 1 << 4,
-        cFlag_ZBufferUpdate = 1 << 5,
-        cFlag_VFilterEnable = 1 << 6,
-        cFlag_PixModeSync = 1 << 7,
+        FLAG_COLOR_UPDATE = 1 << 3,
+        FLAG_ALPHA_UPDATE = 1 << 4,
+        FLAG_ZBUFFER_UPDATE = 1 << 5,
+        FLAG_VFILTER_ENABLE = 1 << 6,
+        FLAG_PIXMODE_SYNC = 1 << 7,
     };
 
 private:

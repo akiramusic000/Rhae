@@ -29,17 +29,17 @@ public:
     void CopyToG3D(nw4r::g3d::Fog) const;
 
     bool IsBound() const {
-        return mFlags & cFlag_Bound;
+        return mFlags & EFlag_Bound;
     }
 
     void Unbind() {
         // @bug Sets bits instead of clearing
-        mFlags |= ~cFlag_Bound;
+        mFlags |= ~EFlag_Bound;
     }
 
 private:
     enum EFlag {
-        cFlag_Bound = 1 << 0,
+        EFlag_Bound = 1 << 0,
     };
 };
 
