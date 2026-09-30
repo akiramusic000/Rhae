@@ -33,7 +33,7 @@ s32 VFSysSetSyncMode(s32 i_handle_idx, u32 i_mode);
 static union VFSysDeviceTableEntry* l_vfsys_dev_table[26];
 static struct PDM_INIT_DISK l_dev_init_info_table[26];
 
-static struct PDM_INIT_DISK l_dev_nandflash_init_info;
+static struct PDM_INIT_DISK l_dev_nandflash_init_info = {VFi_nanddrv_init_drv_tbl, 0};
 
 static struct VF_HANDLE_TYPE* l_sys_handle_table_p;
 static s32 l_vfsys_dev_table_init;

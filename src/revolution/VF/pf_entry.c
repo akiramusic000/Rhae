@@ -1,9 +1,9 @@
 #include <revolution/VF.h>
 
 extern PF_VOLUME_SET VFipf_vol_set;
-static u8 FAT_DELETED = 0xE5;
+DECL_SECTION(".sdata2") static u8 FAT_DELETED = 0xE5;
 
-static u32 VFiPFENT_compareAttr(u8 attr, u8 attr_required, u8 attr_unwanted) {
+u32 VFiPFENT_compareAttr(u8 attr, u8 attr_required, u8 attr_unwanted) {
     u32 is_valid;
 
     is_valid = 1;
@@ -24,7 +24,7 @@ static u32 VFiPFENT_compareAttr(u8 attr, u8 attr_required, u8 attr_unwanted) {
     return is_valid;
 }
 
-static s32 VFiPFENT_compareEntryName(struct PF_DIR_ENT* p_ent, struct PF_STR* p_pattern, u8 attr) {
+s32 VFiPFENT_compareEntryName(struct PF_DIR_ENT* p_ent, struct PF_STR* p_pattern, u8 attr) {
     s32 is_match;
 
     // TODO: dumb hack to prevent inlining
@@ -54,7 +54,7 @@ static s32 VFiPFENT_compareEntryName(struct PF_DIR_ENT* p_ent, struct PF_STR* p_
     return is_match;
 }
 
-static s32 VFiPFENT_getEntry(struct PF_DIR_ENT* p_ent, struct PF_ENT_ITER* p_iter, struct PF_STR* p_pattern, u8 attr_required, u8 attr_unwanted, u32* logical_index) {
+s32 VFiPFENT_getEntry(struct PF_DIR_ENT* p_ent, struct PF_ENT_ITER* p_iter, struct PF_STR* p_pattern, u8 attr_required, u8 attr_unwanted, u32* logical_index) {
     s32 err;
     s32 is_match;
     u32 is_valid;
@@ -142,7 +142,7 @@ static s32 VFiPFENT_getEntry(struct PF_DIR_ENT* p_ent, struct PF_ENT_ITER* p_ite
     return 0;
 }
 
-static s32 VFiPFENT_searchEmptyTailSFN(struct PF_FFD* p_ffd, u32 tail_index, const s8* pattern, u32* p_tail_bit) {
+s32 VFiPFENT_searchEmptyTailSFN(struct PF_FFD* p_ffd, u32 tail_index, const s8* pattern, u32* p_tail_bit) {
     struct PF_ENT_ITER iter;
     u8 attr;
     s32 err;
@@ -190,7 +190,7 @@ static s32 VFiPFENT_searchEmptyTailSFN(struct PF_FFD* p_ffd, u32 tail_index, con
     return 0;
 }
 
-static s32 VFiPFENT_findEmptyTailSFN(struct PF_DIR_ENT* p_ent_containig_dir, const s8* name, u32* p_tails) {
+s32 VFiPFENT_findEmptyTailSFN(struct PF_DIR_ENT* p_ent_containig_dir, const s8* name, u32* p_tails) {
     struct PF_FFD ffd;
     struct PF_FAT_HINT hint;
     s32 err;

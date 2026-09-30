@@ -2,8 +2,8 @@
 #include <revolution/VF.h>
 
 extern struct PDM_DISK_SET VFipdm_disk_set;
-s32 VF_nand_retry_max;
-s32 VF_nand_sleep_msec;
+s32 VF_nand_retry_max = 0;
+s32 VF_nand_sleep_msec = 0;
 
 static struct {
     s32 (*create)(const char*, u8, u8);
@@ -78,7 +78,7 @@ s32 VFi_NandClose(struct NANDFileInfo* info) {
     return error;
 }
 
-s32 VFi_NandOpen(const char* path, struct NANDFileInfo* info, u8 accType) {
+static inline s32 VFi_NandOpen(const char* path, struct NANDFileInfo* info, u8 accType) {
     s32 challenge;
     s32 error;
 
@@ -112,7 +112,7 @@ s32 VFi_NANDPrivateOpen(const char* path, struct NANDFileInfo* info, u8 accType)
     return error;
 }
 
-s32 VFi_NandWrite(struct NANDFileInfo* info, void* buf, u32 length) {
+static inline s32 VFi_NandWrite(struct NANDFileInfo* info, void* buf, u32 length) {
     s32 challenge;
     s32 error;
 
@@ -129,7 +129,7 @@ s32 VFi_NandWrite(struct NANDFileInfo* info, void* buf, u32 length) {
     return error;
 }
 
-s32 VFi_NandSeek(struct NANDFileInfo* info, s32 offset, s32 whence) {
+static inline s32 VFi_NandSeek(struct NANDFileInfo* info, s32 offset, s32 whence) {
     s32 challenge;
     s32 error;
 
@@ -219,7 +219,7 @@ s32 VFi_NandOpenSp(const char* path, void* info, u8 accType, u32 i_handleIdx) {
 void VFi_NandSetNANDFuncNormal(u32 i_handleIdx) {
     if (i_handleIdx < 26) {
         l_nandFunc[i_handleIdx].create = VFi_NandCreate;
-        l_nandFunc[i_handleIdx].open = VFi_NandOpen;
+        l_nandFunc[i_handleIdx].open = VFi_NANDPrivateOpen;
         l_nandFunc[i_handleIdx].createDir = VFi_NandCreateDir;
         l_nandFunc[i_handleIdx].delete = VFi_NandDelete;
     }
