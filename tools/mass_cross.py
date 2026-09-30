@@ -3,7 +3,14 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from rapidfuzz.fuzz import partial_ratio, partial_ratio_alignment
 from rapidfuzz.distance.Levenshtein import opcodes
-from splits import Split, ObjectSplit, SectionType, parse_splits, check_is_section_type
+from splits import (
+    Split,
+    ObjectSplit,
+    SectionType,
+    parse_splits,
+    check_is_section_type,
+    slice_object_splits,
+)
 from symbols import Symbols, Symbol, parse_symbols
 from pathlib import Path
 from pprint import pp
@@ -106,36 +113,6 @@ def _symbols_to_size_sequences(
         section: _symbols_to_size_seq(symbols, start, end)
         for section, (start, end) in section_addresses.items()
     }
-
-
-def _slice_object_splits(
-    object_splits: list[ObjectSplit],
-    filename_start: str,
-    filename_end: str | None,
-) -> list[ObjectSplit]:
-    filename_start = filename_start.rstrip(":")
-
-    for idx, o_split in enumerate(object_splits):
-        if o_split.file == filename_start:
-            start_idx = idx
-            break
-    else:
-        raise ValueError(f"'{filename_start}' not found in 'splits.txt'")
-
-    if filename_end is None:
-        end_idx = None
-    else:
-        filename_end = filename_end.rstrip(":")
-        for idx, o_split in enumerate(object_splits[start_idx:]):
-            if o_split.file == filename_end:
-                end_idx = idx + start_idx
-                break
-        else:
-            raise ValueError(
-                f"'{filename_end}' not found in 'splits.txt' after '{filename_start}'"
-            )
-
-    return object_splits[start_idx:end_idx]
 
 
 # ------------------------------------------
@@ -516,7 +493,7 @@ def do_mass_cross(
     start_split_filename: str,
     end_split_filename: str | None,
 ) -> CrossTextResult:
-    selected_splits = _slice_object_splits(
+    selected_splits = slice_object_splits(
         needle_splits,
         start_split_filename,
         end_split_filename,

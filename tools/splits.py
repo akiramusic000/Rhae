@@ -68,6 +68,36 @@ class ObjectSplit:
         )
 
 
+def slice_object_splits(
+    object_splits: list[ObjectSplit],
+    filename_start: str,
+    filename_end: str | None,
+) -> list[ObjectSplit]:
+    filename_start = filename_start.rstrip(":")
+
+    for idx, o_split in enumerate(object_splits):
+        if o_split.file == filename_start:
+            start_idx = idx
+            break
+    else:
+        raise ValueError(f"'{filename_start}' not found in 'splits.txt'")
+
+    if filename_end is None:
+        end_idx = None
+    else:
+        filename_end = filename_end.rstrip(":")
+        for idx, o_split in enumerate(object_splits[start_idx:]):
+            if o_split.file == filename_end:
+                end_idx = idx + start_idx
+                break
+        else:
+            raise ValueError(
+                f"'{filename_end}' not found in 'splits.txt' after '{filename_start}'"
+            )
+
+    return object_splits[start_idx:end_idx]
+
+
 def parse_splits(splits_txt: str) -> list[ObjectSplit]:
     all_object_splits: list[ObjectSplit] = []
     # None state is also used for the Sections header

@@ -981,16 +981,6 @@ egg/gfxe/eggDrawPathXluSnap.cpp:
 	.data       start:0x8032D348 end:0x8032D378
 	.sdata2     start:0x8043D7D0 end:0x8043D7E0
 
-egg/gfxe/eggLightManager.cpp:
-	.rodata     start:0x8030E0F8 end:0x8030E2A0
-	.data       start:0x8032D3B0 end:0x8032D420
-
-egg/gfxe/eggLightTexture.cpp:
-	.rodata     start:0x8030E2A0 end:0x8030E420
-	.data       start:0x8032D420 end:0x8032D568
-	.bss        start:0x8039F390 end:0x8039F3B8
-	.sbss       start:0x8043BB90 end:0x8043BBA8
-
 egg/gfxe/eggFog.cpp:
 	.text       start:0x8008E7B8 end:0x8008E990
 
@@ -1002,6 +992,20 @@ egg/gfxe/eggG3DUtility.cpp:
 
 egg/gfxe/eggGfxEngine.cpp:
 	.text       start:0x8008F624 end:0x8008F85C
+	.rodata     start:0x8030E090 end:0x8030E0F8
+	.data       start:0x8032D3A0 end:0x8032D3B0
+	.sbss       start:0x8043BB88 end:0x8043BB90
+	.sdata2     start:0x8043D7E8 end:0x8043D7F0
+
+egg/gfxe/eggLightManager.cpp:
+	.rodata     start:0x8030E0F8 end:0x8030E2A0
+	.data       start:0x8032D3B0 end:0x8032D420
+
+egg/gfxe/eggLightTexture.cpp:
+	.rodata     start:0x8030E2A0 end:0x8030E420
+	.data       start:0x8032D420 end:0x8032D568
+	.bss        start:0x8039F390 end:0x8039F3B8
+	.sbss       start:0x8043BB90 end:0x8043BBA8
 
 egg/gfxe/eggLightTextureManager.cpp:
 	.text       start:0x80092650 end:0x80093564
