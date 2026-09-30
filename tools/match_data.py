@@ -1,9 +1,5 @@
-from bisect import bisect_left
 from copy import copy
 from collections import defaultdict
-from dataclasses import dataclass, field
-from rapidfuzz.fuzz import partial_ratio, partial_ratio_alignment
-from rapidfuzz.distance.Levenshtein import opcodes
 from splits import (
     Split,
     ObjectSplit,
