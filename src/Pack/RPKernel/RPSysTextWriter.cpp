@@ -90,7 +90,7 @@ void RPSysTextWriter::PrintfZeroCenter(f32 x, f32 y, const char* pMsg, ...) {
         break;
     }
 
-    case RPGrpScreen::CANVASMODE_LU: {
+    case RPGrpScreen::CANVAS_LU: {
         x = (x + 1.0f) * (pScreen->GetWidth() / 2.0f);
         y = (-y + 1.0f) * (pScreen->GetHeight() / 2.0f);
         break;
