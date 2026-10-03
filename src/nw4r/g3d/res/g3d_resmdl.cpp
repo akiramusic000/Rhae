@@ -164,8 +164,8 @@ u32 ResMdl::GetResShpNumEntries() const {
  * ResTexPlttInfo
  *
  ******************************************************************************/
-ResTexPlttInfo ResMdl::GetResTexPlttInfoOffsetFromTexName(int idx) const {
-    return ResTexPlttInfo(
+ResTexPlttInfoOffset ResMdl::GetResTexPlttInfoOffsetFromTexName(int idx) const {
+    return ResTexPlttInfoOffset(
         ofs_to_obj<ResDic>(ref().toResTexNameToTexPlttInfoDic)[idx]);
 }
 
