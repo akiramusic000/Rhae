@@ -917,6 +917,7 @@ egg/gfxe/eggStateGX.cpp:
 	.text       start:0x80083A4C end:0x80084908
 	.rodata     start:0x8030D868 end:0x8030D8F0
 	.bss        start:0x8039E1A0 end:0x8039E1D0
+	.sdata      start:0x8043ABC0 end:0x8043ABD0
 	.sbss       start:0x8043BB38 end:0x8043BB50
 	.sdata2     start:0x8043D608 end:0x8043D618
 
@@ -939,13 +940,14 @@ egg/gfxe/eggAnalizeDL.cpp:
 egg/gfxe/eggCapTexture.cpp:
 	.text       start:0x800858B4 end:0x80085C14
 	.rodata     start:0x8030DA20 end:0x8030DA90
-	.sdata2     start:0x8043D648 end:0x8043D650
+	.data       start:0x8032CFE8 end:0x8032D000
+	.sdata2     start:0x8043D640 end:0x8043D650
 	.sbss2      start:0x80441970 end:0x80441978
 
 egg/gfxe/eggCpuTexture.cpp:
 	.text       start:0x80085C14 end:0x80087110
 	.rodata     start:0x8030DA90 end:0x8030DC20
-	.data       start:0x8032CFE8 end:0x8032D040
+	.data       start:0x8032D000 end:0x8032D040
 	.sdata      start:0x8043ABD0 end:0x8043ABD8
 	.sdata2     start:0x8043D650 end:0x8043D680
 
@@ -972,7 +974,7 @@ egg/gfxe/eggDrawPathDOF.cpp:
 egg/gfxe/eggDrawPathHDR.cpp:
 	.text       start:0x8008CFA8 end:0x8008D290
 	.rodata     start:0x8030DFC0 end:0x8030DFE0
-	.data       start:0x8032D150 end:0x8032D318
+	.data       start:0x8032D2E8 end:0x8032D318
 	.sdata2     start:0x8043D7B0 end:0x8043D7B8
 
 egg/gfxe/eggDrawPathShadowVolume.cpp:
@@ -983,7 +985,7 @@ egg/gfxe/eggDrawPathXluSnap.cpp:
 
 egg/gfxe/eggFog.cpp:
 	.text       start:0x8008E7B8 end:0x8008E990
-	.data       start:0x8032D318 end:0x8032D390
+	.data       start:0x8032D378 end:0x8032D390
 	.sdata2     start:0x8043D7E0 end:0x8043D7E8
 
 egg/gfxe/eggFogManager.cpp:
@@ -993,6 +995,7 @@ egg/gfxe/eggFogManager.cpp:
 egg/gfxe/eggG3DUtility.cpp:
 	.text       start:0x8008EC6C end:0x8008F624
 	.rodata     start:0x8030E010 end:0x8030E090
+	.sbss       start:0x8043BB70 end:0x8043BB88
 
 egg/gfxe/eggGfxEngine.cpp:
 	.text       start:0x8008F624 end:0x8008F85C
@@ -1102,7 +1105,7 @@ egg/gfxe/eggPostEffectMaskDOF.cpp:
 egg/gfxe/eggScreenEffectBase.cpp:
 	.text       start:0x8009F578 end:0x800A00CC
 	.rodata     start:0x8030EC58 end:0x8030ECF0
-	.data       start:0x8032DA28 end:0x8032DAD8
+	.data       start:0x8032DA98 end:0x8032DAD8
 	.bss        start:0x8039F440 end:0x8039F4A0
 	.sdata      start:0x8043AC38 end:0x8043AC40
 	.sbss       start:0x8043BBD8 end:0x8043BBE8
@@ -1145,17 +1148,20 @@ egg/prim/eggAssert.cpp:
 egg/geom/eggPlane.cpp:
 	extab       start:0x80006508 end:0x80006510
 	extabindex  start:0x80006CDC end:0x80006CE8
-	.text       start:0x800A1980 end:0x800A1A4C
+	.text       start:0x800A191C end:0x800A1A4C
 
 egg/math/eggMath.cpp:
-	extab       start:0x80006510 end:0x80006528
-	extabindex  start:0x80006CE8 end:0x80006D0C
-	.text       start:0x800A1A4C end:0x800A1AF8
+	extab       start:0x80006510 end:0x80006540
+	extabindex  start:0x80006CE8 end:0x80006D30
+	.text       start:0x800A1A4C end:0x800A1C04
 	.rodata     start:0x8030EE30 end:0x8030EE68
 	.sdata2     start:0x8043DA78 end:0x8043DA80
 
 egg/math/eggQuat.cpp:
-	.text       start:0x800A2318 end:0x800A23B0
+	extab       start:0x80006540 end:0x800065C8
+	extabindex  start:0x80006D30 end:0x80006DCC
+	.text       start:0x800A1C04 end:0x800A2C28
+	.ctors      start:0x802E9D3C end:0x802E9D40
 
 egg/math/eggVector.cpp:
 	extab       start:0x800065C8 end:0x800065D8
@@ -1194,7 +1200,9 @@ egg/core/eggThread.cpp:
 
 egg/core/eggSystem.cpp:
 	.text       start:0x800A4088 end:0x800A44E8
-	.rodata     start:0x8030EF60 end:0x8030EFE8
+	.rodata     start:0x8030EF60 end:0x8030EFE6
+	.data       start:0x8032DBD8 end:0x8032DC0C
+	.sbss       start:0x8043BC40 end:0x8043BC48
 	.sdata2     start:0x8043DAE8 end:0x8043DAF8
 
 egg/core/eggTaskThread.cpp:
@@ -1224,18 +1232,18 @@ egg/core/eggSceneManager.cpp:
 	.sdata2     start:0x8043DB00 end:0x8043DB10
 
 egg/core/eggController.cpp:
-	.text       start:0x800A6518 end:0x800A7F58
+	.text       start:0x800A6254 end:0x800A7F58
 	.ctors      start:0x802E9D44 end:0x802E9D48
 	.rodata     start:0x8030F180 end:0x8030F338
 	.data       start:0x8032DC88 end:0x8032DD98
 	.bss        start:0x8039F5F0 end:0x8039FF80
 	.sdata      start:0x8043AC40 end:0x8043AC48
 	.sbss       start:0x8043BC70 end:0x8043BC80
-	.sdata2     start:0x8043DB20 end:0x8043DB30
+	.sdata2     start:0x8043DB10 end:0x8043DB30
 
 egg/core/eggStream.cpp:
-	.text       start:0x800A7F98 end:0x800AA444
-	.rodata     start:0x8030F338 end:0x8030F488
+	.text       start:0x800A7F58 end:0x800AA444
+	.rodata     start:0x8030F338 end:0x8030F486
 	.data       start:0x8032DD98 end:0x8032DDB0
 	.bss        start:0x8039FF80 end:0x803A0380
 

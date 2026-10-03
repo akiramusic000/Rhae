@@ -7,6 +7,13 @@
 
 namespace EGG {
 
+u8 G3DUtility::sManualProjectionMapMode;
+MEMAllocator* G3DUtility::sAllocator;
+u8* G3DUtility::sTempMem;
+u32 G3DUtility::sTempMemIndex;
+u32 G3DUtility::sTempMemSize;
+
+
 void G3DUtility::initialize(u32 tmpSize, Heap* pHeap) {
 #line 31
     EGG_ASSERT(tmpSize % 32 == 0);
@@ -50,7 +57,7 @@ void G3DUtility::initialize(u32 tmpSize, Heap* pHeap) {
             continue;
         }
 
-        if (pFunc != manualProjectionMapping) {
+        if (pFunc != nw4r::g3d::detail::ScnDependentMtxFunc::DefaultMapping) {
             continue;
         }
 
@@ -93,7 +100,7 @@ void G3DUtility::manualProjectionMapping(nw4r::math::MTX34* pM, s8 /* camRef */,
 #line 134
     EGG_ASSERT(pM);
 
-    nw4r::math::MTX34Copy(pM, nw4r::g3d::G3DState::GetProjectionTexMtxPtr());
+    nw4r::math::MTX34Copy(pM, nw4r::g3d::G3DState::GetInvCameraMtxPtr());
 }
 
 bool G3DUtility::setUpLightSet(nw4r::g3d::LightSetting& rSetting,
@@ -131,22 +138,24 @@ bool G3DUtility::setUpLightSet(nw4r::g3d::LightSetting& rSetting,
         u32 i_light = 0;
         int endLightIdx = resLightSet.GetNumLight();
 
-        for (; i_light < endLightIdx; i_light++) {
-            u32 lightID = resLightSet.GetLightID(i_light);
+        if (endLightIdx) {
+            for (; i_light < endLightIdx; i_light++) {
+                u32 lightID = resLightSet.GetLightID(i_light);
 
-            if (lightID != nw4r::g3d::ResLightSetData::INVALID_ID) {
-                const nw4r::g3d::ResAnmLight anmLight =
-                    scn.GetResAnmLight(lightID);
+                if (lightID != nw4r::g3d::ResLightSetData::INVALID_ID) {
+                    const nw4r::g3d::ResAnmLight anmLight =
+                        scn.GetResAnmLight(lightID);
 
-                lightSet.SelectLightObj(i_light, anmLight.GetRefNumber());
+                    lightSet.SelectLightObj(i_light, anmLight.GetRefNumber());
 
-                if (anmLight.HasSpecularLight()) {
-                    lightSet.SelectLightObj(specLightIdx--,
-                                            anmLight.GetSpecularLightIdx());
+                    if (anmLight.HasSpecularLight()) {
+                        lightSet.SelectLightObj(specLightIdx--,
+                                                anmLight.GetSpecularLightIdx());
+                    }
+
+                } else {
+                    lightSet.SelectLightObj(i_light, -1);
                 }
-
-            } else {
-                lightSet.SelectLightObj(i_light, -1);
             }
         }
 
@@ -173,7 +182,7 @@ u16 G3DUtility::searchStringResNode(const nw4r::g3d::ResMdl mdl,
                                     u32 resultNum) {
     u16 found = 0;
 
-    for (u32 id = 0; id < mdl.GetResNodeNumEntries(); id++) {
+    for (int id = 0; id < mdl.GetResNodeNumEntries(); id++) {
         const nw4r::g3d::ResNode node = mdl.GetResNode(id);
 
         if (pName != NULL && std::strstr(node.GetName(), pName) == NULL) {
@@ -197,7 +206,7 @@ u16 G3DUtility::searchStringResMat(const nw4r::g3d::ResMdl mdl,
                                    u32 resultNum) {
     u16 found = 0;
 
-    for (u32 id = 0; id < mdl.GetResMatNumEntries(); id++) {
+    for (int id = 0; id < mdl.GetResMatNumEntries(); id++) {
         const nw4r::g3d::ResMat mat = mdl.GetResMat(id);
 
         if (pName != NULL && std::strstr(mat.GetName(), pName) == NULL) {

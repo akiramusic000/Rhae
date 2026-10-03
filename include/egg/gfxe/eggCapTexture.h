@@ -118,8 +118,8 @@ private:
     u8 mVerticalFilter[GX_VFILTER_SZ]; // at 0x24
 
     static const u8 SAMPLE_PATTERN_OFF[12][2];
-    static const u8 VFILTER_BLUR[GX_VFILTER_SZ];
-    static const u8 VFILTER_OFF[GX_VFILTER_SZ];
+    static const u8 VFILTER_BLUR[];
+    static const u8 VFILTER_OFF[];
 };
 
 } // namespace EGG

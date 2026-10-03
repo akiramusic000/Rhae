@@ -84,8 +84,12 @@ TextureBuffer* ScreenEffectBase::captureEfb(BufferType type, bool alpha) const {
                 }
 
             } else {
-                sWorkSpaceHideV[GX_VIEWPORT_L] = rEfb.vp.x;
-                sWorkSpaceHideV[GX_VIEWPORT_T] = rEfb.vp.y;
+                f32 another_cap_x = rEfb.vp.x;
+                sWorkSpaceHideV[GX_VIEWPORT_L] = another_cap_x;
+                sWorkSpaceV[GX_VIEWPORT_L] = another_cap_x;
+                f32 another_cap_y = rEfb.vp.y;
+                sWorkSpaceHideV[GX_VIEWPORT_T] = another_cap_y; 
+                sWorkSpaceV[GX_VIEWPORT_T] = another_cap_y;
                 sWorkSpaceHideV[GX_VIEWPORT_W] = sWorkSpaceV[GX_VIEWPORT_W];
                 sWorkSpaceHideV[GX_VIEWPORT_H] = sWorkSpaceV[GX_VIEWPORT_H];
             }

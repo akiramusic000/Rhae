@@ -301,7 +301,7 @@ void ModelEx::calcView(const nw4r::math::MTX34& rViewMtx,
 void ModelEx::drawShapeDirectly(u32 drawFlag, bool opa, bool xlu,
                                 nw4r::math::MTX34* pViewMtx) {
 #line 539
-    EGG_ASSERT(!(drawFlag & cDrawShape_None));
+    EGG_ASSERT(!( drawFlag & cDrawShape_None ));
 
     if (!opa && !xlu) {
         return;
